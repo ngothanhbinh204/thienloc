@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<link rel="stylesheet" href="">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Space+Grotesk:wght@300..700&family=Tektur:wght@400..900&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="./css/core.min.css">
+		<link rel="stylesheet" href="./css/main.min.css">
+		<title>Home</title>
+	</head>
+	<body class="homepage">
+		<header class="header">
+			<div class="header-wrapper flex items-center justify-between rounded-[80px]">
+				<div class="logo"><a href="/"><img class="lozad h-12 w-auto object-contain" data-src="./img/logo-thienloc.svg" alt=""/></a></div>
+				<div class="menu hidden lg:block">
+					<ul>
+						<li><a class="item-menu" href="/"><i class="fa-solid fa-house"></i></a></li>
+						<li><a class="item-menu" href="Introduction.html">Giới thiệu</a></li>
+						<li class="has-sub"><a class="item-menu" href="#"><span>Sản phẩm</span></a>
+							<div class="mega-menu">
+								<div class="col">
+									<div class="label">Ấn phẩm bao bì</div>
+									<ul>
+										<li><a href="#">In Hộp Giấy - Hộp Cứng</a></li>
+										<li><a href="#">In Túi Giấy</a></li>
+										<li><a href="#">Tem Nhãn</a></li>
+										<li><a href="#">Thùng Carton</a></li>
+									</ul>
+								</div>
+								<div class="col">
+									<div class="label">Ấn phẩm văn phòng</div>
+									<ul>
+										<li><a href="#">In Bao Thư</a></li>
+										<li><a href="#">Bìa Đựng Hồ Sơ</a></li>
+										<li><a href="#">Danh Thiếp</a></li>
+										<li><a href="#">Giấy Tiêu Đề</a></li>
+									</ul>
+								</div>
+								<div class="col">
+									<div class="label">Ấn phẩm tiếp thị</div>
+									<ul>
+										<li><a href="#">In Tờ Rơi</a></li>
+										<li><a href="#">In Catalogue</a></li>
+										<li><a href="#">Tờ Gấp</a></li>
+										<li><a href="#">Phiếu Quà Tặng - Giảm Giá</a></li>
+										<li><a href="#">In Lịch Tết</a></li>
+									</ul>
+								</div>
+								<div class="col">
+									<div class="label">Sản phẩm khác</div>
+									<ul>
+										<li><a href="#">Biểu Mẫu</a></li>
+										<li><a href="#">Phiếu Bảo Hành</a></li>
+										<li><a href="#">Thiệp Mời</a></li>
+										<li><a href="#">Thực Đơn</a></li>
+									</ul>
+								</div>
+								<div class="col">
+									<div class="label">In gia công</div>
+									<ul>
+										<li><a href="#">In Gia Công</a></li>
+									</ul>
+								</div>
+							</div>
+						</li>
+						<li class="has-sub"><a class="item-menu" href="#"><span>Dịch vụ</span></a>
+							<div class="mega-menu">
+								<div class="col">
+									<div class="label">Ấn phẩm bao bì</div>
+									<ul>
+										<li><a href="#">In Hộ</a></li>
+										<li><a href="#">In Túi Gi</a></li>
+										<li><a href="#">Tem N</a></li>
+										<li><a href="#">Thùng Cart</a></li>
+									</ul>
+								</div>
+								<div class="col">
+									<div class="label">Ấn phẩm văn phòng</div>
+									<ul>
+										<li><a href="#">In Bao Thư</a></li>
+										<li><a href="#">Bìa Đựng  </a></li>
+										<li><a href="#">Danh Thiếp</a></li>
+										<li><a href="#">Giấy Tiêu Đề</a></li>
+									</ul>
+								</div>
+								<div class="col">
+									<div class="label">Ấn phẩm tiếp thị</div>
+									<ul>
+										<li><a href="#">In Tờ Rơi</a></li>
+										<li><a href="#">In Catalogue</a></li>
+										<li><a href="#">Tờ Gấp</a></li>
+										<li><a href="#">Phiếu Quà Tặng - Giảm Giá</a></li>
+										<li><a href="#">In Lịch Tết</a></li>
+									</ul>
+								</div>
+								<div class="col">
+									<div class="label">Sản phẩm khác</div>
+									<ul>
+										<li><a href="#">Biểu Mẫu</a></li>
+										<li><a href="#">Phiếu Bảo Hành</a></li>
+										<li><a href="#">Thiệp Mời</a></li>
+										<li><a href="#">Thực Đơn</a></li>
+									</ul>
+								</div>
+								<div class="col">
+									<div class="label">In gia công</div>
+									<ul>
+										<li><a href="#">In Gia Công</a></li>
+									</ul>
+								</div>
+							</div>
+						</li>
+						<li><a class="item-menu" href="#">Khách hàng</a></li>
+						<li><a class="item-menu" href="#">Tin tức</a></li>
+						<li><a class="item-menu" href="#">Liên hệ</a></li>
+					</ul>
+				</div>
+				<div class="tools">
+					<div class="search cursor-pointer"><i class="fa-light fa-magnifying-glass text-xl"></i></div>
+					<div class="language"><img class="lozad flag" data-src="./img/flag-vn.svg" alt=""/><span>VN</span><i class="fa-light fa-chevron-down text-xs text-neutral-600"></i>
+					</div>
+					<div class="hamburger lg:hidden">
+						<div class="header-hambuger"><span></span><span></span><span></span></div>
+					</div>
+				</div>
+			</div>
+			<div class="mobile-menu">
+				<ul class="flex flex-col gap-4">
+					<li><a class="text-lg font-bold text-utility-2929 block py-2" href="#"><i class="fa-solid fa-house"></i></a></li>
+					<li><a class="text-lg font-bold text-utility-2929 block py-2" href="#">Giới thiệu</a></li>
+					<li class="has-sub">
+						<div class="flex items-center justify-between border-b border-neutral-100"><a class="text-lg font-bold text-utility-2929 block py-2 flex-1" href="#">Sản phẩm</a><i class="fa-solid fa-chevron-down text-sm text-neutral-500 transition-transform duration-300 w-8 h-8 flex items-center justify-center cursor-pointer"></i></div>
+						<div class="submenu hidden pl-4">
+							<ul class="flex flex-col gap-2 py-2">
+								<li class="has-sub-2">
+									<div class="flex items-center justify-between"><a class="text-base text-neutral-600 block py-2 flex-1" href="#">Ấn phẩm bao bì</a><i class="fa-solid fa-chevron-down text-xs text-neutral-400 transition-transform duration-300 w-6 h-6 flex items-center justify-center cursor-pointer"></i></div>
+									<div class="submenu-2 hidden pl-4 border-l border-neutral-200 ml-2">
+										<ul class="flex flex-col gap-2 py-2">
+											<li><a class="text-sm text-neutral-500 block py-1" href="#">In Hộp Giấy - Hộp Cứng</a></li>
+											<li><a class="text-sm text-neutral-500 block py-1" href="#">In Túi Giấy</a></li>
+											<li><a class="text-sm text-neutral-500 block py-1" href="#">Tem Nhãn</a></li>
+											<li><a class="text-sm text-neutral-500 block py-1" href="#">Thùng Carton</a></li>
+										</ul>
+									</div>
+								</li>
+								<li><a class="text-base text-neutral-600 block py-2" href="#">Ấn phẩm văn phòng</a></li>
+								<li><a class="text-base text-neutral-600 block py-2" href="#">Ấn phẩm tiếp thị</a></li>
+								<li><a class="text-base text-neutral-600 block py-2" href="#">Sản phẩm khác</a></li>
+								<li><a class="text-base text-neutral-600 block py-2" href="#">In gia công</a></li>
+							</ul>
+						</div>
+					</li>
+					<li class="has-sub">
+						<div class="flex items-center justify-between border-b border-neutral-100"><a class="text-lg font-bold text-utility-2929 block py-2 flex-1" href="#">Dịch vụ</a><i class="fa-solid fa-chevron-down text-sm text-neutral-500 transition-transform duration-300 w-8 h-8 flex items-center justify-center cursor-pointer"></i></div>
+						<div class="submenu hidden pl-4">
+							<ul class="flex flex-col gap-2 py-2">
+								<li><a class="text-base text-neutral-600 block py-2" href="#">Dịch vụ 1</a></li>
+								<li><a class="text-base text-neutral-600 block py-2" href="#">Dịch vụ 2</a></li>
+							</ul>
+						</div>
+					</li>
+					<li><a class="text-lg font-bold text-utility-2929 block py-2" href="#">Khách hàng</a></li>
+					<li><a class="text-lg font-bold text-utility-2929 block py-2" href="#">Tin tức</a></li>
+					<li><a class="text-lg font-bold text-utility-2929 block py-2" href="#">Liên hệ</a></li>
+				</ul>
+			</div>
+		</header>
+		<main>
+			<section class="page-banner relative">
+				<div class="swiper banner-swiper">
+					<div class="swiper-wrapper">
+						<div class="swiper-slide">
+							<div class="banner-item relative h-full w-full">
+								<div class="banner-img"><img class="lozad w-full h-full object-cover" data-src="./img/1.jpg" alt=""/>
+								</div>
+								<div class="content flex items-center">
+									<div class="wrapper-content">
+										<h1 class="title-60 text-white font-bold uppercase">DI SẢN 30 NĂM KIẾN TẠO <br> BIỂU TƯỢNG THƯƠNG HIỆU</h1><a class="btn btn-primary" href="#">Về chúng tôi</a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="swiper-slide">
+							<div class="banner-item relative h-full w-full">
+								<div class="banner-img"><img class="lozad w-full h-full object-cover" data-src="./img/1.jpg" alt=""/>
+								</div>
+								<div class="content flex items-center">
+									<div class="wrapper-content">
+										<h1 class="title-60 text-white font-bold uppercase">DI SẢN TẠO <br> BIỂU TƯỢNG THƯƠNG HIỆU</h1><a class="btn btn-primary" href="#">Về ABC</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="group-controll">
+						<div class="wrap-button-slide">
+							<div class="btn-prev banner-prev"><i class="fa-solid fa-chevron-left"></i></div>
+							<div class="btn-next banner-next"><i class="fa-solid fa-chevron-right"></i></div>
+						</div>
+						<div class="swiper-pagination banner-pagination"></div>
+					</div>
+				</div>
+			</section>
+			<section class="home-1 section-py relative overflow-hidden">
+				<div class="home-1-decor"><img class="lozad undefined" data-src="./img/bg-partent-1.svg" alt=""/>
+				</div>
+				<div class="container relative z-10">
+					<div class="home-1-content text-center">
+						<h2 class="title-80 font-black uppercase text-mask-image text-image" data-aos="fade-up" data-aos-duration="1000"><span class="block">IN NÊN GIÁ TRỊ</span><span class="block">GÓI TRỌN NIỀM TIN</span></h2>
+					</div><a class="btn btn-primary" href="#" data-aos="fade-up" data-aos-delay="200">Về chúng tôi</a>
+					<div class="list-stats">
+						<div class="stat-item" data-aos="fade-up" data-aos-delay="400">
+							<div class="stat-icon"><img class="lozad undefined" data-src="./img/exp.svg" alt=""/>
+							</div>
+							<div class="stat-info">
+								<div class="stat-number">30+</div>
+								<div class="stat-label">Năm kinh nghiệm</div>
+							</div>
+						</div>
+						<div class="stat-item" data-aos="fade-up" data-aos-delay="500">
+							<div class="stat-icon"><img class="lozad undefined" data-src="./img/exp.svg" alt=""/>
+							</div>
+							<div class="stat-info">
+								<div class="stat-number">2000 M2</div>
+								<div class="stat-label">Nhà xưởng</div>
+							</div>
+						</div>
+						<div class="stat-item" data-aos="fade-up" data-aos-delay="600">
+							<div class="stat-icon"><img class="lozad undefined" data-src="./img/exp.svg" alt=""/>
+							</div>
+							<div class="stat-info">
+								<div class="stat-number">100+</div>
+								<div class="stat-label">Nhân sự</div>
+							</div>
+						</div>
+						<div class="stat-item" data-aos="fade-up" data-aos-delay="700">
+							<div class="stat-icon"><img class="lozad undefined" data-src="./img/exp.svg" alt=""/>
+							</div>
+							<div class="stat-info">
+								<div class="stat-number">200+</div>
+								<div class="stat-label">Khách hàng/năm</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<section class="home-2">
+				<div class="marquee-wrapper pt-5 mb-2">
+					<div class="marquee">
+						<div class="marquee-content"><span class="marquee-item">THIÊN LỘC</span><span class="marquee-dot">•</span><span class="marquee-item">THIÊN LỘC</span><span class="marquee-dot">•</span><span class="marquee-item">THIÊN LỘC</span><span class="marquee-dot">•</span><span class="marquee-item">THIÊN LỘC</span><span class="marquee-dot">•</span></div>
+						<div class="marquee-content" aria-hidden="true"><span class="marquee-item">THIÊN LỘC</span><span class="marquee-dot">•</span><span class="marquee-item">THIÊN LỘC</span><span class="marquee-dot">•</span><span class="marquee-item">THIÊN LỘC</span><span class="marquee-dot">•</span><span class="marquee-item">THIÊN LỘC</span><span class="marquee-dot">•</span></div>
+					</div>
+				</div>
+				<div class="section-header text-center" data-aos="fade-up">
+					<div class="container">
+						<h2 class="title-48 font-bold text-white font-medium">Sản Phẩm Tiêu Biểu</h2>
+						<p class="body-18 text-white py-10">Bao bì không chỉ là vật chứa đựng sản phẩm, mà còn là cách thương hiệu thể hiện giá trị, cá tính và sự khác biệt...</p>
+					</div>
+				</div>
+				<div class="product-cards">
+					<div class="list-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-1">
+						<div class="product-card" data-aos="fade-up" data-aos-delay="200">
+							<div class="product-img"><img class="lozad w-full h-full object-cover" data-src="./img/product-item-1.png" alt=""/>
+							</div>
+							<div class="product-content">
+								<h3 class="product-title title-36 text-white">Ấn phẩm văn phòng</h3>
+								<p class="product-desc">Sắc nét – bền đẹp – thiết kế theo phong cách riêng</p>
+								<div class="product-line"></div><a class="btn btn-secondary product-btn" href="#">Xem thêm</a>
+							</div>
+						</div>
+						<div class="product-card" data-aos="fade-up" data-aos-delay="300">
+							<div class="product-img"><img class="lozad w-full h-full object-cover" data-src="./img/product-item-1.png" alt=""/>
+							</div>
+							<div class="product-content">
+								<h3 class="product-title title-36 text-white">Bao bì sản phẩm</h3>
+								<p class="product-desc">Sắc nét – bền đẹp – thiết kế theo phong cách riêng</p>
+								<div class="product-line"></div><a class="btn btn-secondary product-btn" href="#">Xem thêm</a>
+							</div>
+						</div>
+						<div class="product-card" data-aos="fade-up" data-aos-delay="400">
+							<div class="product-img"><img class="lozad w-full h-full object-cover" data-src="./img/product-item-1.png" alt=""/>
+							</div>
+							<div class="product-content">
+								<h3 class="product-title title-36 text-white">Ấn phẩm văn phòng</h3>
+								<p class="product-desc">Sắc nét – bền đẹp – thiết kế theo phong cách riêng</p>
+								<div class="product-line"></div><a class="btn btn-secondary product-btn" href="#">Xem thêm</a>
+							</div>
+						</div>
+						<div class="product-card" data-aos="fade-up" data-aos-delay="500">
+							<div class="product-img"><img class="lozad w-full h-full object-cover" data-src="./img/product-item-1.png" alt=""/>
+							</div>
+							<div class="product-content">
+								<h3 class="product-title title-36 text-white">Hộp & Thùng</h3>
+								<p class="product-desc">Sắc nét – bền đẹp – thiết kế theo phong cách riêng</p>
+								<div class="product-line"></div><a class="btn btn-secondary product-btn" href="#">Xem thêm</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<section class="home-3 section-py bg-gray-50" style="background-image: url('./img/bg-image-customer.png'); background-size: cover; background-position: center;">
+				<div class="container">
+					<div class="section-header text-center mb-10 space-y-6" data-aos="fade-up">
+						<h2 class="title-48 text-primary-1">Khách Hàng</h2>
+						<p class="body-18">Sự tin tưởng của quý khách hàng là động lực để chúng tôi không ngừng phát triển và hoàn thiện</p>
+					</div>
+					<div class="customer-slider swiper flex flex-col items-center" data-aos="fade-up" data-aos-delay="200">
+						<div class="swiper-wrapper">
+							<div class="swiper-slide">
+								<div class="customer-card">
+									<div class="customer-logo"><img class="lozad w-full h-full object-contain" data-src="./img/vissan-logo.png" alt=""/>
+									</div>
+									<div class="customer-name">VISSAN</div>
+								</div>
+							</div>
+							<div class="swiper-slide">
+								<div class="customer-card">
+									<div class="customer-logo"><img class="lozad w-full h-full object-contain" data-src="./img/vissan-logo.png" alt=""/>
+									</div>
+									<div class="customer-name">Bitis</div>
+								</div>
+							</div>
+							<div class="swiper-slide">
+								<div class="customer-card">
+									<div class="customer-logo"><img class="lozad w-full h-full object-contain" data-src="./img/vissan-logo.png" alt=""/>
+									</div>
+									<div class="customer-name">CIH</div>
+								</div>
+							</div>
+							<div class="swiper-slide">
+								<div class="customer-card">
+									<div class="customer-logo"><img class="lozad w-full h-full object-contain" data-src="./img/vissan-logo.png" alt=""/>
+									</div>
+									<div class="customer-name">Dasin</div>
+								</div>
+							</div>
+							<div class="swiper-slide">
+								<div class="customer-card">
+									<div class="customer-logo"><img class="lozad w-full h-full object-contain" data-src="./img/vissan-logo.png" alt=""/>
+									</div>
+									<div class="customer-name">Quốc Tế</div>
+								</div>
+							</div>
+							<div class="swiper-slide">
+								<div class="customer-card">
+									<div class="customer-logo"><img class="lozad w-full h-full object-contain" data-src="./img/vissan-logo.png" alt=""/>
+									</div>
+									<div class="customer-name">Vinamilk</div>
+								</div>
+							</div>
+							<div class="swiper-slide">
+								<div class="customer-card">
+									<div class="customer-logo"><img class="lozad w-full h-full object-contain" data-src="./img/vissan-logo.png" alt=""/>
+									</div>
+									<div class="customer-name">Acecook</div>
+								</div>
+							</div>
+							<div class="swiper-slide">
+								<div class="customer-card">
+									<div class="customer-logo"><img class="lozad w-full h-full object-contain" data-src="./img/vissan-logo.png" alt=""/>
+									</div>
+									<div class="customer-name">Orion</div>
+								</div>
+							</div>
+						</div>
+						<div class="swiper-pagination home-3-pagination"></div><a class="btn btn-primary btn-large mx-auto">Dịch vụ của chúng tôi</a>
+					</div>
+				</div>
+			</section>
+			<section class="section-home-4 section-py">
+				<div class="container">
+					<div class="section-header text-center" data-aos="fade-up">
+						<h2 class="title-48 text-white font-medium">Quy Trình Làm Việc</h2>
+					</div>
+					<div class="workflow-grid">
+						<div class="workflow-item item-odd" data-aos="fade-up" data-aos-delay="0">
+							<div class="workflow-desc">
+								<p>Hiểu rõ nhu cầu và mục tiêu của bạn để đưa ra giải pháp phù hợp nhất.</p>
+							</div>
+							<div class="workflow-box">
+								<div class="workflow-circle"> 
+									<div class="wrapper-icon">
+										<div class="workflow-icon"><img class="lozad w-full h-full object-contain" data-src="./img/icon-workflow.svg" alt=""/>
+										</div>
+									</div>
+								</div>
+								<div class="workflow-label"><span>1. Tư vấn</span></div>
+							</div>
+							<div class="workflow-arrow"><img class="lozad w-full h-full object-contain" data-src="./img/arrow_workflow.svg" alt=""/>
+							</div>
+						</div>
+						<div class="workflow-item item-even" data-aos="fade-up" data-aos-delay="100">
+							<div class="workflow-desc">
+								<p>Phác thảo ý tưởng sáng tạo, kết hợp thẩm mỹ và tính ứng dụng cao.</p>
+							</div>
+							<div class="workflow-box">
+								<div class="workflow-circle"> 
+									<div class="wrapper-icon">
+										<div class="workflow-icon"><img class="lozad w-full h-full object-contain" data-src="./img/icon-workflow.svg" alt=""/>
+										</div>
+									</div>
+								</div>
+								<div class="workflow-label"><span>2. Thiết kế</span></div>
+							</div>
+							<div class="workflow-arrow"><img class="lozad w-full h-full object-contain" data-src="./img/arrow_workflow_down.svg" alt=""/>
+							</div>
+						</div>
+						<div class="workflow-item item-odd" data-aos="fade-up" data-aos-delay="200">
+							<div class="workflow-desc">
+								<p>Sử dụng công nghệ hiện đại, đảm bảo màu sắc và chất lượng đúng chuẩn.</p>
+							</div>
+							<div class="workflow-box">
+								<div class="workflow-circle"> 
+									<div class="wrapper-icon">
+										<div class="workflow-icon"><img class="lozad w-full h-full object-contain" data-src="./img/icon-workflow.svg" alt=""/>
+										</div>
+									</div>
+								</div>
+								<div class="workflow-label"><span>3. In ấn</span></div>
+							</div>
+							<div class="workflow-arrow"><img class="lozad w-full h-full object-contain" data-src="./img/arrow_workflow.svg" alt=""/>
+							</div>
+						</div>
+						<div class="workflow-item item-even" data-aos="fade-up" data-aos-delay="300">
+							<div class="workflow-desc">
+								<p>Hoàn thiện sản phẩm với các bước xử lý tỉ mỉ và chi tiết.</p>
+							</div>
+							<div class="workflow-box">
+								<div class="workflow-circle"> 
+									<div class="wrapper-icon">
+										<div class="workflow-icon"><img class="lozad w-full h-full object-contain" data-src="./img/icon-workflow.svg" alt=""/>
+										</div>
+									</div>
+								</div>
+								<div class="workflow-label"><span>4. Gia công</span></div>
+							</div>
+							<div class="workflow-arrow"><img class="lozad w-full h-full object-contain" data-src="./img/arrow_workflow_down.svg" alt=""/>
+							</div>
+						</div>
+						<div class="workflow-item item-odd" data-aos="fade-up" data-aos-delay="400">
+							<div class="workflow-desc">
+								<p>Hoàn thiện sản phẩm với các bước xử lý tỉ mỉ và chi tiết.</p>
+							</div>
+							<div class="workflow-box">
+								<div class="workflow-circle"> 
+									<div class="wrapper-icon">
+										<div class="workflow-icon"><img class="lozad w-full h-full object-contain" data-src="./img/icon-workflow.svg" alt=""/>
+										</div>
+									</div>
+								</div>
+								<div class="workflow-label"><span>5. Kiểm tra QC</span></div>
+							</div>
+							<div class="workflow-arrow"><img class="lozad w-full h-full object-contain" data-src="./img/arrow_workflow.svg" alt=""/>
+							</div>
+						</div>
+						<div class="workflow-item item-even" data-aos="fade-up" data-aos-delay="500">
+							<div class="workflow-desc">
+								<p>Vận chuyển đúng hẹn, hỗ trợ và chăm sóc khách hàng sau bán.</p>
+							</div>
+							<div class="workflow-box">
+								<div class="workflow-circle"> 
+									<div class="wrapper-icon">
+										<div class="workflow-icon"><img class="lozad w-full h-full object-contain" data-src="./img/icon-workflow.svg" alt=""/>
+										</div>
+									</div>
+								</div>
+								<div class="workflow-label"><span>6. Giao hàng</span></div>
+							</div>
+							<div class="workflow-arrow"><img class="lozad w-full h-full object-contain" data-src="./img/arrow_workflow_down.svg" alt=""/>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<section class="section-home-5 section-py relative">
+				<div class="home-5-decor"><img class="lozad undefined" data-src="./img/bg-partent-1.svg" alt=""/>
+				</div>
+				<div class="container">
+					<div class="section-header text-center !mb-7.5" data-aos="fade-up">
+						<h2 class="title-48 text-primary-1 font-medium">Tin Tức - Sự Kiện</h2>
+					</div>
+					<div class="news-filter flex justify-center gap-3 mb-11.5" data-aos="fade-up" data-aos-delay="200">
+						<button class="filter-btn active" data-filter="all">Tất cả</button>
+						<button class="filter-btn" data-filter="news">Tin tức</button>
+						<button class="filter-btn" data-filter="event">Sự kiện</button>
+					</div>
+					<div class="news-grid">
+						<div class="news-item news-item-featured" data-aos="fade-right" data-aos-delay="300">
+										<div class="news-card news-card-featured"><a class="news-card-img" href="#"><img class="lozad w-full h-full object-cover" data-src="./img/1.jpg" alt=""/></a>
+											<div class="news-card-content">
+												<div class="news-card-meta"><span class="news-date">20.08.2025</span><span class="news-category cat-event">Sự kiện</span></div>
+												<h3 class="news-card-title"><a href="#">Bao bì hàng hóa-ngôn ngữ của thương hiệu xuất khẩu Việt Nam</a></h3>
+												<p class="news-card-desc">Bao bì là &quot;ngôn ngữ của thương hiệu&quot; xuất khẩu, vừa đóng vai trò bảo vệ sản phẩm, vừa truyền tải thông tin thương hiệu đến thị trường quốc tế.</p>
+											</div>
+										</div>
+						</div>
+						<div class="news-item news-item-small" data-aos="fade-left" data-aos-delay="400">
+										<div class="news-card news-card-small"><a class="news-card-img" href="#"><img class="lozad w-full h-full object-cover" data-src="./img/1.jpg" alt=""/></a>
+											<div class="news-card-content">
+												<div class="news-card-meta"><span class="news-date">20.08.2025</span><span class="news-category cat-news">Tin tức</span></div>
+												<h3 class="news-card-title"><a href="#">Bao bì - &quot;Đại sứ thầm lặng&quot; đưa hàng Việt vươn xa</a></h3>
+											</div>
+										</div>
+						</div>
+						<div class="news-item news-item-small" data-aos="fade-left" data-aos-delay="500">
+										<div class="news-card news-card-small"><a class="news-card-img" href="#"><img class="lozad w-full h-full object-cover" data-src="./img/1.jpg" alt=""/></a>
+											<div class="news-card-content">
+												<div class="news-card-meta"><span class="news-date">20.08.2025</span><span class="news-category cat-news">Tin tức</span></div>
+												<h3 class="news-card-title"><a href="#">Hướng đi mới cho ngành in ấn bao ấn Việt Nam</a></h3>
+											</div>
+										</div>
+						</div>
+						<div class="news-item news-item-small" data-aos="fade-left" data-aos-delay="600">
+										<div class="news-card news-card-small"><a class="news-card-img" href="#"><img class="lozad w-full h-full object-cover" data-src="./img/1.jpg" alt=""/></a>
+											<div class="news-card-content">
+												<div class="news-card-meta"><span class="news-date">20.08.2025</span><span class="news-category cat-event">Sự kiện</span></div>
+												<h3 class="news-card-title"><a href="#">Bao bì hàng hóa-ngôn ngữ của thương hiệu xuất khẩu</a></h3>
+											</div>
+										</div>
+						</div>
+						<div class="news-item news-item-small" data-aos="fade-left" data-aos-delay="700">
+										<div class="news-card news-card-small"><a class="news-card-img" href="#"><img class="lozad w-full h-full object-cover" data-src="./img/1.jpg" alt=""/></a>
+											<div class="news-card-content">
+												<div class="news-card-meta"><span class="news-date">20.08.2025</span><span class="news-category cat-news">Tin tức</span></div>
+												<h3 class="news-card-title"><a href="#">Xu hướng bao bì và thương hiệu xuất khẩu 2025</a></h3>
+											</div>
+										</div>
+						</div>
+					</div>
+					<div class="news-footer flex justify-center mt-10" data-aos="fade-up" data-aos-delay="800"><a class="btn btn-primary" href="#">Xem thêm</a></div>
+				</div>
+			</section>
+			<section class="section-home-6 section-py relative">
+				<div class="home-6-bg absolute-full z-0"><img class="lozad w-full h-full object-cover" data-src="./img/image-bg-contact.png" alt=""/>
+				</div>
+				<div class="container relative z-10">
+					<div class="row items-center wrapper-cta">
+						<div class="form-col w-full mb-8 lg:mb-0" data-aos="fade-right">
+							<div class="contact-form-wrapper">
+								<div class="form-header">
+									<h3 class="form-title">ĐĂNG KÝ NHẬN TƯ VẤN <span>MIỄN PHÍ</span></h3>
+									<p class="form-subtitle">ĐỂ TÌM KIẾM GIẢI PHÁP BAO BÌ TỐI ƯU NHẤT.</p>
+								</div>
+								<form class="contact-form" action="#" method="post">
+									<div class="form-group">
+										<label class="form-label" for="your-name">Tên</label>
+										<input class="form-control" type="text" id="your-name" name="your-name" placeholder="Tên*" required>
+									</div>
+									<div class="form-group">
+										<label class="form-label" for="your-email">Email</label>
+										<input class="form-control" type="email" id="your-email" name="your-email" placeholder="Email*" required>
+									</div>
+									<div class="form-group">
+										<label class="form-label" for="your-phone">Điện thoại</label>
+										<input class="form-control" type="tel" id="your-phone" name="your-phone" placeholder="Điện thoại">
+									</div>
+									<div class="form-group">
+										<label class="form-label" for="your-message">Nội dung</label>
+										<textarea class="form-control" id="your-message" name="your-message" placeholder="Nội dung" rows="4"></textarea>
+									</div>
+									<div class="form-group form-submit">
+										<button class="btn btn-primary" type="submit">Gửi</button>
+									</div>
+								</form>
+							</div>
+						</div>
+						<div class="content-col w-full lg:ml-auto" data-aos="fade-left">
+							<div class="cta-content">
+								<div class="cta-header">
+									<h2 class="cta-title">Sẵn Sàng Kiến Tạo Giá Trị Thương Hiệu Bạn?</h2>
+									<p class="cta-desc">Khách hàng không nhất thiết sẽ nhớ bạn vì sản phẩm bạn bán, nhưng họ nhất định sẽ nhớ bạn vì cách bạn đã chăm sóc họ.</p><a class="btn btn-secondary-outline" href="#">Liên hệ</a>
+								</div>
+								<div class="cta-hotline">
+									<div class="hotline-left">
+										<p class="hotline-label">Bạn cần</p>
+										<p class="hotline-label">hỗ trợ</p>
+									</div>
+									<div class="hotline-right"><span class="hotline-tag">Hotline</span>
+										<p class="hotline-number">+84-283 771 6039</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</main>
+		<footer class="footer relative">
+			<div class="container">
+				<div class="footer-decor"><img class="lozad undefined" data-src="./img/decor-footer.svg" alt=""/>
+				</div>
+				<div class="footer-top">
+					<div class="box-left w-auto mb-6 lg:mb-0">
+						<div class="footer-company">
+							<h2 class="footer-title">Công Ty TNHH In Bao Bì Thiên Lộc</h2>
+							<p class="footer-subtitle">IN NÊN GIÁ TRỊ – GÓI TRỌN NIỀM TIN</p>
+						</div>
+					</div>
+					<div class="box-right w-auto">
+						<div class="footer-social-certs">
+							<div class="footer-social"><span class="social-label">Mạng xã hội</span>
+								<div class="social-links"><a class="social-link" href="#" target="_blank" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a><a class="social-link" href="#" target="_blank" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a></div>
+							</div>
+							<div class="footer-certs">
+								<div class="box-img"><img class="lozad cert-img" data-src="./img/cert.png" alt=""/>
+								</div>
+								<div class="box-img"><img class="lozad cert-img" data-src="./img/cert.png" alt=""/>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="footer-middle">
+					<div class="col-footer w-full md:w-12/12 lg:col-span-5">
+						<ul class="footer-info-list">
+							<li class="footer-info-item">
+								<div class="info-icon"><i class="fa-solid fa-building"></i></div>
+								<div class="info-content"><span class="info-label">Văn phòng</span><a class="info-value" href="https://maps.google.com" target="_blank">71 Nguyễn Thị Thập, P. Tân Phú, Quận 7, TP. HCM</a></div>
+							</li>
+							<li class="footer-info-item">
+								<div class="info-icon"><i class="fa-solid fa-industry"></i></div>
+								<div class="info-content"><span class="info-label">Xưởng sản xuất</span><a class="info-value" href="https://maps.google.com" target="_blank">200 Nguyễn Hữu Thọ, Ấp 2, Xã Long Thới, Huyện Nhà Bè, TP. HCM</a></div>
+							</li>
+						</ul>
+					</div>
+					<div class="col-footer w-full md:w-12/12 lg:col-span-5">
+						<ul class="footer-info-list">
+							<li class="footer-info-item">
+								<div class="info-icon"><i class="fa-solid fa-phone"></i></div>
+								<div class="info-content"><span class="info-label">Điện thoại</span><a class="info-value" href="tel:+842837716039">+84-283 771 6039 | +84-937 25 9068</a></div>
+							</li>
+							<li class="footer-info-item">
+								<div class="info-icon"><i class="fa-solid fa-barcode"></i></div>
+								<div class="info-content"><span class="info-label">Mã số thuế</span><span class="info-value">0304373042</span></div>
+							</li>
+							<li class="footer-info-item">
+								<div class="info-icon"><i class="fa-solid fa-fax"></i></div>
+								<div class="info-content"><span class="info-label">Fax</span><span class="info-value">+84-283 771 9188</span></div>
+							</li>
+							<li class="footer-info-item">
+								<div class="info-icon"><i class="fa-solid fa-envelope"></i></div>
+								<div class="info-content"><span class="info-label">Email</span><a class="info-value" href="mailto:info@vietnam-tea.com">info@vietnam-tea.com</a></div>
+							</li>
+						</ul>
+					</div>
+					<div class="col-footer w-full md:w-12/12 lg:col-span-2">
+						<div class="footer-menu">
+							<h3 class="menu-title">Liên kết nhanh</h3>
+							<ul class="menu-list">
+								<li class="menu-item"><a href="#">Giới thiệu</a></li>
+								<li class="menu-item"><a href="#">Sản phẩm</a></li>
+								<li class="menu-item"><a href="#">Dịch vụ</a></li>
+								<li class="menu-item"><a href="#">Khách hàng</a></li>
+								<li class="menu-item"><a href="#">Tin Tức</a></li>
+								<li class="menu-item"><a href="#">Liên hệ</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="footer-bottom">
+					<div class="footer-bottom-inner">
+						<p class="copyright">© 2025 THIÊN LỘC. All Rights Reserved. Website designed by CanhCam.</p>
+						<ul class="footer-policy-menu">
+							<li class="policy-item"><a href="#">Privacy Policy</a></li>
+							<li class="policy-divider">|</li>
+							<li class="policy-item"><a href="#">Sitemap </a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</footer>
+		<script src="./js/core.min.js"></script>
+		<script src="./js/main.min.js"></script>
+	</body>
+</html>

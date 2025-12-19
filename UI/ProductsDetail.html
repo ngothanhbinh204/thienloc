@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<link rel="stylesheet" href="">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Space+Grotesk:wght@300..700&family=Tektur:wght@400..900&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="./css/core.min.css">
+		<link rel="stylesheet" href="./css/main.min.css">
+		<title></title>
+	</head>
+	<body>
+		<header class="header">
+			<div class="header-wrapper flex items-center justify-between rounded-[80px]">
+				<div class="logo"><a href="/"><img class="lozad h-12 w-auto object-contain" data-src="./img/logo-thienloc.svg" alt=""/></a></div>
+				<div class="menu hidden lg:block">
+					<ul>
+						<li><a class="item-menu" href="/"><i class="fa-solid fa-house"></i></a></li>
+						<li><a class="item-menu" href="Introduction.html">Giới thiệu</a></li>
+						<li class="has-sub"><a class="item-menu" href="#"><span>Sản phẩm</span></a>
+							<div class="mega-menu">
+								<div class="col">
+									<div class="label">Ấn phẩm bao bì</div>
+									<ul>
+										<li><a href="#">In Hộp Giấy - Hộp Cứng</a></li>
+										<li><a href="#">In Túi Giấy</a></li>
+										<li><a href="#">Tem Nhãn</a></li>
+										<li><a href="#">Thùng Carton</a></li>
+									</ul>
+								</div>
+								<div class="col">
+									<div class="label">Ấn phẩm văn phòng</div>
+									<ul>
+										<li><a href="#">In Bao Thư</a></li>
+										<li><a href="#">Bìa Đựng Hồ Sơ</a></li>
+										<li><a href="#">Danh Thiếp</a></li>
+										<li><a href="#">Giấy Tiêu Đề</a></li>
+									</ul>
+								</div>
+								<div class="col">
+									<div class="label">Ấn phẩm tiếp thị</div>
+									<ul>
+										<li><a href="#">In Tờ Rơi</a></li>
+										<li><a href="#">In Catalogue</a></li>
+										<li><a href="#">Tờ Gấp</a></li>
+										<li><a href="#">Phiếu Quà Tặng - Giảm Giá</a></li>
+										<li><a href="#">In Lịch Tết</a></li>
+									</ul>
+								</div>
+								<div class="col">
+									<div class="label">Sản phẩm khác</div>
+									<ul>
+										<li><a href="#">Biểu Mẫu</a></li>
+										<li><a href="#">Phiếu Bảo Hành</a></li>
+										<li><a href="#">Thiệp Mời</a></li>
+										<li><a href="#">Thực Đơn</a></li>
+									</ul>
+								</div>
+								<div class="col">
+									<div class="label">In gia công</div>
+									<ul>
+										<li><a href="#">In Gia Công</a></li>
+									</ul>
+								</div>
+							</div>
+						</li>
+						<li class="has-sub"><a class="item-menu" href="#"><span>Dịch vụ</span></a>
+							<div class="mega-menu">
+								<div class="col">
+									<div class="label">Ấn phẩm bao bì</div>
+									<ul>
+										<li><a href="#">In Hộ</a></li>
+										<li><a href="#">In Túi Gi</a></li>
+										<li><a href="#">Tem N</a></li>
+										<li><a href="#">Thùng Cart</a></li>
+									</ul>
+								</div>
+								<div class="col">
+									<div class="label">Ấn phẩm văn phòng</div>
+									<ul>
+										<li><a href="#">In Bao Thư</a></li>
+										<li><a href="#">Bìa Đựng  </a></li>
+										<li><a href="#">Danh Thiếp</a></li>
+										<li><a href="#">Giấy Tiêu Đề</a></li>
+									</ul>
+								</div>
+								<div class="col">
+									<div class="label">Ấn phẩm tiếp thị</div>
+									<ul>
+										<li><a href="#">In Tờ Rơi</a></li>
+										<li><a href="#">In Catalogue</a></li>
+										<li><a href="#">Tờ Gấp</a></li>
+										<li><a href="#">Phiếu Quà Tặng - Giảm Giá</a></li>
+										<li><a href="#">In Lịch Tết</a></li>
+									</ul>
+								</div>
+								<div class="col">
+									<div class="label">Sản phẩm khác</div>
+									<ul>
+										<li><a href="#">Biểu Mẫu</a></li>
+										<li><a href="#">Phiếu Bảo Hành</a></li>
+										<li><a href="#">Thiệp Mời</a></li>
+										<li><a href="#">Thực Đơn</a></li>
+									</ul>
+								</div>
+								<div class="col">
+									<div class="label">In gia công</div>
+									<ul>
+										<li><a href="#">In Gia Công</a></li>
+									</ul>
+								</div>
+							</div>
+						</li>
+						<li><a class="item-menu" href="#">Khách hàng</a></li>
+						<li><a class="item-menu" href="#">Tin tức</a></li>
+						<li><a class="item-menu" href="#">Liên hệ</a></li>
+					</ul>
+				</div>
+				<div class="tools">
+					<div class="search cursor-pointer"><i class="fa-light fa-magnifying-glass text-xl"></i></div>
+					<div class="language"><img class="lozad flag" data-src="./img/flag-vn.svg" alt=""/><span>VN</span><i class="fa-light fa-chevron-down text-xs text-neutral-600"></i>
+					</div>
+					<div class="hamburger lg:hidden">
+						<div class="header-hambuger"><span></span><span></span><span></span></div>
+					</div>
+				</div>
+			</div>
+			<div class="mobile-menu">
+				<ul class="flex flex-col gap-4">
+					<li><a class="text-lg font-bold text-utility-2929 block py-2" href="#"><i class="fa-solid fa-house"></i></a></li>
+					<li><a class="text-lg font-bold text-utility-2929 block py-2" href="#">Giới thiệu</a></li>
+					<li class="has-sub">
+						<div class="flex items-center justify-between border-b border-neutral-100"><a class="text-lg font-bold text-utility-2929 block py-2 flex-1" href="#">Sản phẩm</a><i class="fa-solid fa-chevron-down text-sm text-neutral-500 transition-transform duration-300 w-8 h-8 flex items-center justify-center cursor-pointer"></i></div>
+						<div class="submenu hidden pl-4">
+							<ul class="flex flex-col gap-2 py-2">
+								<li class="has-sub-2">
+									<div class="flex items-center justify-between"><a class="text-base text-neutral-600 block py-2 flex-1" href="#">Ấn phẩm bao bì</a><i class="fa-solid fa-chevron-down text-xs text-neutral-400 transition-transform duration-300 w-6 h-6 flex items-center justify-center cursor-pointer"></i></div>
+									<div class="submenu-2 hidden pl-4 border-l border-neutral-200 ml-2">
+										<ul class="flex flex-col gap-2 py-2">
+											<li><a class="text-sm text-neutral-500 block py-1" href="#">In Hộp Giấy - Hộp Cứng</a></li>
+											<li><a class="text-sm text-neutral-500 block py-1" href="#">In Túi Giấy</a></li>
+											<li><a class="text-sm text-neutral-500 block py-1" href="#">Tem Nhãn</a></li>
+											<li><a class="text-sm text-neutral-500 block py-1" href="#">Thùng Carton</a></li>
+										</ul>
+									</div>
+								</li>
+								<li><a class="text-base text-neutral-600 block py-2" href="#">Ấn phẩm văn phòng</a></li>
+								<li><a class="text-base text-neutral-600 block py-2" href="#">Ấn phẩm tiếp thị</a></li>
+								<li><a class="text-base text-neutral-600 block py-2" href="#">Sản phẩm khác</a></li>
+								<li><a class="text-base text-neutral-600 block py-2" href="#">In gia công</a></li>
+							</ul>
+						</div>
+					</li>
+					<li class="has-sub">
+						<div class="flex items-center justify-between border-b border-neutral-100"><a class="text-lg font-bold text-utility-2929 block py-2 flex-1" href="#">Dịch vụ</a><i class="fa-solid fa-chevron-down text-sm text-neutral-500 transition-transform duration-300 w-8 h-8 flex items-center justify-center cursor-pointer"></i></div>
+						<div class="submenu hidden pl-4">
+							<ul class="flex flex-col gap-2 py-2">
+								<li><a class="text-base text-neutral-600 block py-2" href="#">Dịch vụ 1</a></li>
+								<li><a class="text-base text-neutral-600 block py-2" href="#">Dịch vụ 2</a></li>
+							</ul>
+						</div>
+					</li>
+					<li><a class="text-lg font-bold text-utility-2929 block py-2" href="#">Khách hàng</a></li>
+					<li><a class="text-lg font-bold text-utility-2929 block py-2" href="#">Tin tức</a></li>
+					<li><a class="text-lg font-bold text-utility-2929 block py-2" href="#">Liên hệ</a></li>
+				</ul>
+			</div>
+		</header>
+		<main>
+			<div class="wrapper-gap-top">
+				<div class="breadcrumb-wrapper bg-white py-2 w-full">
+					<div class="container">
+						<ul class="flex items-center gap-2 text-sm text-neutral-600">
+							<li><a href="/">Trang chủ</a></li>
+							<li><span>|</span></li>
+							<li><span class="text-primary-1">Giới thiệu</span></li>
+						</ul>
+					</div>
+				</div>
+				<section class="section-product-detail section-py">
+					<div class="container">
+						<div class="wrapper">
+							<div class="product-detail-left">
+								<div class="product-detail-hero">
+									<div class="product-gallery">
+										<div class="gallery-thumbnails">
+											<button class="thumb-nav thumb-prev btn-slider-2"><i class="fa-solid fa-chevron-up"></i></button>
+											<div class="swiper thumbs-slider">
+												<div class="swiper-wrapper">
+													<div class="swiper-slide">
+														<div class="thumbnail-item"><img class="lozad undefined" data-src="img/1.jpg" alt=""/>
+														</div>
+													</div>
+													<div class="swiper-slide">
+														<div class="thumbnail-item"><img class="lozad undefined" data-src="img/1.jpg" alt=""/>
+														</div>
+													</div>
+													<div class="swiper-slide">
+														<div class="thumbnail-item"><img class="lozad undefined" data-src="img/1.jpg" alt=""/>
+														</div>
+													</div>
+													<div class="swiper-slide">
+														<div class="thumbnail-item"><img class="lozad undefined" data-src="img/1.jpg" alt=""/>
+														</div>
+													</div>
+													<div class="swiper-slide">
+														<div class="thumbnail-item"><img class="lozad undefined" data-src="img/1.jpg" alt=""/>
+														</div>
+													</div>
+													<div class="swiper-slide">
+														<div class="thumbnail-item"><img class="lozad undefined" data-src="img/1.jpg" alt=""/>
+														</div>
+													</div>
+													<div class="swiper-slide">
+														<div class="thumbnail-item"><img class="lozad undefined" data-src="img/1.jpg" alt=""/>
+														</div>
+													</div>
+													<div class="swiper-slide">
+														<div class="thumbnail-item"><img class="lozad undefined" data-src="img/1.jpg" alt=""/>
+														</div>
+													</div>
+													<div class="swiper-slide">
+														<div class="thumbnail-item"><img class="lozad undefined" data-src="img/1.jpg" alt=""/>
+														</div>
+													</div>
+													<div class="swiper-slide">
+														<div class="thumbnail-item"><img class="lozad undefined" data-src="img/1.jpg" alt=""/>
+														</div>
+													</div>
+												</div>
+											</div>
+											<button class="thumb-nav thumb-next btn-slider-2"><i class="fa-solid fa-chevron-down"></i></button>
+										</div>
+										<div class="gallery-main">
+											<div class="swiper swiper-product-gallery">
+												<div class="swiper-wrapper">
+													<div class="swiper-slide">
+														<div class="img-wrapper"><img class="lozad undefined" data-src="img/1.jpg" alt=""/>
+														</div>
+													</div>
+													<div class="swiper-slide">
+														<div class="img-wrapper"><img class="lozad undefined" data-src="img/1.jpg" alt=""/>
+														</div>
+													</div>
+													<div class="swiper-slide">
+														<div class="img-wrapper"><img class="lozad undefined" data-src="img/1.jpg" alt=""/>
+														</div>
+													</div>
+													<div class="swiper-slide">
+														<div class="img-wrapper"><img class="lozad undefined" data-src="img/1.jpg" alt=""/>
+														</div>
+													</div>
+													<div class="swiper-slide">
+														<div class="img-wrapper"><img class="lozad undefined" data-src="img/1.jpg" alt=""/>
+														</div>
+													</div>
+													<div class="swiper-slide">
+														<div class="img-wrapper"><img class="lozad undefined" data-src="img/1.jpg" alt=""/>
+														</div>
+													</div>
+													<div class="swiper-slide">
+														<div class="img-wrapper"><img class="lozad undefined" data-src="img/1.jpg" alt=""/>
+														</div>
+													</div>
+													<div class="swiper-slide">
+														<div class="img-wrapper"><img class="lozad undefined" data-src="img/1.jpg" alt=""/>
+														</div>
+													</div>
+													<div class="swiper-slide">
+														<div class="img-wrapper"><img class="lozad undefined" data-src="img/1.jpg" alt=""/>
+														</div>
+													</div>
+													<div class="swiper-slide">
+														<div class="img-wrapper"><img class="lozad undefined" data-src="img/1.jpg" alt=""/>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="product-info">
+										<h1 class="title-36 text-primary-1">Ấn phẩm văn phòng</h1>
+										<div class="product-description body-18">
+											<p>Cây đặc inox 304 là loại thép không gỉ austenitic phổ biến nhất hiện nay và hay bắt với khả năng chống ăn mòn cao, độ bền vượt trội và dễ gia công trong nhiều điều kiện. Sản phẩm được ứng dụng rộng rãi trong cả khi khe tạo, thực phẩm, y tế, xây dựng và trong tri nội thất, đáp ứng tiêu chuẩn khắt khe về chất lượng và an toàn.</p>
+										</div><a class="btn btn-primary" href="#">Liên hệ tư vấn</a>
+									</div>
+								</div>
+								<div class="product-tabs tabs-wrapper">
+									<div class="tabs-navigation">
+										<button class="tab-btn active" data-tab="tab-info">Thông tin sản phẩm</button>
+										<button class="tab-btn" data-tab="tab-advantages">Ưu đãi và chiết khấu</button>
+										<button class="tab-btn" data-tab="tab-usage">Hướng dẫn sử dụng</button>
+										<button class="tab-btn" data-tab="tab-maintenance">Hướng dẫn bảo quản</button>
+									</div>
+									<div class="tabs-content">
+										<div class="wrapper-content-tab collapsed">
+											<div class="tab-pane active" id="tab-info">
+												<h3 class="title-36">Thông tin sản phẩm</h3>
+												<div class="tab-content-body body-18">
+													<p>Chúng tôi cung cấp Ba chi bò mỹ nguyên khối. Ba chi bò mỹ cát lát. Ba chi bò mỹ nguyên thùng cắt. nhân hàng nói tiếng đến từ Mỹ như Excel. Được đến cắt hút lên tủ có chuối bán lẻ, nhà hàng, khách sạn... người tiêu dùng.</p>
+													<p>Quá trình sơ chế, hút chân không, đông khay, cấp đông ba chi bò Mỹ về sinh sạch sẽ đảm bảo chất lượng, an toàn cho sức khỏe người tiêu dùng. Ba chi bò Mỹ cát lát được phả cát bằng máy Cắt công nghiệp, cắt mỏng cho món lẩu theo tiêu chuẩn độ dày 1mm hoặc cát dạng dày khoảng...5mm phù hợp cho món nướng...</p>
+													<p>Ba chi bò Mỹ có thể bảo quản đông trong ngăn đá với nhiệt độ -18 do C. Trước khi sử dụng không nên để thịt tan giã hoàn toàn mà miếng thịt phải còn hơi cứng để khi thái lát, cắt miếng sẽ dễ dàng hơn. Như vậy thịt vừa có độ dẻo dai, vừa giữ được hương vị tự nhiên nhất và không bị nát khi chế biến.</p>
+													<p>Ba chi bò Mỹ có thể bảo quản đông trong ngăn đá với nhiệt độ -18 do C. Trước khi sử dụng không nên để thịt tan giã hoàn toàn mà miếng thịt phải còn hơi cứng để khi thái lát, cắt miếng sẽ dễ dàng hơn. Như vậy thịt vừa có độ dẻo dai, vừa giữ được hương vị tự nhiên nhất và không bị nát khi chế biến.</p>
+													<p>Ba chi bò Mỹ có thể bảo quản đông trong ngăn đá với nhiệt độ -18 do C. Trước khi sử dụng không nên để thịt tan giã hoàn toàn mà miếng thịt phải còn hơi cứng để khi thái lát, cắt miếng sẽ dễ dàng hơn. Như vậy thịt vừa có độ dẻo dai, vừa giữ được hương vị tự nhiên nhất và không bị nát khi chế biến.</p>
+													<p>Ba chi bò Mỹ có thể bảo quản đông trong ngăn đá với nhiệt độ -18 do C. Trước khi sử dụng không nên để thịt tan giã hoàn toàn mà miếng thịt phải còn hơi cứng để khi thái lát, cắt miếng sẽ dễ dàng hơn. Như vậy thịt vừa có độ dẻo dai, vừa giữ được hương vị tự nhiên nhất và không bị nát khi chế biến.</p>
+													<p>Ba chi bò Mỹ có thể bảo quản đông trong ngăn đá với nhiệt độ -18 do C. Trước khi sử dụng không nên để thịt tan giã hoàn toàn mà miếng thịt phải còn hơi cứng để khi thái lát, cắt miếng sẽ dễ dàng hơn. Như vậy thịt vừa có độ dẻo dai, vừa giữ được hương vị tự nhiên nhất và không bị nát khi chế biến.</p>
+													<p>Ba chi bò Mỹ có thể bảo quản đông trong ngăn đá với nhiệt độ -18 do C. Trước khi sử dụng không nên để thịt tan giã hoàn toàn mà miếng thịt phải còn hơi cứng để khi thái lát, cắt miếng sẽ dễ dàng hơn. Như vậy thịt vừa có độ dẻo dai, vừa giữ được hương vị tự nhiên nhất và không bị nát khi chế biến.</p>
+													<p>Ba chi bò Mỹ có thể bảo quản đông trong ngăn đá với nhiệt độ -18 do C. Trước khi sử dụng không nên để thịt tan giã hoàn toàn mà miếng thịt phải còn hơi cứng để khi thái lát, cắt miếng sẽ dễ dàng hơn. Như vậy thịt vừa có độ dẻo dai, vừa giữ được hương vị tự nhiên nhất và không bị nát khi chế biến.</p>
+													<p>Ba chi bò Mỹ có thể bảo quản đông trong ngăn đá với nhiệt độ -18 do C. Trước khi sử dụng không nên để thịt tan giã hoàn toàn mà miếng thịt phải còn hơi cứng để khi thái lát, cắt miếng sẽ dễ dàng hơn. Như vậy thịt vừa có độ dẻo dai, vừa giữ được hương vị tự nhiên nhất và không bị nát khi chế biến.</p>
+												</div>
+											</div>
+											<div class="tab-pane" id="tab-advantages">
+												<h3 class="title-36">Ưu đãi và chiết khấu</h3>
+												<div class="tab-content-body body-18">
+													<p>Nội dung về ưu đãi và chiết khấu...</p>
+												</div>
+											</div>
+											<div class="tab-pane" id="tab-usage">
+												<h3 class="title-36">Hướng dẫn sử dụng</h3>
+												<div class="tab-content-body body-18">
+													<p>Nội dung hướng dẫn sử dụng...</p>
+												</div>
+											</div>
+											<div class="tab-pane" id="tab-maintenance">
+												<h3 class="title-36">Hướng dẫn bảo quản</h3>
+												<div class="tab-content-body body-18">
+													<p>Nội dung hướng dẫn bảo quản...</p>
+												</div>
+											</div>
+										</div>
+										<div class="view-more-container text-center mt-8">
+											<button class="btn-view-more text-primary-2 font-normal flex items-center justify-center gap-3 mx-auto" type="button"><span>Xem thêm</span><i class="fa-solid fa-chevron-down"></i></button>
+										</div>
+									</div>
+								</div>
+								<div class="product-related section-py">
+									<h2 class="title-36 text-center text-primary-1 mb-5 lg:mb-11">Sản phẩm gợi ý
+										<div class="wrapper-related-products relative">
+											<div class="btn-relative-prev btn-slider-2"><i class="fa-solid fa-chevron-left"></i></div>
+											<div class="swiper swiper-related-products">
+												<div class="swiper-wrapper">
+													<div class="swiper-slide">
+														<div class="product-card">
+															<div class="product-image"><img class="lozad undefined" data-src="img/1.jpg" alt=""/>
+															</div>
+															<div class="product-info">
+																<h3 class="product-title">Ấn phẩm văn phòng</h3><a class="btn btn-primary" href="#">Xem chi tiết</a>
+															</div>
+														</div>
+													</div>
+													<div class="swiper-slide">
+														<div class="product-card">
+															<div class="product-image"><img class="lozad undefined" data-src="img/1.jpg" alt=""/>
+															</div>
+															<div class="product-info">
+																<h3 class="product-title">Ấn phẩm văn phòng</h3><a class="btn btn-primary" href="#">Xem chi tiết</a>
+															</div>
+														</div>
+													</div>
+													<div class="swiper-slide">
+														<div class="product-card">
+															<div class="product-image"><img class="lozad undefined" data-src="img/1.jpg" alt=""/>
+															</div>
+															<div class="product-info">
+																<h3 class="product-title">Ấn phẩm văn phòng</h3><a class="btn btn-primary" href="#">Xem chi tiết</a>
+															</div>
+														</div>
+													</div>
+													<div class="swiper-slide">
+														<div class="product-card">
+															<div class="product-image"><img class="lozad undefined" data-src="img/1.jpg" alt=""/>
+															</div>
+															<div class="product-info">
+																<h3 class="product-title">Ấn phẩm văn phòng</h3><a class="btn btn-primary" href="#">Xem chi tiết</a>
+															</div>
+														</div>
+													</div>
+													<div class="swiper-slide">
+														<div class="product-card">
+															<div class="product-image"><img class="lozad undefined" data-src="img/1.jpg" alt=""/>
+															</div>
+															<div class="product-info">
+																<h3 class="product-title">Ấn phẩm văn phòng</h3><a class="btn btn-primary" href="#">Xem chi tiết</a>
+															</div>
+														</div>
+													</div>
+													<div class="swiper-slide">
+														<div class="product-card">
+															<div class="product-image"><img class="lozad undefined" data-src="img/1.jpg" alt=""/>
+															</div>
+															<div class="product-info">
+																<h3 class="product-title">Ấn phẩm văn phòng</h3><a class="btn btn-primary" href="#">Xem chi tiết</a>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="btn-relative-next btn-slider-2"><i class="fa-solid fa-chevron-right"></i></div>
+										</div>
+									</h2>
+								</div>
+							</div>
+							<div class="product-detail-right">
+								<div class="sidebar-widget widget-latest-posts">
+									<h3 class="widget-title">Bài viết mới</h3>
+									<div class="widget-content">
+										<div class="post-item">
+											<p class="body-16">103+ Mẫu background tím sáng tối, ý tưởng nền màu tím trơn và nhiều</p>
+										</div>
+										<div class="post-item">
+											<p class="body-16">103+ Mẫu background tím sáng tối, ý tưởng nền màu tím trơn và nhiều</p>
+										</div>
+										<div class="post-item">
+											<p class="body-16">103+ Mẫu background tím sáng tối, ý tưởng nền màu tím trơn và nhiều</p>
+										</div>
+										<div class="post-item">
+											<p class="body-16">103+ Mẫu background tím sáng tối, ý tưởng nền màu tím trơn và nhiều</p>
+										</div>
+										<div class="post-item">
+											<p class="body-16">103+ Mẫu background tím sáng tối, ý tưởng nền màu tím trơn và nhiều</p>
+										</div>
+									</div>
+								</div>
+								<div class="sidebar-widget widget-services">
+									<h3 class="widget-title">Dịch vụ chính</h3>
+									<div class="widget-content">
+										<div class="service-item">
+											<p class="body-16">103+ Mẫu background tím sáng tối, ý tưởng nền màu tím trơn và nhiều</p>
+										</div>
+										<div class="service-item">
+											<p class="body-16">103+ Mẫu background tím sáng tối, ý tưởng nền màu tím trơn và nhiều</p>
+										</div>
+										<div class="service-item">
+											<p class="body-16">103+ Mẫu background tím sáng tối, ý tưởng nền màu tím trơn và nhiều</p>
+										</div>
+										<div class="service-item">
+											<p class="body-16">103+ Mẫu background tím sáng tối, ý tưởng nền màu tím trơn và nhiều</p>
+										</div>
+										<div class="service-item">
+											<p class="body-16">103+ Mẫu background tím sáng tối, ý tưởng nền màu tím trơn và nhiều</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+			</div>
+		</main>
+		<footer class="footer relative">
+			<div class="container">
+				<div class="footer-decor"><img class="lozad undefined" data-src="./img/decor-footer.svg" alt=""/>
+				</div>
+				<div class="footer-top">
+					<div class="box-left w-auto mb-6 lg:mb-0">
+						<div class="footer-company">
+							<h2 class="footer-title">Công Ty TNHH In Bao Bì Thiên Lộc</h2>
+							<p class="footer-subtitle">IN NÊN GIÁ TRỊ – GÓI TRỌN NIỀM TIN</p>
+						</div>
+					</div>
+					<div class="box-right w-auto">
+						<div class="footer-social-certs">
+							<div class="footer-social"><span class="social-label">Mạng xã hội</span>
+								<div class="social-links"><a class="social-link" href="#" target="_blank" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a><a class="social-link" href="#" target="_blank" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a></div>
+							</div>
+							<div class="footer-certs">
+								<div class="box-img"><img class="lozad cert-img" data-src="./img/cert.png" alt=""/>
+								</div>
+								<div class="box-img"><img class="lozad cert-img" data-src="./img/cert.png" alt=""/>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="footer-middle">
+					<div class="col-footer w-full md:w-12/12 lg:col-span-5">
+						<ul class="footer-info-list">
+							<li class="footer-info-item">
+								<div class="info-icon"><i class="fa-solid fa-building"></i></div>
+								<div class="info-content"><span class="info-label">Văn phòng</span><a class="info-value" href="https://maps.google.com" target="_blank">71 Nguyễn Thị Thập, P. Tân Phú, Quận 7, TP. HCM</a></div>
+							</li>
+							<li class="footer-info-item">
+								<div class="info-icon"><i class="fa-solid fa-industry"></i></div>
+								<div class="info-content"><span class="info-label">Xưởng sản xuất</span><a class="info-value" href="https://maps.google.com" target="_blank">200 Nguyễn Hữu Thọ, Ấp 2, Xã Long Thới, Huyện Nhà Bè, TP. HCM</a></div>
+							</li>
+						</ul>
+					</div>
+					<div class="col-footer w-full md:w-12/12 lg:col-span-5">
+						<ul class="footer-info-list">
+							<li class="footer-info-item">
+								<div class="info-icon"><i class="fa-solid fa-phone"></i></div>
+								<div class="info-content"><span class="info-label">Điện thoại</span><a class="info-value" href="tel:+842837716039">+84-283 771 6039 | +84-937 25 9068</a></div>
+							</li>
+							<li class="footer-info-item">
+								<div class="info-icon"><i class="fa-solid fa-barcode"></i></div>
+								<div class="info-content"><span class="info-label">Mã số thuế</span><span class="info-value">0304373042</span></div>
+							</li>
+							<li class="footer-info-item">
+								<div class="info-icon"><i class="fa-solid fa-fax"></i></div>
+								<div class="info-content"><span class="info-label">Fax</span><span class="info-value">+84-283 771 9188</span></div>
+							</li>
+							<li class="footer-info-item">
+								<div class="info-icon"><i class="fa-solid fa-envelope"></i></div>
+								<div class="info-content"><span class="info-label">Email</span><a class="info-value" href="mailto:info@vietnam-tea.com">info@vietnam-tea.com</a></div>
+							</li>
+						</ul>
+					</div>
+					<div class="col-footer w-full md:w-12/12 lg:col-span-2">
+						<div class="footer-menu">
+							<h3 class="menu-title">Liên kết nhanh</h3>
+							<ul class="menu-list">
+								<li class="menu-item"><a href="#">Giới thiệu</a></li>
+								<li class="menu-item"><a href="#">Sản phẩm</a></li>
+								<li class="menu-item"><a href="#">Dịch vụ</a></li>
+								<li class="menu-item"><a href="#">Khách hàng</a></li>
+								<li class="menu-item"><a href="#">Tin Tức</a></li>
+								<li class="menu-item"><a href="#">Liên hệ</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="footer-bottom">
+					<div class="footer-bottom-inner">
+						<p class="copyright">© 2025 THIÊN LỘC. All Rights Reserved. Website designed by CanhCam.</p>
+						<ul class="footer-policy-menu">
+							<li class="policy-item"><a href="#">Privacy Policy</a></li>
+							<li class="policy-divider">|</li>
+							<li class="policy-item"><a href="#">Sitemap </a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</footer>
+		<script src="./js/core.min.js"></script>
+		<script src="./js/main.min.js"></script>
+	</body>
+</html>

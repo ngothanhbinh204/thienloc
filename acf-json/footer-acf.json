@@ -1,0 +1,207 @@
+{
+	"key": "group_footer_options",
+	"title": "Footer Options",
+	"fields": [
+		{
+			"key": "field_footer_company",
+			"label": "Footer - Company",
+			"name": "footer_company",
+			"type": "group",
+			"sub_fields": [
+				{
+					"key": "field_footer_company_name",
+					"label": "Company Name",
+					"name": "name",
+					"type": "text"
+				},
+				{
+					"key": "field_footer_company_slogan",
+					"label": "Company Slogan",
+					"name": "slogan",
+					"type": "text"
+				}
+			]
+		},
+		{
+			"key": "field_footer_socials",
+			"label": "Footer - Social Links",
+			"name": "footer_socials",
+			"type": "repeater",
+			"sub_fields": [
+				{
+					"key": "field_footer_social_icon",
+					"label": "Icon Class",
+					"name": "icon",
+					"type": "text"
+				},
+				{
+					"key": "field_footer_social_link",
+					"label": "Link",
+					"name": "link",
+					"type": "link"
+				}
+			]
+		},
+		{
+			"key": "field_footer_certs",
+			"label": "Footer - Certificates",
+			"name": "footer_certs",
+			"type": "repeater",
+			"sub_fields": [
+				{
+					"key": "field_footer_cert_image",
+					"label": "Certificate Image",
+					"name": "image",
+					"type": "image"
+				}
+			]
+		},
+		{
+			"key": "field_footer_middle_col_1",
+			"label": "Footer Middle - Column 1",
+			"name": "footer_middle_col_1",
+			"type": "repeater",
+			"sub_fields": [
+				{
+					"key": "field_col1_icon_type",
+					"label": "Icon Type",
+					"name": "icon_type",
+					"type": "radio",
+					"choices": {
+						"class": "FontAwesome Class",
+						"image": "Image"
+					},
+					"default_value": "class",
+					"layout": "horizontal"
+				},
+				{
+					"key": "field_col1_icon_class",
+					"label": "Icon Class",
+					"name": "icon_class",
+					"type": "text",
+					"conditional_logic": [
+						[
+							{
+								"field": "field_col1_icon_type",
+								"operator": "==",
+								"value": "class"
+							}
+						]
+					]
+				},
+				{
+					"key": "field_col1_icon_image",
+					"label": "Icon Image",
+					"name": "icon_image",
+					"type": "image",
+					"conditional_logic": [
+						[
+							{
+								"field": "field_col1_icon_type",
+								"operator": "==",
+								"value": "image"
+							}
+						]
+					]
+				},
+				{
+					"key": "field_col1_label",
+					"label": "Label",
+					"name": "label",
+					"type": "text"
+				},
+				{
+					"key": "field_col1_link",
+					"label": "Link",
+					"name": "link",
+					"type": "link"
+				}
+			]
+		},
+		{
+			"key": "field_footer_middle_col_2",
+			"label": "Footer Middle - Column 2",
+			"name": "footer_middle_col_2",
+			"type": "repeater",
+			"sub_fields": [
+				{
+					"key": "field_col2_icon_type",
+					"label": "Icon Type",
+					"name": "icon_type",
+					"type": "radio",
+					"choices": {
+						"class": "FontAwesome Class",
+						"image": "Image"
+					},
+					"default_value": "class",
+					"layout": "horizontal"
+				},
+				{
+					"key": "field_col2_icon_class",
+					"label": "Icon Class",
+					"name": "icon_class",
+					"type": "text",
+					"conditional_logic": [
+						[
+							{
+								"field": "field_col2_icon_type",
+								"operator": "==",
+								"value": "class"
+							}
+						]
+					]
+				},
+				{
+					"key": "field_col2_icon_image",
+					"label": "Icon Image",
+					"name": "icon_image",
+					"type": "image",
+					"conditional_logic": [
+						[
+							{
+								"field": "field_col2_icon_type",
+								"operator": "==",
+								"value": "image"
+							}
+						]
+					]
+				},
+				{
+					"key": "field_col2_label",
+					"label": "Label",
+					"name": "label",
+					"type": "text"
+				},
+				{
+					"key": "field_col2_link",
+					"label": "Link",
+					"name": "link",
+					"type": "link"
+				}
+			]
+		},
+		{
+			"key": "field_footer_copyright",
+			"label": "Footer Copyright",
+			"name": "footer_copyright",
+			"type": "text"
+		}
+	],
+	"location": [
+		[
+			{
+				"param": "options_page",
+				"operator": "==",
+				"value": "acf-options-footer"
+			}
+		]
+	],
+	"menu_order": 0,
+	"position": "normal",
+	"style": "default",
+	"label_placement": "top",
+	"instruction_placement": "label",
+	"hide_on_screen": "",
+	"active": true,
+	"description": ""
+}

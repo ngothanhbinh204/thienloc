@@ -10,3 +10,11 @@ Text Domain:          canhcamtheme
 /***************
 CUSTOM CSS CANH CAM COMPANY
 ***************/
+[type=button], [type=reset], [type=submit], button {
+	--tw-bg-opacity: 1;
+    --tw-text-opacity: 1;
+    border-radius: 9999px;
+    background-color: rgb(237 28 36 / var(--tw-bg-opacity));
+    color: rgb(255 255 255 / var(--tw-text-opacity));
+    font-weight: 500;
+}

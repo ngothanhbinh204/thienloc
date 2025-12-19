@@ -1,0 +1,67 @@
+<?php
+$marquee = get_sub_field('marquee') ?? [];
+$title   = get_sub_field('title');
+$desc    = get_sub_field('description');
+$items   = get_sub_field('items') ?? [];
+
+if (!$title && empty($items)) {
+    return;
+}
+?>
+
+<section class="home-2">
+	<?php if ($marquee): ?>
+	<div class="marquee-wrapper pt-5 mb-2">
+		<div class="marquee">
+			<?php for ($i = 0; $i < 2; $i++): ?>
+			<div class="marquee-content" <?= $i === 1 ? 'aria-hidden="true"' : ''; ?>>
+				<?php foreach ($marquee as $m): ?>
+				<span class="marquee-item"><?= esc_html($m['text']); ?></span>
+				<span class="marquee-dot">•</span>
+				<?php endforeach; ?>
+			</div>
+			<?php endfor; ?>
+		</div>
+	</div>
+	<?php endif; ?>
+
+	<div class="section-header text-center">
+		<div class="container">
+			<?php if ($title): ?>
+			<h2 class="title-48 text-white"><?= esc_html($title); ?></h2>
+			<?php endif; ?>
+			<?php if ($desc): ?>
+			<div class="body-18 text-white py-10"><?= wp_kses_post($desc); ?></div>
+			<?php endif; ?>
+		</div>
+	</div>
+
+	<?php if ($items): ?>
+	<div class="product-cards">
+		<div class="list-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-1">
+			<?php foreach ($items as $item): ?>
+			<div class="product-card">
+				<?php if (!empty($item['image'])): ?>
+				<div class="product-img">
+					<img class="lozad" data-src="<?= esc_url($item['image']['url']); ?>" alt="">
+				</div>
+				<?php endif; ?>
+
+				<div class="product-content">
+					<h3 class="product-title title-36 text-white">
+						<?= esc_html($item['title'] ?? ''); ?>
+					</h3>
+					<?= wp_kses_post($item['description'] ?? ''); ?>
+
+					<?php if (!empty($item['link'])): ?>
+					<a class="btn btn-secondary product-btn" href="<?= esc_url($item['link']['url']); ?>">
+						<?= esc_html($item['link']['title']); ?>
+					</a>
+					<?php endif; ?>
+				</div>
+			</div>
+			<?php endforeach; ?>
+		</div>
+	</div>
+	<?php endif; ?>
+</section>

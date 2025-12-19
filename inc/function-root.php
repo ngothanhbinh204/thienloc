@@ -12,6 +12,7 @@ function register_my_menu()
 		'footer-2' => __('Footer 2', 'canhcamtheme'),
 		'footer-3' => __('Footer 3', 'canhcamtheme'),
 		'footer-4' => __('Footer 4', 'canhcamtheme'),
+		'footer-policy-menu' => __('Footer policy menu', 'canhcamtheme'),
 	);
 	register_nav_menus($locations);
 }
@@ -467,13 +468,27 @@ function get_term_depth($taxonomy, $depth)
  * Get image attractment
  */
 
-function changeAttrImage($url)
+function changeAttrImage($html)
 {
-	$image_output = $url;
-	$image_output = str_replace('src', 'data-src', $image_output);
-	$image_output = str_replace('class="', 'class="lozad ', $image_output);
-	return $image_output;
+	if (!$html) return '';
+
+	// Add lozad class safely
+	$html = preg_replace(
+		'/<img(.*?)class="(.*?)"/',
+		'<img$1class="lozad $2"',
+		$html
+	);
+
+	// Add data-src but keep src
+	$html = preg_replace(
+		'/src="([^"]+)"/',
+		'src="$1" data-src="$1"',
+		$html
+	);
+
+	return $html;
 }
+
 function get_image_attrachment($image, $type = "image")
 {
 	if ($type == "image") {
@@ -497,18 +512,39 @@ function get_image_attrachment($image, $type = "image")
 	}
 }
 // get img post
-function get_image_post($id, $type = "image")
+function get_image_post($post_id, $type = 'image')
 {
-	if ($type == "image") {
-		$alt = get_the_post_thumbnail_caption($id) != '' ? get_the_post_thumbnail_caption($id) : get_the_title($id);
-		$url = get_the_post_thumbnail($id, 'full', array('class' => '', 'alt' => $alt, 'title' => $alt));
-		return changeAttrImage($url);
+	if (!has_post_thumbnail($post_id)) {
+		return '';
 	}
-	if ($type == "url") {
-		$url = get_the_post_thumbnail_url($id, 'full', array('class' => ''));
-		return $url;
+
+	if ($type === 'image') {
+		$alt = get_post_meta(
+			get_post_thumbnail_id($post_id),
+			'_wp_attachment_image_alt',
+			true
+		) ?: get_the_title($post_id);
+
+		$html = get_the_post_thumbnail(
+			$post_id,
+			'full',
+			[
+				'class' => 'product-thumb',
+				'alt'   => esc_attr($alt),
+				'title'=> esc_attr($alt),
+			]
+		);
+
+		return changeAttrImage($html);
 	}
+
+	if ($type === 'url') {
+		return get_the_post_thumbnail_url($post_id, 'full');
+	}
+
+	return '';
 }
+
 
 add_filter('wp_lazy_loading_enabled', '__return_true');
 /**

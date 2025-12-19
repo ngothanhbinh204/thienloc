@@ -59,15 +59,106 @@ function add_field_select_banner()
 			// )
 		),
 	));
-	acf_add_local_field(array(
-		'key' => 'banner_select_page',
-		'label' => 'Chọn banner hiển thị',
-		'name' => 'Chọn banner hiển thị',
-		'type' => 'post_object',
-		'post_type' => 'banner',
-		'multiple' => 1,
-		'parent' => 'select_banner',
-	));
+
+	acf_add_local_field_group([
+	'key' => 'group_banner_content',
+	'title' => 'Banner Content',
+	'location' => [
+		[
+			[
+				'param' => 'post_type',
+				'operator' => '==',
+				'value' => 'banner',
+			],
+		],
+	],
+	'fields' => [
+		[
+			'key' => 'field_banner_type',
+			'label' => 'Kiểu banner',
+			'name' => 'banner_type',
+			'type' => 'radio',
+			'choices' => [
+				'single' => 'Banner đơn',
+				'slider' => 'Banner slider',
+			],
+			'default_value' => 'single',
+			'layout' => 'horizontal',
+		],
+
+		// SINGLE
+		[
+			'key' => 'field_banner_single_image',
+			'label' => 'Ảnh banner',
+			'name' => 'banner_single_image',
+			'type' => 'image',
+			'return_format' => 'id',
+			'conditional_logic' => [
+				[
+					[
+						'field' => 'field_banner_type',
+						'operator' => '==',
+						'value' => 'single',
+					],
+				],
+			],
+		],
+
+		// SLIDER
+		[
+			'key' => 'field_banner_slides',
+			'label' => 'Slides',
+			'name' => 'banner_slides',
+			'type' => 'repeater',
+			'min' => 1,
+			'layout' => 'block',
+			'conditional_logic' => [
+				[
+					[
+						'field' => 'field_banner_type',
+						'operator' => '==',
+						'value' => 'slider',
+					],
+				],
+			],
+			'sub_fields' => [
+				[
+					'key' => 'field_slide_image',
+					'label' => 'Ảnh',
+					'name' => 'image',
+					'type' => 'image',
+					'return_format' => 'id',
+				],
+				[
+					'key' => 'field_slide_title',
+					'label' => 'Tiêu đề',
+					'name' => 'title',
+					'type' => 'wysiwyg',
+					'toolbar' => 'basic',
+					'media_upload' => 0,
+					'rows' => 2,
+				],
+				[
+					'key' => 'field_slide_button',
+					'label' => 'Nút',
+					'name' => 'button',
+					'type' => 'link',
+				],
+			],
+		],
+	],
+]);
+
+		acf_add_local_field([
+		'key'        => 'banner_select_page',
+		'label'      => 'Chọn banner hiển thị',
+		'name'       => 'banner_select_page',
+		'type'       => 'post_object',
+		'post_type'  => ['banner'],
+		'multiple'   => false, //
+		'return_format' => 'id', //
+		'parent'     => 'select_banner',
+	]);
 }
 add_action('acf/init', 'add_field_select_banner');
 
