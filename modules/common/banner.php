@@ -12,7 +12,6 @@ if ($object instanceof WP_Term) {
 }
 
 $banner_selected = get_field('banner_select_page', $context_id);
-// var_dump($banner_selected);
 if (empty($banner_selected)) {
 	return;
 }
