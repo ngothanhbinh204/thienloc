@@ -119,7 +119,7 @@ $company_slogan = $footer_company['slogan'] ?? '';
 					<li class="footer-info-item">
 						<div class="info-icon">
 							<?php if ($icon_type === 'image' && $icon_image) : ?>
-							<?= get_image_attrachment($icon_image); ?>
+							<?= get_image_attrachment($icon_image, 'image'); ?>
 							<?php elseif ($icon_class) : ?>
 							<i class="<?= esc_attr($icon_class); ?>"></i>
 							<?php endif; ?>
