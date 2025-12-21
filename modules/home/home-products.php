@@ -25,20 +25,20 @@ if (!$title && empty($items)) {
 	</div>
 	<?php endif; ?>
 
-	<div class="section-header text-center">
+	<div class="section-header text-center" data-aos="fade-up">
 		<div class="container">
 			<?php if ($title): ?>
 			<h2 class="title-48 text-white"><?= esc_html($title); ?></h2>
 			<?php endif; ?>
 			<?php if ($desc): ?>
-			<div class="body-18 text-white py-10"><?= wp_kses_post($desc); ?></div>
+			<div class="desc text-white !mt-10"><?= wp_kses_post($desc); ?></div>
 			<?php endif; ?>
 		</div>
 	</div>
 
 	<?php if ($items): ?>
 	<div class="product-cards">
-		<div class="list-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-1">
+		<div class="list-grid">
 			<?php foreach ($items as $item): ?>
 			<div class="product-card">
 				<?php if (!empty($item['image'])): ?>
@@ -48,11 +48,11 @@ if (!$title && empty($items)) {
 				<?php endif; ?>
 
 				<div class="product-content">
-					<h3 class="product-title title-36 text-white">
+					<h3 class="product-title">
 						<?= esc_html($item['title'] ?? ''); ?>
 					</h3>
-					<?= wp_kses_post($item['description'] ?? ''); ?>
-
+					<p class="product-desc"><?= wp_kses_post($item['description'] ?? ''); ?></p>
+					<div class="product-line"></div>
 					<?php if (!empty($item['link'])): ?>
 					<a class="btn btn-secondary product-btn" href="<?= esc_url($item['link']['url']); ?>">
 						<?= esc_html($item['link']['title']); ?>

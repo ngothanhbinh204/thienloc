@@ -122,7 +122,15 @@
 				</div>
 				<div class="tools">
 					<div class="search cursor-pointer"><i class="fa-light fa-magnifying-glass text-xl"></i></div>
-					<div class="language"><img class="lozad flag" data-src="./img/flag-vn.svg" alt=""/><span>VN</span><i class="fa-light fa-chevron-down text-xs text-neutral-600"></i>
+					<div class="language relative">
+						<div class="current-lang flex items-center gap-1 cursor-pointer"><img class="lozad flag" data-src="./img/flag-vn.svg" alt=""/><span>VN</span><i class="fa-light fa-chevron-down text-xs text-neutral-600 transition-transform duration-300"></i>
+						</div>
+						<div class="lang-dropdown">
+							<ul>
+								<li><a href="#"><img class="lozad flag" data-src="./img/flag-vn.svg" alt=""/><span>VN</span></a></li>
+								<li><a href="#"><img class="lozad flag" data-src="./img/flag-en.svg" alt=""/><span>EN</span></a></li>
+							</ul>
+						</div>
 					</div>
 					<div class="hamburger lg:hidden">
 						<div class="header-hambuger"><span></span><span></span><span></span></div>
@@ -172,7 +180,7 @@
 		</header>
 		<main>
 			<div class="wrapper-gap-top">
-				<div class="breadcrumb-wrapper bg-white py-2 w-full">
+				<div class="breadcrumb-wrapper py-2 w-full">
 					<div class="container">
 						<ul class="flex items-center gap-2 text-sm text-neutral-600">
 							<li><a href="/">Trang chủ</a></li>
@@ -276,70 +284,68 @@
 				<section class="section-related-customers section-py bg-utility-50">
 					<div class="container">
 						<h2 class="title-36 text-center text-primary-1 mb-10">Khách hàng liên quan</h2>
-						<div class="section-related-customers relative">
-							<div class="swiper-column-auto auto-4-column swiper-loop">
-								<div class="swiper swiper-related-customers">
-									<div class="swiper-wrapper">
-										<div class="swiper-slide">
-											<div class="customer-card">
-												<div class="card-img"><img class="lozad undefined" data-src="img/ctm-logo.png" alt=""/>
-												</div>
-												<div class="card-body">
-													<div class="card-title">Thực phẩm</div><a class="btn btn-primary" href="#">Xem chi tiết</a>
-												</div>
+						<div class="related-customers-slider relative">
+							<div class="swiper swiper-related-customers">
+								<div class="swiper-wrapper">
+									<div class="swiper-slide">
+										<div class="customer-card">
+											<div class="card-img"><img class="lozad undefined" data-src="img/ctm-logo.png" alt=""/>
+											</div>
+											<div class="card-body">
+												<div class="card-title">Thực phẩm</div><a class="btn btn-primary" href="#">Xem chi tiết</a>
 											</div>
 										</div>
-										<div class="swiper-slide">
-											<div class="customer-card">
-												<div class="card-img"><img class="lozad undefined" data-src="img/ctm-logo.png" alt=""/>
-												</div>
-												<div class="card-body">
-													<div class="card-title">Thực phẩm</div><a class="btn btn-primary" href="#">Xem chi tiết</a>
-												</div>
+									</div>
+									<div class="swiper-slide">
+										<div class="customer-card">
+											<div class="card-img"><img class="lozad undefined" data-src="img/ctm-logo.png" alt=""/>
+											</div>
+											<div class="card-body">
+												<div class="card-title">Thực phẩm</div><a class="btn btn-primary" href="#">Xem chi tiết</a>
 											</div>
 										</div>
-										<div class="swiper-slide">
-											<div class="customer-card">
-												<div class="card-img"><img class="lozad undefined" data-src="img/ctm-logo.png" alt=""/>
-												</div>
-												<div class="card-body">
-													<div class="card-title">Thực phẩm</div><a class="btn btn-primary" href="#">Xem chi tiết</a>
-												</div>
+									</div>
+									<div class="swiper-slide">
+										<div class="customer-card">
+											<div class="card-img"><img class="lozad undefined" data-src="img/ctm-logo.png" alt=""/>
+											</div>
+											<div class="card-body">
+												<div class="card-title">Thực phẩm</div><a class="btn btn-primary" href="#">Xem chi tiết</a>
 											</div>
 										</div>
-										<div class="swiper-slide">
-											<div class="customer-card">
-												<div class="card-img"><img class="lozad undefined" data-src="img/ctm-logo.png" alt=""/>
-												</div>
-												<div class="card-body">
-													<div class="card-title">Thực phẩm</div><a class="btn btn-primary" href="#">Xem chi tiết</a>
-												</div>
+									</div>
+									<div class="swiper-slide">
+										<div class="customer-card">
+											<div class="card-img"><img class="lozad undefined" data-src="img/ctm-logo.png" alt=""/>
+											</div>
+											<div class="card-body">
+												<div class="card-title">Thực phẩm</div><a class="btn btn-primary" href="#">Xem chi tiết</a>
 											</div>
 										</div>
-										<div class="swiper-slide">
-											<div class="customer-card">
-												<div class="card-img"><img class="lozad undefined" data-src="img/ctm-logo.png" alt=""/>
-												</div>
-												<div class="card-body">
-													<div class="card-title">Thực phẩm</div><a class="btn btn-primary" href="#">Xem chi tiết</a>
-												</div>
+									</div>
+									<div class="swiper-slide">
+										<div class="customer-card">
+											<div class="card-img"><img class="lozad undefined" data-src="img/ctm-logo.png" alt=""/>
+											</div>
+											<div class="card-body">
+												<div class="card-title">Thực phẩm</div><a class="btn btn-primary" href="#">Xem chi tiết</a>
 											</div>
 										</div>
-										<div class="swiper-slide">
-											<div class="customer-card">
-												<div class="card-img"><img class="lozad undefined" data-src="img/ctm-logo.png" alt=""/>
-												</div>
-												<div class="card-body">
-													<div class="card-title">Thực phẩm</div><a class="btn btn-primary" href="#">Xem chi tiết</a>
-												</div>
+									</div>
+									<div class="swiper-slide">
+										<div class="customer-card">
+											<div class="card-img"><img class="lozad undefined" data-src="img/ctm-logo.png" alt=""/>
+											</div>
+											<div class="card-body">
+												<div class="card-title">Thực phẩm</div><a class="btn btn-primary" href="#">Xem chi tiết</a>
 											</div>
 										</div>
 									</div>
 								</div>
-								<div class="swiper-navigation center-y">
-									<div class="btn-prev btn-slider-2"><i class="fa-solid fa-chevron-left"></i></div>
-									<div class="btn-next btn-slider-2"><i class="fa-solid fa-chevron-right"></i></div>
-								</div>
+							</div>
+							<div class="swiper-navigation center-y">
+								<div class="btn-prev btn-slider-2"><i class="fa-solid fa-chevron-left"></i></div>
+								<div class="btn-next btn-slider-2"><i class="fa-solid fa-chevron-right"></i></div>
 							</div>
 						</div>
 					</div>
@@ -424,12 +430,21 @@
 						<ul class="footer-policy-menu">
 							<li class="policy-item"><a href="#">Privacy Policy</a></li>
 							<li class="policy-divider">|</li>
-							<li class="policy-item"><a href="#">Sitemap </a></li>
+							<li class="policy-item"><a href="#">Sitemap</a></li>
 						</ul>
 					</div>
 				</div>
 			</div>
 		</footer>
+		<div class="header-search-form">
+			<div class="wrap-form-search-product">
+				<form class="productsearchbox" action="#" method="GET">
+					<input type="text" placeholder="Tìm kiếm sản phẩm...">
+					<button type="submit"><i class="fa-light fa-magnifying-glass text-white"></i></button>
+				</form>
+			</div>
+			<div class="close-search absolute top-8 right-8 cursor-pointer text-white text-4xl hover:text-primary-1 transition-300"><i class="fa-light fa-xmark"> </i></div>
+		</div>
 		<script src="./js/core.min.js"></script>
 		<script src="./js/main.min.js"></script>
 	</body>

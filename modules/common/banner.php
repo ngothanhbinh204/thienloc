@@ -22,18 +22,20 @@ $banner_type   = get_field('banner_type', $banner_id);
 // Sửa lại đúng tên field trong config là 'banner_single_image'
 $banner_image  = get_field('banner_single_image', $banner_id);
 $banner_slides = get_field('banner_slides', $banner_id);
-
 ?>
 
 <section class="page-banner relative">
 
 	<?php if ($banner_type === 'single' && $banner_image) : ?>
 
-	<div class="banner-item relative h-full w-full">
-		<div class="banner-img">
-			<?= get_image_attrachment($banner_image, 'full', 'lozad w-full h-full object-cover'); ?>
+	<div class="banner-swiper">
+		<div class="banner-item relative h-full w-full">
+			<div class="banner-img">
+				<?= get_image_attrachment($banner_image, 'image'); ?>
+			</div>
 		</div>
 	</div>
+
 
 	<?php elseif ($banner_type === 'slider' && !empty($banner_slides)) : ?>
 

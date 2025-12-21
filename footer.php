@@ -12,9 +12,24 @@ $company_slogan = $footer_company['slogan'] ?? '';
 
 </main>
 
+
 <?php if (stripos($_SERVER['HTTP_USER_AGENT'] ?? '', 'Chrome-Lighthouse') === false) : ?>
 <?php wp_footer(); ?>
 <?php endif; ?>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+	if (typeof lozad !== 'undefined') {
+		const observer = lozad('.lozad', {
+			loaded: function(el) {
+				el.classList.add('loaded');
+			}
+		});
+		console.log('lozad loaded')
+		observer.observe();
+	}
+});
+</script>
 
 <?= $field_body_extra ?: '' ?>
 <div class="header-search-form">
@@ -40,7 +55,7 @@ $company_slogan = $footer_company['slogan'] ?? '';
 	<div class="container">
 
 		<div class="footer-decor">
-			<img class="lozad" data-src="<?= get_template_directory_uri(); ?>/img/decor-footer.svg" alt="">
+			<img class="lozad" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" data-src="<?= get_template_directory_uri(); ?>/img/decor-footer.svg" alt="">
 		</div>
 
 		<!-- FOOTER TOP -->

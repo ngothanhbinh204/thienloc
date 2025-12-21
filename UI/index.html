@@ -122,7 +122,15 @@
 				</div>
 				<div class="tools">
 					<div class="search cursor-pointer"><i class="fa-light fa-magnifying-glass text-xl"></i></div>
-					<div class="language"><img class="lozad flag" data-src="./img/flag-vn.svg" alt=""/><span>VN</span><i class="fa-light fa-chevron-down text-xs text-neutral-600"></i>
+					<div class="language relative">
+						<div class="current-lang flex items-center gap-1 cursor-pointer"><img class="lozad flag" data-src="./img/flag-vn.svg" alt=""/><span>VN</span><i class="fa-light fa-chevron-down text-xs text-neutral-600 transition-transform duration-300"></i>
+						</div>
+						<div class="lang-dropdown">
+							<ul>
+								<li><a href="#"><img class="lozad flag" data-src="./img/flag-vn.svg" alt=""/><span>VN</span></a></li>
+								<li><a href="#"><img class="lozad flag" data-src="./img/flag-en.svg" alt=""/><span>EN</span></a></li>
+							</ul>
+						</div>
 					</div>
 					<div class="hamburger lg:hidden">
 						<div class="header-hambuger"><span></span><span></span><span></span></div>
@@ -211,7 +219,7 @@
 				</div>
 				<div class="container relative z-10">
 					<div class="home-1-content text-center">
-						<h2 class="title-80 font-black uppercase text-mask-image text-image" data-aos="fade-up" data-aos-duration="1000"><span class="block">IN NÊN GIÁ TRỊ</span><span class="block">GÓI TRỌN NIỀM TIN</span></h2>
+						<h2 class="text-mask-image text-image" data-aos="fade-up" data-aos-duration="1000"><span class="block">IN NÊN GIÁ TRỊ</span><span class="block">GÓI TRỌN NIỀM TIN</span></h2>
 					</div><a class="btn btn-primary" href="#" data-aos="fade-up" data-aos-delay="200">Về chúng tôi</a>
 					<div class="list-stats">
 						<div class="stat-item" data-aos="fade-up" data-aos-delay="400">
@@ -259,7 +267,7 @@
 				<div class="section-header text-center" data-aos="fade-up">
 					<div class="container">
 						<h2 class="title-48 font-bold text-white font-medium">Sản Phẩm Tiêu Biểu</h2>
-						<p class="body-18 text-white py-10">Bao bì không chỉ là vật chứa đựng sản phẩm, mà còn là cách thương hiệu thể hiện giá trị, cá tính và sự khác biệt...</p>
+						<p class="desc text-white !mt-10">Bao bì không chỉ là vật chứa đựng sản phẩm, mà còn là cách thương hiệu thể hiện giá trị, cá tính và sự khác biệt...</p>
 					</div>
 				</div>
 				<div class="product-cards">
@@ -268,7 +276,7 @@
 							<div class="product-img"><img class="lozad w-full h-full object-cover" data-src="./img/product-item-1.png" alt=""/>
 							</div>
 							<div class="product-content">
-								<h3 class="product-title title-36 text-white">Ấn phẩm văn phòng</h3>
+								<h3 class="product-title">Ấn phẩm văn phòng</h3>
 								<p class="product-desc">Sắc nét – bền đẹp – thiết kế theo phong cách riêng</p>
 								<div class="product-line"></div><a class="btn btn-secondary product-btn" href="#">Xem thêm</a>
 							</div>
@@ -277,7 +285,7 @@
 							<div class="product-img"><img class="lozad w-full h-full object-cover" data-src="./img/product-item-1.png" alt=""/>
 							</div>
 							<div class="product-content">
-								<h3 class="product-title title-36 text-white">Bao bì sản phẩm</h3>
+								<h3 class="product-title">Bao bì sản phẩm</h3>
 								<p class="product-desc">Sắc nét – bền đẹp – thiết kế theo phong cách riêng</p>
 								<div class="product-line"></div><a class="btn btn-secondary product-btn" href="#">Xem thêm</a>
 							</div>
@@ -286,7 +294,7 @@
 							<div class="product-img"><img class="lozad w-full h-full object-cover" data-src="./img/product-item-1.png" alt=""/>
 							</div>
 							<div class="product-content">
-								<h3 class="product-title title-36 text-white">Ấn phẩm văn phòng</h3>
+								<h3 class="product-title">Ấn phẩm văn phòng</h3>
 								<p class="product-desc">Sắc nét – bền đẹp – thiết kế theo phong cách riêng</p>
 								<div class="product-line"></div><a class="btn btn-secondary product-btn" href="#">Xem thêm</a>
 							</div>
@@ -295,7 +303,7 @@
 							<div class="product-img"><img class="lozad w-full h-full object-cover" data-src="./img/product-item-1.png" alt=""/>
 							</div>
 							<div class="product-content">
-								<h3 class="product-title title-36 text-white">Hộp & Thùng</h3>
+								<h3 class="product-title">Hộp & Thùng</h3>
 								<p class="product-desc">Sắc nét – bền đẹp – thiết kế theo phong cách riêng</p>
 								<div class="product-line"></div><a class="btn btn-secondary product-btn" href="#">Xem thêm</a>
 							</div>
@@ -305,9 +313,9 @@
 			</section>
 			<section class="home-3 section-py bg-gray-50" style="background-image: url('./img/bg-image-customer.png'); background-size: cover; background-position: center;">
 				<div class="container">
-					<div class="section-header text-center mb-10 space-y-6" data-aos="fade-up">
+					<div class="section-header text-center space-y-6" data-aos="fade-up">
 						<h2 class="title-48 text-primary-1">Khách Hàng</h2>
-						<p class="body-18">Sự tin tưởng của quý khách hàng là động lực để chúng tôi không ngừng phát triển và hoàn thiện</p>
+						<p class="desc">Sự tin tưởng của quý khách hàng là động lực để chúng tôi không ngừng phát triển và hoàn thiện</p>
 					</div>
 					<div class="customer-slider swiper flex flex-col items-center" data-aos="fade-up" data-aos-delay="200">
 						<div class="swiper-wrapper">
@@ -532,15 +540,15 @@
 										</div>
 						</div>
 					</div>
-					<div class="news-footer flex justify-center mt-10" data-aos="fade-up" data-aos-delay="800"><a class="btn btn-primary" href="#">Xem thêm</a></div>
+					<div class="news-footer" data-aos="fade-up" data-aos-delay="800"><a class="btn btn-primary" href="#">Xem thêm</a></div>
 				</div>
 			</section>
 			<section class="section-home-6 section-py relative">
 				<div class="home-6-bg absolute-full z-0"><img class="lozad w-full h-full object-cover" data-src="./img/image-bg-contact.png" alt=""/>
 				</div>
 				<div class="container relative z-10">
-					<div class="row items-center wrapper-cta">
-						<div class="form-col w-full mb-8 lg:mb-0" data-aos="fade-right">
+					<div class="items-center wrapper-cta">
+						<div class="form-col" data-aos="fade-right">
 							<div class="contact-form-wrapper">
 								<div class="form-header">
 									<h3 class="form-title">ĐĂNG KÝ NHẬN TƯ VẤN <span>MIỄN PHÍ</span></h3>
@@ -564,8 +572,9 @@
 										<textarea class="form-control" id="your-message" name="your-message" placeholder="Nội dung" rows="4"></textarea>
 									</div>
 									<div class="form-group form-submit">
-										<button class="btn btn-primary" type="submit">Gửi</button>
+										<button class="btn btn-primary" type="submit">Gửi </button>
 									</div>
+									<input type="submit" value=" Gửi ">
 								</form>
 							</div>
 						</div>
@@ -668,12 +677,21 @@
 						<ul class="footer-policy-menu">
 							<li class="policy-item"><a href="#">Privacy Policy</a></li>
 							<li class="policy-divider">|</li>
-							<li class="policy-item"><a href="#">Sitemap </a></li>
+							<li class="policy-item"><a href="#">Sitemap</a></li>
 						</ul>
 					</div>
 				</div>
 			</div>
 		</footer>
+		<div class="header-search-form">
+			<div class="wrap-form-search-product">
+				<form class="productsearchbox" action="#" method="GET">
+					<input type="text" placeholder="Tìm kiếm sản phẩm...">
+					<button type="submit"><i class="fa-light fa-magnifying-glass text-white"></i></button>
+				</form>
+			</div>
+			<div class="close-search absolute top-8 right-8 cursor-pointer text-white text-4xl hover:text-primary-1 transition-300"><i class="fa-light fa-xmark"> </i></div>
+		</div>
 		<script src="./js/core.min.js"></script>
 		<script src="./js/main.min.js"></script>
 	</body>

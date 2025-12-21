@@ -4,13 +4,7 @@ Template name: Page - About
 */ 
 ?>
 <?= get_header() ?>
-<?php
-// $breadcrumbs = canhcam_get_breadcrumbs();
 
-// if (empty($breadcrumbs)) {
-// 	return;
-// }
-?>
 <?php get_template_part('modules/common/banner')?>
 
 <div class="wrapper-introduction">

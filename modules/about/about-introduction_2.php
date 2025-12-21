@@ -1,49 +1,43 @@
 <?php
-$image_main  = get_sub_field('image_main');
-$image_sub   = get_sub_field('image_sub');
-$title       = get_sub_field('title');
-$description = get_sub_field('description');
-$features    = get_sub_field('features');
+$items = get_sub_field('items');
 ?>
 <section class="introduction-2 section-py">
 	<div class="container">
 		<div class="intro-grid">
-			<div class="col-item" data-aos="fade-right">
-				<div class="wrapper-img">
-					<div class="img-main">
-						<?= get_image_attrachment($image_main, 'image'); ?>
+			<?php if ($items) :
+				foreach ($items as $key => $item) :
+					$icon = $item['icon'];
+					$title = $item['title'];
+					$description = $item['description'];
+					$image = $item['image'];
+
+					$aos_anim = ($key % 2 == 0) ? 'fade-right' : 'fade-left';
+					$aos_delay = ($key % 2 != 0) ? 'data-aos-delay="200"' : '';
+			?>
+			<div class="col-item" data-aos="<?= $aos_anim ?>" <?= $aos_delay ?>>
+				<div class="header-box">
+					<?php if ($icon) : ?>
+					<div class="icon">
+						<?= get_image_attrachment($icon, 'image'); ?>
 					</div>
-					<div class="img-absolute">
-						<?= get_image_attrachment($image_sub, 'image'); ?>
-					</div>
-				</div>
-			</div>
-			<div class="col-item" data-aos="fade-left" data-aos-delay="200">
-				<div class="content">
+					<?php endif; ?>
 					<?php if ($title) : ?>
-						<h2 class="title-48 text-primary-1 font-medium mb-6">
-							<?= nl2br(esc_html($title)); ?>
-						</h2>
-					<?php endif; ?>
-
-					<?php if ($description) : ?>
-						<div class="content-html text-justify mb-6">
-							<?= $description; ?>
-						</div>
-					<?php endif; ?>
-
-					<?php if ($features) : ?>
-						<ul class="list-check">
-							<?php foreach ($features as $feature) : ?>
-								<li>
-									<i class="fa-solid fa-check"></i>
-									<span><?= esc_html($feature['text']); ?></span>
-								</li>
-							<?php endforeach; ?>
-						</ul>
+					<h3 class="title"><?= $title ?></h3>
 					<?php endif; ?>
 				</div>
+				<?php if ($description) : ?>
+				<div class="desc">
+					<?= $description ?>
+				</div>
+				<?php endif; ?>
+				<?php if ($image) : ?>
+				<div class="img-wrapper">
+					<?= get_image_attrachment($image, 'image'); ?>
+				</div>
+				<?php endif; ?>
 			</div>
+			<?php endforeach;
+			endif; ?>
 		</div>
 	</div>
 </section>

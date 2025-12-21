@@ -115,7 +115,7 @@ get_header();
 						</div>
 						<div class="partner-info">
 							<h4 class="partner-name"><?php the_title(); ?></h4>
-							<div class="partner-description body-18">
+							<div class="partner-description body-18 ">
 								<?php the_excerpt(); ?>
 							</div>
 							<a class="btn btn-primary w-fit" href="<?php the_permalink(); ?>">Xem thêm</a>

@@ -468,25 +468,33 @@ function get_term_depth($taxonomy, $depth)
  * Get image attractment
  */
 
-function changeAttrImage($html)
+function changeAttrImage($url)
 {
-	if (!$html) return '';
+	$image_output = $url;
+	$image_output = str_replace('src', 'data-src', $image_output);
+	$image_output = str_replace('class="', 'class="lozad ', $image_output);
+	return $image_output;
+}
+/**
+ * Lozad lazy loading placeholder
+ */
+define('LOZAD_PLACEHOLDER', "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E");
 
-	// Add lozad class safely
-	$html = preg_replace(
-		'/<img(.*?)class="(.*?)"/',
-		'<img$1class="lozad $2"',
-		$html
+/**
+ * Generate a lozad lazy loading image tag
+ */
+function get_lozad_img($src, $alt = '', $class = '')
+{
+	if (empty($src)) return '';
+	
+	$class = trim('lozad ' . $class);
+	return sprintf(
+		'<img class="%s" src="%s" data-src="%s" alt="%s" />',
+		esc_attr($class),
+		LOZAD_PLACEHOLDER,
+		esc_url($src),
+		esc_attr($alt)
 	);
-
-	// Add data-src but keep src
-	$html = preg_replace(
-		'/src="([^"]+)"/',
-		'src="$1" data-src="$1"',
-		$html
-	);
-
-	return $html;
 }
 
 function get_image_attrachment($image, $type = "image")

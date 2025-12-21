@@ -38,7 +38,7 @@
 			</div>
 		</section>
 
-		<div class="section-related-news1">
+		<div class="section-related-news">
 			<div class="container">
 				<div class="related-news section-py">
 					<h2 class="section-title title-36 text-center text-primary">Tin tức liên quan</h2>
@@ -99,7 +99,7 @@
 									?>
 								</div>
 							</div>
-							<div class="swiper-navigation center-y">
+							<div class="swiper-navigation">
 								<div class="btn-prev btn-slider-1"><i class="fa-solid fa-chevron-left"></i></div>
 								<div class="btn-next btn-slider-1"><i class="fa-solid fa-chevron-right"></i></div>
 							</div>

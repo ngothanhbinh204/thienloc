@@ -26,7 +26,9 @@
 
 						if (!empty($logo)) :
 					?>
-					<img class="lozad h-12 w-auto object-contain" data-src="<?= esc_url($logo[0]) ?>"
+					<img class="lozad h-12 w-auto object-contain" 
+						src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E"
+						data-src="<?= esc_url($logo[0]) ?>"
 						alt="<?= esc_attr(get_bloginfo('name')) ?>" />
 					<?php
 						endif;
@@ -53,14 +55,15 @@
 				<div class="search cursor-pointer"><i class="fa-light fa-magnifying-glass text-xl"></i></div>
 				<div class="language relative">
 					<div class="current-lang flex items-center gap-1 cursor-pointer"><img class="lozad flag"
+							src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E"
 							data-src="./img/flag-vn.svg" alt="" /><span>VN</span><i
 							class="fa-light fa-chevron-down text-xs text-neutral-600 transition-transform duration-300"></i>
 					</div>
 					<div class="lang-dropdown">
 						<ul>
-							<li><a href="#"><img class="lozad flag" data-src="./img/flag-vn.svg"
+							<li><a href="#"><img class="lozad flag" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" data-src="./img/flag-vn.svg"
 										alt="" /><span>VN</span></a></li>
-							<li><a href="#"><img class="lozad flag" data-src="./img/flag-en.svg"
+							<li><a href="#"><img class="lozad flag" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" data-src="./img/flag-en.svg"
 										alt="" /><span>EN</span></a></li>
 						</ul>
 					</div>

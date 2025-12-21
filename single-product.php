@@ -109,8 +109,8 @@
 							</div>
 						</div>
 
-						<div class="product-related section-py">
-							<h2 class="title-36 text-center text-primary-1 mb-5 lg:mb-11">Sản phẩm gợi ý</h2>
+						<div class="product-related">
+							<h2>Sản phẩm gợi ý</h2>
 							<div class="wrapper-related-products relative">
 								<div class="btn-relative-prev btn-slider-2"><i class="fa-solid fa-chevron-left"></i>
 								</div>
@@ -144,30 +144,32 @@
 												$rel_specs = get_field('product_specs');
 										?>
 										<div class="swiper-slide">
-											<article class="product-card">
-												<a class="product-link" href="<?php the_permalink(); ?>">
-													<div class="product-image">
-														<?= get_image_attrachment($rel_img_id, 'image'); ?>
-													</div>
-													<div class="product-info">
-														<h3 class="product-name"><?php the_title(); ?></h3>
-														<?php if ($rel_specs) : ?>
-														<div class="product-specs">
-															<?php 
-																		$count = 0;
-																		foreach ($rel_specs as $spec) : 
-																			if ($count >= 3) break;
-																		?>
-															<p><?= esc_html($spec['text']); ?></p>
-															<?php 
-																			$count++;
-																		endforeach; 
-																		?>
+											<div class="slide-inner">
+												<article class="product-card">
+													<a class="product-link" href="<?php the_permalink(); ?>">
+														<div class="product-image">
+															<?= get_image_attrachment($rel_img_id, 'image'); ?>
 														</div>
-														<?php endif; ?>
-													</div>
-												</a>
-											</article>
+														<div class="product-info">
+															<h3 class="product-name"><?php the_title(); ?></h3>
+															<?php if ($rel_specs) : ?>
+															<div class="product-specs">
+																<?php 
+																			$count = 0;
+																			foreach ($rel_specs as $spec) : 
+																				if ($count >= 3) break;
+																			?>
+																<p><?= esc_html($spec['text']); ?></p>
+																<?php 
+																				$count++;
+																			endforeach; 
+																			?>
+															</div>
+															<?php endif; ?>
+														</div>
+													</a>
+												</article>
+											</div>
 										</div>
 										<?php
 											endwhile;

@@ -118,7 +118,7 @@ if (!$title && !$query->have_posts()) {
 		<?php endif; ?>
 
 		<?php if ($button): ?>
-		<div class="news-footer flex justify-center mt-10">
+		<div class="news-footer" data-aos="fade-up" data-aos-delay="800">
 			<a class="btn btn-primary" href="<?= esc_url($button['url']); ?>"
 				target="<?= esc_attr($button['target'] ?: '_self'); ?>">
 				<?= esc_html($button['title']); ?>

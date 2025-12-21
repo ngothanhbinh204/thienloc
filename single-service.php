@@ -20,42 +20,20 @@
 		</section>
 
 		<?php
-		$detail_title       = get_field('detail_title');
-		$detail_desc_top    = get_field('detail_desc_top');
-		$detail_highlights  = get_field('detail_highlights');
-		$detail_desc_bottom = get_field('detail_desc_bottom');
+		$detail_desc_top    = get_the_content();
 		?>
 		<section class="section-services-detail-2 section-py">
 			<div class="container">
 				<div class="row">
 					<div class="grid-layout">
 						<div class="content-wrapper">
-							<?php if ($detail_title) : ?>
-								<h2 class="title"><?= esc_html($detail_title); ?></h2>
-							<?php endif; ?>
-
+							
 							<?php if ($detail_desc_top) : ?>
 								<div class="desc">
 									<?= $detail_desc_top; ?>
 								</div>
 							<?php endif; ?>
 
-							<?php if ($detail_highlights) : ?>
-								<ul class="list-check">
-									<?php foreach ($detail_highlights as $item) : ?>
-										<li>
-											<i class="fa-solid fa-square-check"></i>
-											<span><?= esc_html($item['text']); ?></span>
-										</li>
-									<?php endforeach; ?>
-								</ul>
-							<?php endif; ?>
-
-							<?php if ($detail_desc_bottom) : ?>
-								<div class="desc-bottom">
-									<?= $detail_desc_bottom; ?>
-								</div>
-							<?php endif; ?>
 						</div>
 					</div>
 				</div>

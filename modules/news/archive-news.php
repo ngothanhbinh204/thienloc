@@ -41,7 +41,7 @@ $news_query = new WP_Query($args);
 							<div class="date-month"><?= get_the_date('m.Y'); ?></div>
 						</div>
 						<div class="wrapper">
-							<h2 class="news-title title-20">
+							<h2 class="news-title">
 								<a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
 							</h2>
 							<div class="news-excerpt body-16">
@@ -69,7 +69,7 @@ $news_query = new WP_Query($args);
 							<div class="date-month"><?= get_the_date('m.Y'); ?></div>
 						</div>
 						<div class="wrapper">
-							<h3 class="news-title title-20">
+							<h3 class="news-title">
 								<a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
 							</h3>
 							<div class="news-excerpt body-16">

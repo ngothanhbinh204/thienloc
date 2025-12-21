@@ -116,10 +116,9 @@
 		<section class="section-related-customers section-py bg-utility-50">
 			<div class="container">
 				<h2 class="title-36 text-center text-primary-1 mb-10">Khách hàng liên quan</h2>
-				<div class="section-related-customers relative">
-					<div class="swiper-column-auto auto-4-column swiper-loop">
-						<div class="swiper swiper-related-customers">
-							<div class="swiper-wrapper">
+				<div class="related-customers-slider relative">
+					<div class="swiper swiper-related-customers">
+						<div class="swiper-wrapper">
 								<?php
 								$related_args = array(
 									'post_type'      => 'customer',
@@ -133,21 +132,22 @@
 									while ($related_query->have_posts()) : $related_query->the_post();
 								?>
 								<div class="swiper-slide">
-									<div class="partner-card bg-white p-4 rounded-lg h-full">
-										<div class="partner-logo mb-4">
+									<div class="customer-card bg-white p-4 rounded-lg h-full">
+										<div class="card-img">
 											<?php if (has_post_thumbnail()) : ?>
 											<a href="<?php the_permalink(); ?>">
 												<?= get_image_attrachment(get_post_thumbnail_id(), 'image'); ?>
 											</a>
 											<?php endif; ?>
 										</div>
-										<div class="partner-info">
-											<h4 class="partner-name font-bold text-lg mb-2">
+										<div class="card-body">
+											<h4 class="card-title">
 												<a href="<?php the_permalink(); ?>"
-													class="hover:text-primary-1 transition-colors"><?php the_title(); ?></a>
+													class="hover:text-primary-1 transition-colors">
+													<?= the_title(); ?></a>
 											</h4>
-											<a class="btn btn-primary w-fit text-sm px-4 py-2"
-												href="<?php the_permalink(); ?>">Xem thêm</a>
+											<a class="btn btn-primary"
+												href="<?php the_permalink(); ?>">Xem chi tiết</a>
 										</div>
 									</div>
 								</div>
@@ -156,12 +156,11 @@
 									wp_reset_postdata();
 								endif;
 								?>
-							</div>
 						</div>
-						<div class="swiper-navigation center-y">
-							<div class="btn-prev btn-slider-2"><i class="fa-solid fa-chevron-left"></i></div>
-							<div class="btn-next btn-slider-2"><i class="fa-solid fa-chevron-right"></i></div>
-						</div>
+					</div>
+					<div class="swiper-navigation center-y">
+						<div class="btn-prev btn-slider-2"><i class="fa-solid fa-chevron-left"></i></div>
+						<div class="btn-next btn-slider-2"><i class="fa-solid fa-chevron-right"></i></div>
 					</div>
 				</div>
 			</div>

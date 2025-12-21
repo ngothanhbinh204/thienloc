@@ -42,6 +42,7 @@ function add_field_select_banner()
 		'title' => 'Banner: Select Page',
 		'fields' => array(),
 		'location' => array(
+			// Pages
 			array(
 				array(
 					'param' => 'post_type',
@@ -49,14 +50,21 @@ function add_field_select_banner()
 					'value' => 'page',
 				),
 			),
-			// Thêm taxonomy ở dưới
-			// array(
-			// 	array(
-			// 		'param' => 'taxonomy',
-			// 		'operator' => '==',
-			// 		'value' => 'danh-muc-san-pham'
-			// 	)
-			// )
+			// Category (bài viết) - cho phép thêm banner cho danh mục bài viết
+			array(
+				array(
+					'param' => 'taxonomy',
+					'operator' => '==',
+					'value' => 'category',
+				),
+			),
+			array(
+				array(
+					'param' => 'taxonomy',
+					'operator' => '==',
+					'value' => 'product_cat',
+				),
+			),
 		),
 	));
 

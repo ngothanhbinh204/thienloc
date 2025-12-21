@@ -85,12 +85,37 @@ Template name: Page - Products
 				<div class="product-grid">
 					<?php
 					$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
+					$sort = isset($_GET['sort']) ? $_GET['sort'] : '';
+					
 					$args = array(
 						'post_type'      => 'product',
 						'posts_per_page' => 12,
 						'paged'          => $paged,
 						'status'         => 'publish',
 					);
+
+					// Sort Logic
+					switch ($sort) {
+						case 'price':
+							$args['orderby']  = 'meta_value_num';
+							$args['meta_key'] = 'price'; // Assumed meta key
+							$args['order']    = 'ASC';
+							break;
+						case 'price-desc':
+							$args['orderby']  = 'meta_value_num';
+							$args['meta_key'] = 'price'; // Assumed meta key
+							$args['order']    = 'DESC';
+							break;
+						case 'date':
+							$args['orderby'] = 'date';
+							$args['order']   = 'DESC';
+							break;
+						default:
+							$args['orderby'] = 'menu_order date';
+							$args['order']   = 'DESC';
+							break;
+					}
+
 					$query = new WP_Query($args);
 
 					if ($query->have_posts()) :
@@ -129,5 +154,69 @@ Template name: Page - Products
 		</div>
 	</div>
 </section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+	const selectTrigger = document.querySelector('.select-trigger');
+	const selectDropdown = document.querySelector('.select-dropdown');
+	const selectOptions = document.querySelectorAll('.select-option');
+	const selectedValue = document.querySelector('.selected-value');
+
+	// Toggle dropdown
+	if (selectTrigger) {
+		selectTrigger.addEventListener('click', function() {
+			selectDropdown.classList.toggle('show');
+		});
+	}
+
+	// Close dropdown when clicking outside
+	document.addEventListener('click', function(e) {
+		if (selectTrigger && !selectTrigger.contains(e.target) && !selectDropdown.contains(e.target)) {
+			selectDropdown.classList.remove('show');
+		}
+	});
+
+	// Handle option click
+	selectOptions.forEach(option => {
+		option.addEventListener('click', function() {
+			const value = this.getAttribute('data-value');
+			const text = this.textContent;
+			
+			// Update trigger text
+			if (selectedValue) selectedValue.textContent = text;
+			
+			// Update active class
+			selectOptions.forEach(opt => opt.classList.remove('active'));
+			this.classList.add('active');
+			
+			// Close dropdown
+			if (selectDropdown) selectDropdown.classList.remove('show');
+
+			// Redirect with sort param
+			const url = new URL(window.location.href);
+			if (value) {
+				url.searchParams.set('sort', value);
+			} else {
+				url.searchParams.delete('sort');
+			}
+			// Reset pagination when sorting changes
+			url.searchParams.delete('paged'); 
+			window.location.href = url.toString();
+		});
+	});
+
+	// Set active state based on URL
+	const currentUrl = new URL(window.location.href);
+	const currentSort = currentUrl.searchParams.get('sort');
+	if (currentSort) {
+		const activeOption = document.querySelector(`.select-option[data-value="${currentSort}"]`);
+		if (activeOption) {
+			selectOptions.forEach(opt => opt.classList.remove('active'));
+			activeOption.classList.add('active');
+			if (selectedValue) selectedValue.textContent = activeOption.textContent;
+		}
+	}
+});
+</script>
 
 <?= get_footer() ?>

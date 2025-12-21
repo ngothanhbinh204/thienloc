@@ -12,13 +12,13 @@ if (!$title && empty($customers)) {
 <section class="home-3 section-py bg-gray-50" style="<?= get_sub_field('background') ? 'background-image:url(' . esc_url(get_sub_field('background')['url']) . ')' : ''; ?>; background-size: cover;
     background-position: center;">
 	<div class="container">
-		<div class="section-header text-center mb-10 space-y-6">
+		<div class="text-center space-y-6">
 			<?php if ($title): ?>
 			<h2 class="title-48 text-primary-1"><?= esc_html($title); ?></h2>
 			<?php endif; ?>
 
 			<?php if ($description): ?>
-			<p class="body-18"><?= $description; ?></p>
+			<p class="desc"><?= $description; ?></p>
 			<?php endif; ?>
 		</div>
 
