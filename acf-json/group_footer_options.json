@@ -21,6 +21,32 @@
             "selected": 0
         },
         {
+            "key": "field_6948bf15fa558",
+            "label": "Footer Decor Image",
+            "name": "footer_decor_image",
+            "aria-label": "",
+            "type": "image",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "",
+            "allow_in_bindings": 1,
+            "preview_size": "medium"
+        },
+        {
             "key": "field_footer_company",
             "label": "Footer - Company",
             "name": "footer_company",
@@ -324,16 +350,21 @@
                     "label": "Link",
                     "name": "link",
                     "aria-label": "",
-                    "type": "link",
+                    "type": "wysiwyg",
                     "instructions": "",
-                    "required": false,
-                    "conditional_logic": false,
+                    "required": 0,
+                    "conditional_logic": 0,
                     "wrapper": {
                         "width": "",
                         "class": "",
                         "id": ""
                     },
-                    "return_format": "array",
+                    "default_value": "",
+                    "allow_in_bindings": 0,
+                    "tabs": "all",
+                    "toolbar": "full",
+                    "media_upload": 1,
+                    "delay": 0,
                     "parent_repeater": "field_footer_middle_col_1"
                 }
             ]
@@ -474,16 +505,21 @@
                     "label": "Link",
                     "name": "link",
                     "aria-label": "",
-                    "type": "link",
+                    "type": "wysiwyg",
                     "instructions": "",
-                    "required": false,
-                    "conditional_logic": false,
+                    "required": 0,
+                    "conditional_logic": 0,
                     "wrapper": {
                         "width": "",
                         "class": "",
                         "id": ""
                     },
-                    "return_format": "array",
+                    "default_value": "",
+                    "allow_in_bindings": 0,
+                    "tabs": "all",
+                    "toolbar": "full",
+                    "media_upload": 1,
+                    "delay": 0,
                     "parent_repeater": "field_footer_middle_col_2"
                 }
             ]
@@ -676,7 +712,7 @@
             "label": "Hotline Label 1",
             "name": "cta_hotline_label_1",
             "aria-label": "",
-            "type": "text",
+            "type": "wysiwyg",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -686,11 +722,11 @@
                 "id": ""
             },
             "default_value": "",
-            "maxlength": "",
-            "allow_in_bindings": 1,
-            "placeholder": "",
-            "prepend": "",
-            "append": ""
+            "allow_in_bindings": 0,
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 1,
+            "delay": 0
         },
         {
             "key": "field_contact_hotline_label_2",
@@ -862,5 +898,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1766084398
+    "modified": 1766377718
 }

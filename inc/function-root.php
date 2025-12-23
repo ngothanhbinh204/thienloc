@@ -305,6 +305,17 @@ function add_post_names_to_main_query($query)
 	if (empty($query->query['name'])) {
 		return;
 	}
+	
+	// FIX: Check if we are on the products page and allow pagination
+	$product_page_id = get_page_id_by_template('templates/page-products.php');
+	if ($product_page_id) {
+		$product_page = get_post($product_page_id);
+		if ($query->query['name'] === $product_page->post_name) {
+			$query->is_page = true;
+			return;
+		}
+	}
+
 	// Add CPT to the list of post types WP will include when it queries based on the post name.
 	$query->set('post_type', array('post', 'page', 'products', 'grounds'));
 }
@@ -473,6 +484,7 @@ function changeAttrImage($url)
 	$image_output = $url;
 	$image_output = str_replace('src', 'data-src', $image_output);
 	$image_output = str_replace('class="', 'class="lozad ', $image_output);
+	$image_output = str_replace('<img', '<img src="' . LOZAD_PLACEHOLDER . '"', $image_output);
 	return $image_output;
 }
 /**
@@ -502,7 +514,7 @@ function get_image_attrachment($image, $type = "image")
 	if ($type == "image") {
 		if (!empty($image['ID'])) {
 			$alt = get_post_meta($image['ID'], '_wp_attachment_image_alt', true) != '' ? get_post_meta($image['ID'], '_wp_attachment_image_alt', true) : get_bloginfo('name');
-			$url = wp_get_attachment_image($image['ID'], 'full', '', array('class' => '1', 'alt' => $alt, 'title' => $alt));
+			$url = wp_get_attachment_image($image['ID'], 'full', '', array('class' => '', 'alt' => $alt, 'title' => $alt));
 			return changeAttrImage($url);
 		} else {
 			$url = wp_get_attachment_image($image, 'full', '', array('class' => ''));

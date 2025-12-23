@@ -111,6 +111,39 @@ function add_field_select_banner()
 				],
 			],
 		],
+		[
+			'key' => 'field_banner_single_title',
+			'label' => 'Tiêu đề',
+			'name' => 'banner_single_title',
+			'type' => 'wysiwyg',
+			'toolbar' => 'basic',
+			'media_upload' => 0,
+			'rows' => 2,
+			'conditional_logic' => [
+				[
+					[
+						'field' => 'field_banner_type',
+						'operator' => '==',
+						'value' => 'single',
+					],
+				],
+			],
+		],
+		[
+			'key' => 'field_banner_single_button',
+			'label' => 'Nút',
+			'name' => 'banner_single_button',
+			'type' => 'link',
+			'conditional_logic' => [
+				[
+					[
+						'field' => 'field_banner_type',
+						'operator' => '==',
+						'value' => 'single',
+					],
+				],
+			],
+		],
 
 		// SLIDER
 		[

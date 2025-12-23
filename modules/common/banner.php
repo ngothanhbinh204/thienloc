@@ -21,6 +21,8 @@ $banner_id = $banner_selected instanceof WP_Post ? $banner_selected->ID : (int) 
 $banner_type   = get_field('banner_type', $banner_id);
 // Sửa lại đúng tên field trong config là 'banner_single_image'
 $banner_image  = get_field('banner_single_image', $banner_id);
+$banner_single_title = get_field('banner_single_title', $banner_id);
+$banner_single_button = get_field('banner_single_button', $banner_id);
 $banner_slides = get_field('banner_slides', $banner_id);
 ?>
 
@@ -28,11 +30,30 @@ $banner_slides = get_field('banner_slides', $banner_id);
 
 	<?php if ($banner_type === 'single' && $banner_image) : ?>
 
-	<div class="banner-swiper">
+	<div class="banner-single">
 		<div class="banner-item relative h-full w-full">
 			<div class="banner-img">
 				<?= get_image_attrachment($banner_image, 'image'); ?>
 			</div>
+
+			<?php if ($banner_single_title || $banner_single_button) : ?>
+			<div class="content flex items-center">
+				<div class="wrapper-content">
+					<?php if ($banner_single_title) : ?>
+					<h1 class="title-60 text-white font-bold">
+						<?= $banner_single_title; ?>
+					</h1>
+					<?php endif; ?>
+
+					<?php if (!empty($banner_single_button['url'])) : ?>
+					<a class="btn btn-primary" href="<?= esc_url($banner_single_button['url']); ?>"
+						target="<?= esc_attr($banner_single_button['target'] ?: '_self'); ?>">
+						<?= $banner_single_button['title']; ?>
+					</a>
+					<?php endif; ?>
+				</div>
+			</div>
+			<?php endif; ?>
 		</div>
 	</div>
 

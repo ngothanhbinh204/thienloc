@@ -34,10 +34,18 @@ $args['range'] = (int) $args['range'] - 1;
 if (!$args['custom_query'])
 $args['custom_query'] = @$GLOBALS['wp_query'];
 $count = (int) $args['custom_query']->max_num_pages;
-$page = intval(get_query_var('paged'));
+// Fix: Correctly detect current page number
+$page = 0;
+if (isset($args['custom_query']->query_vars['paged']) && $args['custom_query']->query_vars['paged'] > 0) {
+$page = intval($args['custom_query']->query_vars['paged']);
+}
+if (!$page) $page = intval(get_query_var('paged'));
+if (!$page) $page = intval(get_query_var('page'));
+$page = $page ? $page : 1;
+
 $ceil = ceil($args['range'] / 2);
 
-if ($count <= 1) return FALSE; if (!$page) $page=1; if ($count> $args['range']) {
+if ($count <= 1) return FALSE; if ($count> $args['range']) {
 	if ($page <= $args['range']) { $min=1; $max=$args['range'] + 1; } elseif ($page>= ($count - $ceil)) {
 		$min = $count - $args['range'];
 		$max = $count;
@@ -73,3 +81,17 @@ if ($count <= 1) return FALSE; if (!$page) $page=1; if ($count> $args['range']) 
 
 			if (isset($echo)) echo $args['before_output'] . $echo . $args['after_output'];
 			}
+
+			/**
+			* Fix pagination 404/redirect on static pages using custom queries
+			*/
+			function fix_static_page_pagination_redirect($redirect_url) {
+			if (is_page_template('templates/page-products.php')) {
+			$page = get_query_var('page');
+			if ($page > 1) {
+			return false;
+			}
+			}
+			return $redirect_url;
+			}
+			add_filter('redirect_canonical', 'fix_static_page_pagination_redirect');

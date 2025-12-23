@@ -9,139 +9,142 @@
  *   - 'title' (text) - Section title (e.g., "Máy Móc & Thiết Bị")
  *   - 'description' (textarea/wysiwyg) - Section description
  *   - Repeater: 'slides' - Swiper slides
- *       - Repeater: 'machines' - Machine items per slide (grid of 3)
- *           - 'image' (image) - Machine image
- *           - 'title' (text) - Machine name
- *           - 'link' (url/link) - Machine link (optional)
- *           - 'is_full' (true/false) - Full-width item flag
- * 
- * OR use existing fields with assumptions below:
+ *       - Repeater: 'machines' - Machine items per slide (grid of 3) (Note: We flatten this for auto-slide generation)
+ *           - Relationship: 'machines' - Product Post Objects
  */
 
 $rows = get_sub_field('rows');
 
 // Fallback: If 'rows' field doesn't exist, try to use existing fields
 if (!$rows) {
-	// ASSUMPTION: Mapping existing fields to new structure
-	// Existing: gallery, title, description, button
-	// This assumes a single row without the machine grid pattern
 	$title       = get_sub_field('title');
 	$description = get_sub_field('description');
-	$machines    = get_sub_field('machines'); // NEW FIELD NEEDED
+	$machines    = get_sub_field('machines');
 }
 ?>
 <section class="introduction-5 section-py bg-linear-2">
 	<div class="container">
 		<?php if ($rows) : ?>
-			<?php foreach ($rows as $index => $row) :
+		<?php foreach ($rows as $index => $row) :
 				$is_reverse  = !empty($row['is_reverse']);
 				$row_title   = $row['title'] ?? '';
 				$row_desc    = $row['description'] ?? '';
-				$slides      = $row['slides'] ?? [];
+				$slides_data = $row['slides'] ?? [];
+				
+				// 1. Flatten all machines from the ACF repeater structure
+				// We collect all items and normalize them into a standard structure
+				$all_items = [];
+				if (!empty($slides_data)) {
+					foreach ($slides_data as $s) {
+						$type = $s['type'] ?? 'relationship';
+
+						if ($type === 'custom') {
+							// Handle Custom Items
+							$custom_items = $s['custom_items'] ?? [];
+							if (!empty($custom_items)) {
+								foreach ($custom_items as $item) {
+									$all_items[] = [
+										'type'   => 'custom',
+										'image'  => $item['image'],
+										'title'  => $item['title'],
+										'link'   => null,
+									];
+								}
+							}
+						} else {
+							// Handle Relationship (Default)
+							$machines = $s['machines'] ?? [];
+							if (!empty($machines)) {
+								foreach ($machines as $m) {
+									if ($m instanceof WP_Post) {
+										$all_items[] = [
+											'type'   => 'post',
+											'image'  => get_post_thumbnail_id($m->ID),
+											'title'  => get_the_title($m->ID),
+											'link'   => get_permalink($m->ID),
+										];
+									}
+								}
+							}
+						}
+					}
+				}
+
+				// 3. Chunk items into groups of 3
+				$slides_chunked = !empty($all_items) ? array_chunk($all_items, 3) : [];
+				
+				// 4. Ensure last slide always has 3 items
+				$total_items = count($all_items);
+
+				if ($total_items > 3 && !empty($slides_chunked)) {
+					$last_index = count($slides_chunked) - 1;
+					$last_slide = $slides_chunked[$last_index];
+
+					$missing = 3 - count($last_slide);
+
+					if ($missing > 0) {
+						$补 = array_slice($all_items, 0, $missing);
+						$slides_chunked[$last_index] = array_merge($last_slide, $补);
+					}
+				}
 				
 				$grid_class = $is_reverse ? 'wrapper-grid is-reverse' : 'wrapper-grid';
 				$slider_aos = $is_reverse ? 'fade-left' : 'fade-right';
 				$content_aos = $is_reverse ? 'fade-right' : 'fade-left';
 				$slider_id = 'machine-slider-' . $index;
 			?>
-			<div class="<?= $grid_class; ?>">
-				<div class="col-slider" data-aos="<?= $slider_aos; ?>" data-aos-delay="200">
-					<div class="machine-slider relative" id="<?= $slider_id; ?>">
-						<div class="swiper">
-							<div class="swiper-wrapper">
-								<?php if (!empty($slides)) : ?>
-									<?php foreach ($slides as $slide) : ?>
-										<div class="swiper-slide">
-											<div class="machine-grid">
-												<?php if (!empty($slide['machines'])) : ?>
-													<?php foreach ($slide['machines'] as $machine) :
-														$is_full = !empty($machine['is_full']);
-														$item_class = $is_full ? 'machine-item full' : 'machine-item';
-														$link = $machine['link'] ?? '#';
-													?>
-														<div class="<?= $item_class; ?>">
-															<div class="img-wrapper">
-																<?= get_image_attrachment($machine['image'], 'image'); ?>
-															</div>
-															<h4 class="title">
-																<a href="<?= esc_url($link); ?>"><?= esc_html($machine['title']); ?></a>
-															</h4>
-														</div>
-													<?php endforeach; ?>
-												<?php endif; ?>
-											</div>
+		<div class="<?= $grid_class; ?>">
+			<div class="col-slider" data-aos="<?= $slider_aos; ?>" data-aos-delay="200">
+				<div class="machine-slider relative" id="<?= $slider_id; ?>">
+					<div class="swiper">
+						<div class="swiper-wrapper">
+							<?php if (!empty($slides_chunked)) : ?>
+							<?php foreach ($slides_chunked as $chunk_items) : ?>
+							<div class="swiper-slide">
+								<div class="machine-grid">
+									<?php foreach ($chunk_items as $item) : ?>
+									<div class="machine-item">
+										<div class="img-wrapper">
+											<?= get_image_attrachment($item['image'], 'image'); ?>
 										</div>
-									<?php endforeach; ?>
-								<?php endif; ?>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-content" data-aos="<?= $content_aos; ?>" data-aos-delay="200">
-					<?php if ($row_title) : ?>
-						<h2><?= esc_html($row_title); ?></h2>
-					<?php endif; ?>
-					<?php if ($row_desc) : ?>
-						<div class="desc">
-							<?= wpautop($row_desc); ?>
-						</div>
-					<?php endif; ?>
-					<div class="group-controll in-static">
-						<div class="wrap-button-slide machine-nav" data-target="#<?= $slider_id; ?>">
-							<div class="btn-prev btn-slider-2"><i class="fa-solid fa-chevron-left"></i></div>
-							<div class="btn-next btn-slider-2"><i class="fa-solid fa-chevron-right"></i></div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<?php endforeach; ?>
-		
-		<?php elseif (!empty($machines)) : ?>
-			<!-- Fallback: Single row using 'machines' field -->
-			<div class="wrapper-grid">
-				<div class="col-slider" data-aos="fade-right" data-aos-delay="200">
-					<div class="machine-slider relative" id="machine-slider-0">
-						<div class="swiper">
-							<div class="swiper-wrapper">
-								<div class="swiper-slide">
-									<div class="machine-grid">
-										<?php foreach ($machines as $index => $machine) :
-											$is_full = !empty($machine['is_full']);
-											$item_class = $is_full ? 'machine-item full' : 'machine-item';
-											$link = $machine['link'] ?? '#';
-										?>
-											<div class="<?= $item_class; ?>">
-												<div class="img-wrapper">
-													<?= get_image_attrachment($machine['image'], 'image'); ?>
-												</div>
-												<h4 class="title">
-													<a href="<?= esc_url($link); ?>"><?= esc_html($machine['title']); ?></a>
-												</h4>
-											</div>
-										<?php endforeach; ?>
+										<h4 class="title">
+											<?php if ($item['type'] === 'post' && !empty($item['link'])) : ?>
+												<a href="<?= esc_url($item['link']); ?>"><?= esc_html($item['title']); ?></a>
+											<?php else : ?>
+												<?= esc_html($item['title']); ?>
+											<?php endif; ?>
+										</h4>
 									</div>
+									<?php endforeach; ?>
 								</div>
 							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-content" data-aos="fade-left" data-aos-delay="200">
-					<?php if ($title) : ?>
-						<h2><?= esc_html($title); ?></h2>
-					<?php endif; ?>
-					<?php if ($description) : ?>
-						<div class="desc">
-							<?= wpautop($description); ?>
-						</div>
-					<?php endif; ?>
-					<div class="group-controll in-static">
-						<div class="wrap-button-slide machine-nav" data-target="#machine-slider-0">
-							<div class="btn-prev btn-slider-2"><i class="fa-solid fa-chevron-left"></i></div>
-							<div class="btn-next btn-slider-2"><i class="fa-solid fa-chevron-right"></i></div>
+							<?php endforeach; ?>
+							<?php endif; ?>
 						</div>
 					</div>
 				</div>
 			</div>
+			<div class="col-content" data-aos="<?= $content_aos; ?>" data-aos-delay="200">
+				<?php if ($row_title) : ?>
+				<h2><?= esc_html($row_title); ?></h2>
+				<?php endif; ?>
+				<?php if ($row_desc) : ?>
+				<div class="desc">
+					<?= wpautop($row_desc); ?>
+				</div>
+				<?php endif; ?>
+				<div class="group-controll in-static">
+					<div class="wrap-button-slide machine-nav" data-target="#<?= $slider_id; ?>">
+						<div class="btn-prev btn-slider-2"><i class="fa-solid fa-chevron-left"></i></div>
+						<div class="btn-next btn-slider-2"><i class="fa-solid fa-chevron-right"></i></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<?php endforeach; ?>
+
+		<?php elseif (!empty($machines)) : ?>
+		<!-- Fallback logic if needed, currently empty as per requirement to use new structure -->
 		<?php endif; ?>
 	</div>
 </section>

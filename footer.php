@@ -8,6 +8,9 @@ $footer_copyright = get_field('footer_copyright', 'option');
 $field_body_extra = get_field('field_config_body', 'option');
 $company_name   = $footer_company['name'] ?? '';
 $company_slogan = $footer_company['slogan'] ?? '';
+
+
+$footer_decor_image = get_field('footer_decor_image', 'option');
 ?>
 
 </main>
@@ -17,47 +20,38 @@ $company_slogan = $footer_company['slogan'] ?? '';
 <?php wp_footer(); ?>
 <?php endif; ?>
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-	if (typeof lozad !== 'undefined') {
-		const observer = lozad('.lozad', {
-			loaded: function(el) {
-				el.classList.add('loaded');
-			}
-		});
-		console.log('lozad loaded')
-		observer.observe();
-	}
-});
-</script>
 
 <?= $field_body_extra ?: '' ?>
-<div class="header-search-form">
-	<div class="wrap-form-search-product">
-		<form class="productsearchbox" action="<?= esc_url(home_url('/')); ?>" method="get">
-
-			<input type="text" name="s" placeholder="Tìm kiếm sản phẩm..." value="<?= get_search_query(); ?>">
-
-			<button type="submit">
-				<i class="fa-light fa-magnifying-glass text-white"></i>
-			</button>
-
-		</form>
-	</div>
-
-	<div
-		class="close-search absolute top-8 right-8 cursor-pointer text-white text-4xl hover:text-primary-1 transition-300">
-		<i class="fa-light fa-xmark"></i>
-	</div>
-</div>
 
 <footer class="footer relative">
-	<div class="container">
+	<div class="header-search-form">
+		<div class="wrap-form-search-product">
+			<form class="productsearchbox" action="<?= esc_url(home_url('/')); ?>" method="get">
 
-		<div class="footer-decor">
-			<img class="lozad" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" data-src="<?= get_template_directory_uri(); ?>/img/decor-footer.svg" alt="">
+				<input type="text" name="s" placeholder="Tìm kiếm sản phẩm..." value="<?= get_search_query(); ?>">
+
+				<button type="submit">
+					<i class="fa-light fa-magnifying-glass text-white"></i>
+				</button>
+
+			</form>
 		</div>
 
+		<div
+			class="close-search absolute top-8 right-8 cursor-pointer text-white text-4xl hover:text-primary-1 transition-300">
+			<i class="fa-light fa-xmark"></i>
+		</div>
+	</div>
+
+	<div class="container">
+
+		<?php if ($footer_decor_image) : ?>
+
+		<div class="footer-decor">
+			<img class="footer-decor-img" src="<?= esc_url($footer_decor_image['url']); ?>" data-src="<?= esc_url($footer_decor_image['url']); ?>" alt="">
+		</div>
+
+		<?php endif; ?>
 		<!-- FOOTER TOP -->
 		<div class="footer-top">
 			<div class="box-left w-auto mb-6 lg:mb-0">
@@ -107,7 +101,7 @@ document.addEventListener('DOMContentLoaded', function() {
 									if (!$image) continue;
 								?>
 						<div class="box-img">
-							<?= get_image_attrachment($image, 'image'); ?>
+							<img class="cert-img" src="<?= esc_url($image['url']); ?>" data-src="<?= esc_url($image['url']); ?>" alt=""/>
 						</div>
 						<?php endforeach; ?>
 					</div>
@@ -129,12 +123,12 @@ document.addEventListener('DOMContentLoaded', function() {
 								$icon_class = $item['icon_class'] ?? '';
 								$icon_image = $item['icon_image'] ?? null;
 								$label      = $item['label'] ?? '';
-								$link       = $item['link'] ?? null;
+								$content       = $item['link'] ?? null;
 							?>
 					<li class="footer-info-item">
 						<div class="info-icon">
 							<?php if ($icon_type === 'image' && $icon_image) : ?>
-							<?= get_image_attrachment($icon_image, 'image'); ?>
+							<img class="cert-img" src="<?= esc_url($icon_image['url']); ?>" data-src="<?= esc_url($icon_image['url']); ?>" alt=""/>
 							<?php elseif ($icon_class) : ?>
 							<i class="<?= esc_attr($icon_class); ?>"></i>
 							<?php endif; ?>
@@ -144,13 +138,14 @@ document.addEventListener('DOMContentLoaded', function() {
 							<?php if ($label) : ?>
 							<span class="info-label"><?= esc_html($label); ?></span>
 							<?php endif; ?>
-
-							<?php if (!empty($link['url'])) : ?>
-							<a class="info-value" href="<?= esc_url($link['url']); ?>"
-								target="<?= esc_attr($link['target'] ?: '_self'); ?>">
-								<?= esc_html($link['title']); ?>
-							</a>
+							<?php
+							if (!empty($content)) :
+							?>
+							<div class="info-value editor-content">
+								<?= wp_kses_post($content); ?>
+							</div>
 							<?php endif; ?>
+
 						</div>
 					</li>
 					<?php endforeach; ?>
@@ -167,7 +162,7 @@ document.addEventListener('DOMContentLoaded', function() {
 								$icon_class = $item['icon_class'] ?? '';
 								$icon_image = $item['icon_image'] ?? null;
 								$label      = $item['label'] ?? '';
-								$link       = $item['link'] ?? null;
+								$content       = $item['link'] ?? null;
 							?>
 					<li class="footer-info-item">
 						<div class="info-icon">
@@ -183,11 +178,10 @@ document.addEventListener('DOMContentLoaded', function() {
 							<span class="info-label"><?= esc_html($label); ?></span>
 							<?php endif; ?>
 
-							<?php if (!empty($link['url'])) : ?>
-							<a class="info-value" href="<?= esc_url($link['url']); ?>"
-								target="<?= esc_attr($link['target'] ?: '_self'); ?>">
-								<?= esc_html($link['title']); ?>
-							</a>
+							<?php if (!empty($content)) : ?>
+							<div class="info-value editor-content">
+								<?= wp_kses_post($content); ?>
+							</div>
 							<?php endif; ?>
 						</div>
 					</li>

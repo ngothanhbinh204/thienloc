@@ -8,13 +8,27 @@ $button     = get_sub_field('link') ?? null;
 
 // Chuẩn bị category IDs
 $cat_ids = [];
+
 if (!empty($categories)) {
 	foreach ($categories as $cat) {
+
+		// Term Object
 		if (is_object($cat) && isset($cat->term_id)) {
-			$cat_ids[] = $cat->term_id;
+			$cat_ids[] = (int) $cat->term_id;
+		}
+
+		// Term ID
+		elseif (is_numeric($cat)) {
+			$cat_ids[] = (int) $cat;
+		}
+
+		// Term Array
+		elseif (is_array($cat) && isset($cat['term_id'])) {
+			$cat_ids[] = (int) $cat['term_id'];
 		}
 	}
 }
+
 
 // Query bài viết
 $args = [
@@ -54,11 +68,15 @@ if (!$title && !$query->have_posts()) {
 		<?php if (!empty($cat_ids)): ?>
 		<div class="news-filter flex justify-center gap-3 mb-11.5">
 			<button class="filter-btn active" data-filter="all">Tất cả</button>
-			<?php foreach ($categories as $cat): ?>
-			<button class="filter-btn" data-filter="<?= esc_attr($cat->slug); ?>">
-				<?= esc_html($cat->name); ?>
+			<?php foreach ($categories as $cat): 
+				$term = is_object($cat) ? $cat : get_term((int) $cat, 'category');
+				if (!$term || is_wp_error($term)) continue;
+			?>
+			<button class="filter-btn" data-filter="<?= esc_attr($term->slug); ?>">
+				<?= esc_html($term->name); ?>
 			</button>
 			<?php endforeach; ?>
+
 		</div>
 		<?php endif; ?>
 
@@ -128,3 +146,33 @@ if (!$title && !$query->have_posts()) {
 
 	</div>
 </section>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+	const sections = document.querySelectorAll('.section-home-5');
+
+	sections.forEach(function(section) {
+		const btns = section.querySelectorAll('.filter-btn');
+		const items = section.querySelectorAll('.news-item');
+
+		btns.forEach(function(btn) {
+			btn.addEventListener('click', function() {
+				const filter = this.getAttribute('data-filter');
+
+				// Active state
+				btns.forEach(b => b.classList.remove('active'));
+				this.classList.add('active');
+
+				// Filter items
+				items.forEach(function(item) {
+					const category = item.getAttribute('data-category');
+					if (filter === 'all' || category === filter) {
+						item.style.display = '';
+					} else {
+						item.style.display = 'none';
+					}
+				});
+			});
+		});
+	});
+});
+</script>

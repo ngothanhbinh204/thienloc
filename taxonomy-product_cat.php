@@ -54,62 +54,109 @@ if (!$term_has_banner && $posts_page_has_banner && $posts_page_id) {
 // Determine extra class for main when no banner
 $main_extra_class = !$should_render_banner ? ' wrapper-gap-top' : '';
 ?>
-<?php get_template_part('modules/common/breadcrumb')?>
+<div class="<?= $main_extra_class ?>">
+	<?php get_template_part('modules/common/breadcrumb')?>
 
 <section class="section-product-listing section-py">
 	<div class="container">
 		<div class="row">
 			<aside class="col-lg-3 product-sidebar">
-				<div class="sidebar-sticky">
-					<div class="sidebar-widget category-menu">
-						<div class="widget-header">
-							<?php _e('Danh mục sản phẩm', 'canhcamtheme'); ?>
-						</div>
-						<nav class="category-nav">
-							<ul class="category-list">
-								<?php
-								$terms = get_terms(array(
-									'taxonomy'   => 'product_cat',
-									'hide_empty' => false,
-									'parent'     => 0,
-								));
+	<div class="sidebar-sticky">
+		<div class="sidebar-widget category-menu">
+			<div class="widget-header">
+				<?php _e('Danh mục sản phẩm', 'canhcamtheme'); ?>
+			</div>
 
-								foreach ($terms as $term) :
-									$children = get_terms(array(
-										'taxonomy'   => 'product_cat',
-										'hide_empty' => false,
-										'parent'     => $term->term_id,
-									));
-									$has_child = !empty($children);
-									$active_class = (is_tax('product_cat', $term->term_id)) ? 'active' : '';
+			<nav class="category-nav">
+				<ul class="category-list">
+					<?php
+					// Lấy term hiện tại (chỉ khi đang ở taxonomy)
+					$current_term_id = is_tax('product_cat') ? get_queried_object_id() : 0;
+
+					// Lấy danh mục cha
+					$terms = get_terms([
+						'taxonomy'   => 'product_cat',
+						'hide_empty' => false,
+						'parent'     => 0,
+					]);
+
+					foreach ($terms as $term) :
+
+						// Lấy danh mục con
+						$children = get_terms([
+							'taxonomy'   => 'product_cat',
+							'hide_empty' => false,
+							'parent'     => $term->term_id,
+						]);
+
+						$has_child = !empty($children);
+
+						/**
+						 * Xác định:
+						 * - Có đang active chính nó không
+						 * - Hoặc có child nào đang active không
+						 */
+						$is_current_term_tree = false;
+
+						if ($current_term_id) {
+							// Chính nó active
+							if ($term->term_id == $current_term_id) {
+								$is_current_term_tree = true;
+							}
+
+							// Hoặc có child active
+							if (!$is_current_term_tree && $has_child) {
+								foreach ($children as $child) {
+									if ($child->term_id == $current_term_id) {
+										$is_current_term_tree = true;
+										break;
+									}
+								}
+							}
+						}
+
+						$item_class   = $is_current_term_tree ? 'active' : '';
+						$icon_class   = $is_current_term_tree ? 'fa-minus' : 'fa-plus';
+						$display_attr = $is_current_term_tree
+							? 'style="display:block"'
+							: 'style="display:none"';
+					?>
+
+					<li class="category-item <?php echo esc_attr($item_class); ?>">
+						<div class="header-filter">
+							<a href="<?php echo esc_url(get_term_link($term)); ?>">
+								<?php echo esc_html($term->name); ?>
+							</a>
+
+							<?php if ($has_child) : ?>
+								<span class="toggle-icon">
+									<i class="fa-solid <?php echo esc_attr($icon_class); ?>"></i>
+								</span>
+							<?php endif; ?>
+						</div>
+
+						<?php if ($has_child) : ?>
+							<ul class="sub-category" <?php echo $display_attr; ?>>
+								<?php foreach ($children as $child) :
+									$child_active = ($child->term_id == $current_term_id) ? 'active' : '';
 								?>
-								<li class="category-item <?= $active_class ?>">
-									<div class="header-filter">
-										<a href="<?= get_term_link($term) ?>"><?= esc_html($term->name) ?></a>
-										<?php if ($has_child) : ?>
-										<span class="toggle-icon">
-											<i class="fa-solid fa-plus"></i>
-										</span>
-										<?php endif; ?>
-									</div>
-									<?php if ($has_child) : ?>
-									<ul class="sub-category">
-										<?php foreach ($children as $child) : 
-													$child_active = (is_tax('product_cat', $child->term_id)) ? 'active' : '';
-												?>
-										<li class="<?= $child_active ?>">
-											<a href="<?= get_term_link($child) ?>"><?= esc_html($child->name) ?></a>
-										</li>
-										<?php endforeach; ?>
-									</ul>
-									<?php endif; ?>
-								</li>
+									<li class="<?php echo esc_attr($child_active); ?>">
+										<a href="<?php echo esc_url(get_term_link($child)); ?>">
+											<?php echo esc_html($child->name); ?>
+										</a>
+									</li>
 								<?php endforeach; ?>
 							</ul>
-						</nav>
-					</div>
-				</div>
-			</aside>
+						<?php endif; ?>
+					</li>
+
+					<?php endforeach; ?>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</aside>
+
 
 			<main class="col-lg-9 product-main">
 				<div class="product-header">
@@ -197,6 +244,7 @@ $main_extra_class = !$should_render_banner ? ' wrapper-gap-top' : '';
 		</div>
 	</div>
 </section>
+</div>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {

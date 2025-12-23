@@ -70,9 +70,9 @@ if (!$term_has_banner && $posts_page_has_banner && $posts_page_id) {
 $main_extra_class = !$should_render_banner ? ' wrapper-gap-top' : '';
 ?>
 
-<main class="<?= esc_attr(trim($main_extra_class)) ?>">
+<section class="<?= esc_attr(trim($main_extra_class)) ?>">
 	<?php get_template_part('modules/common/breadcrumb'); ?>
 	<?php get_template_part('modules/news/archive-news'); ?>
-</main>
+</section>
 
 <?php get_footer(); ?>

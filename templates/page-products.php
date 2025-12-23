@@ -26,6 +26,9 @@ Template name: Page - Products
 									'parent'     => 0,
 								));
 
+								$current_term_id = get_queried_object_id();
+								$i = 0;
+
 								foreach ($terms as $term) :
 									$children = get_terms(array(
 										'taxonomy'   => 'product_cat',
@@ -33,21 +36,36 @@ Template name: Page - Products
 										'parent'     => $term->term_id,
 									));
 									$has_child = !empty($children);
-									$active_class = (is_tax('product_cat', $term->term_id)) ? 'active' : '';
+									
+									// Logic: Open if it's the first item OR if it (or its child) is currently active
+									$is_current_term_tree = ($term->term_id == $current_term_id);
+									if (!$is_current_term_tree && $has_child) {
+										foreach($children as $child) {
+											if ($child->term_id == $current_term_id) {
+												$is_current_term_tree = true;
+												break;
+											}
+										}
+									}
+
+									$is_active = ($i === 0 || $is_current_term_tree);
+									$item_class = $is_active ? 'active' : '';
+									$icon_class = $is_active ? 'fa-minus' : 'fa-plus';
+									$display_style = $is_active ? 'style="display: block;"' : 'style="display: none;"';
 								?>
-								<li class="category-item <?= $active_class ?>">
+								<li class="category-item <?= $item_class ?>">
 									<div class="header-filter">
 										<a href="<?= get_term_link($term) ?>"><?= esc_html($term->name) ?></a>
 										<?php if ($has_child) : ?>
 										<span class="toggle-icon">
-											<i class="fa-solid fa-plus"></i>
+											<i class="fa-solid <?= $icon_class ?>"></i>
 										</span>
 										<?php endif; ?>
 									</div>
 									<?php if ($has_child) : ?>
-									<ul class="sub-category">
+									<ul class="sub-category" <?= $display_style ?>>
 										<?php foreach ($children as $child) : 
-													$child_active = (is_tax('product_cat', $child->term_id)) ? 'active' : '';
+													$child_active = ($child->term_id == $current_term_id) ? 'active' : '';
 												?>
 										<li class="<?= $child_active ?>">
 											<a href="<?= get_term_link($child) ?>"><?= esc_html($child->name) ?></a>
@@ -56,7 +74,10 @@ Template name: Page - Products
 									</ul>
 									<?php endif; ?>
 								</li>
-								<?php endforeach; ?>
+								<?php 
+									$i++;
+								endforeach; 
+								?>
 							</ul>
 						</nav>
 					</div>
@@ -74,9 +95,10 @@ Template name: Page - Products
 									class="fa-solid fa-chevron-down"></i></div>
 							<div class="select-dropdown">
 								<div class="select-option active" data-value="">Tất cả</div>
-								<div class="select-option" data-value="price">Giá tăng dần</div>
-								<div class="select-option" data-value="price-desc">Giá giảm dần</div>
-								<div class="select-option" data-value="date">Mới nhất</div>
+								<div class="select-option" data-value="title-asc">Từ A-Z</div>
+								<div class="select-option" data-value="title-desc">Từ Z-A</div>
+								<div class="select-option" data-value="date-desc">Mới nhất</div>
+								<div class="select-option" data-value="date-asc">Cũ nhất</div>
 							</div>
 						</div>
 					</div>
@@ -84,37 +106,58 @@ Template name: Page - Products
 
 				<div class="product-grid">
 					<?php
-					$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
-					$sort = isset($_GET['sort']) ? $_GET['sort'] : '';
-					
+					$paged = (get_query_var('paged')) ? get_query_var('paged') : ((get_query_var('page')) ? get_query_var('page') : 1);
+					$sort  = isset($_GET['sort']) ? sanitize_text_field($_GET['sort']) : '';
+
 					$args = array(
 						'post_type'      => 'product',
-						'posts_per_page' => 12,
+						'posts_per_page' => 3,
 						'paged'          => $paged,
-						'status'         => 'publish',
+						'post_status'    => 'publish',
 					);
 
-					// Sort Logic
+					// Filter by product category if exists
+					if (is_tax('product_cat')) {
+						$term = get_queried_object();
+
+						if ($term && !is_wp_error($term)) {
+							$args['tax_query'] = array(
+								array(
+									'taxonomy' => 'product_cat',
+									'field'    => 'term_id',
+									'terms'    => $term->term_id,
+								),
+							);
+						}
+					}
+
+					// Sort logic
 					switch ($sort) {
-						case 'price':
-							$args['orderby']  = 'meta_value_num';
-							$args['meta_key'] = 'price'; // Assumed meta key
-							$args['order']    = 'ASC';
+						case 'title-asc':
+							$args['orderby'] = 'title';
+							$args['order']   = 'ASC';
 							break;
-						case 'price-desc':
-							$args['orderby']  = 'meta_value_num';
-							$args['meta_key'] = 'price'; // Assumed meta key
-							$args['order']    = 'DESC';
+
+						case 'title-desc':
+							$args['orderby'] = 'title';
+							$args['order']   = 'DESC';
 							break;
-						case 'date':
+
+						case 'date-asc':
+							$args['orderby'] = 'date';
+							$args['order']   = 'ASC';
+							break;
+
+						case 'date-desc':
 							$args['orderby'] = 'date';
 							$args['order']   = 'DESC';
 							break;
+
 						default:
-							$args['orderby'] = 'menu_order date';
+							$args['orderby'] = 'date';
 							$args['order']   = 'DESC';
-							break;
 					}
+
 
 					$query = new WP_Query($args);
 

@@ -48,6 +48,3 @@ return [];
 
 return $breadcrumbs;
 }
-
-
-?>

@@ -26,10 +26,9 @@
 
 						if (!empty($logo)) :
 					?>
-					<img class="lozad h-12 w-auto object-contain" 
+					<img class="lozad h-12 w-auto object-contain"
 						src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E"
-						data-src="<?= esc_url($logo[0]) ?>"
-						alt="<?= esc_attr(get_bloginfo('name')) ?>" />
+						data-src="<?= esc_url($logo[0]) ?>" alt="<?= esc_attr(get_bloginfo('name')) ?>" />
 					<?php
 						endif;
 					}
@@ -54,19 +53,51 @@
 			<div class="tools">
 				<div class="search cursor-pointer"><i class="fa-light fa-magnifying-glass text-xl"></i></div>
 				<div class="language relative">
-					<div class="current-lang flex items-center gap-1 cursor-pointer"><img class="lozad flag"
+					<?php
+					$languages = apply_filters('wpml_active_languages', NULL, 'skip_missing=1');
+					if (!empty($languages)) {
+						$current_lang = null;
+						foreach ($languages as $l) {
+							if ($l['active']) {
+								$current_lang = $l;
+								break;
+							}
+						}
+
+						if ($current_lang) {
+							$has_translations = count($languages) > 1;
+							$cur_code = ($current_lang['code'] === 'vi') ? 'vn' : $current_lang['code'];
+							$cur_flag = get_template_directory_uri() . '/img/flag-' . $cur_code . '.svg';
+							$cur_label = strtoupper($cur_code);
+					?>
+					<div class="current-lang flex items-center gap-1 <?= $has_translations ? 'cursor-pointer' : '' ?>"><img class="lozad flag"
 							src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E"
-							data-src="./img/flag-vn.svg" alt="" /><span>VN</span><i
-							class="fa-light fa-chevron-down text-xs text-neutral-600 transition-transform duration-300"></i>
+							data-src="<?= esc_url($cur_flag) ?>" alt="<?= esc_attr($cur_label) ?>" /><span><?= esc_html($cur_label) ?></span>
+						<?php if ($has_translations) : ?>
+						<i class="fa-light fa-chevron-down text-xs text-neutral-600 transition-transform duration-300"></i>
+						<?php endif; ?>
 					</div>
+					<?php if ($has_translations) : ?>
 					<div class="lang-dropdown">
 						<ul>
-							<li><a href="#"><img class="lozad flag" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" data-src="./img/flag-vn.svg"
-										alt="" /><span>VN</span></a></li>
-							<li><a href="#"><img class="lozad flag" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" data-src="./img/flag-en.svg"
-										alt="" /><span>EN</span></a></li>
+							<?php foreach ($languages as $l) :
+								if (!$l['active']) :
+									$l_code = ($l['code'] === 'vi') ? 'vn' : $l['code'];
+									$l_flag = get_template_directory_uri() . '/img/flag-' . $l_code . '.svg';
+									$l_label = strtoupper($l_code);
+							?>
+							<li><a href="<?= esc_url($l['url']) ?>"><img class="lozad flag"
+										src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E"
+										data-src="<?= esc_url($l_flag) ?>" alt="<?= esc_attr($l_label) ?>" /><span><?= esc_html($l_label) ?></span></a></li>
+							<?php endif;
+							endforeach; ?>
 						</ul>
 					</div>
+					<?php endif; ?>
+					<?php
+						}
+					}
+					?>
 				</div>
 				<div class="hamburger lg:hidden">
 					<div class="header-hambuger"><span></span><span></span><span></span></div>

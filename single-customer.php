@@ -59,7 +59,7 @@
 		?>
 		<section class="section-tabs-customer section-py">
 			<div class="manufacturer-tabs tabs-wrapper">
-				<div class="tabs-navigation container">
+				<div class="tabs-navigation">
 					<button class="tab-btn active" data-tab="tab-products">Sản phẩm đã làm</button>
 					<button class="tab-btn" data-tab="tab-images">Hình ảnh sản phẩm</button>
 					<button class="tab-btn" data-tab="tab-usage">Hướng dẫn sử dụng</button>
@@ -113,13 +113,13 @@
 			</div>
 		</section>
 
-		<section class="section-related-customers section-py bg-utility-50">
+		<section class="section-related-customers section-py">
 			<div class="container">
 				<h2 class="title-36 text-center text-primary-1 mb-10">Khách hàng liên quan</h2>
 				<div class="related-customers-slider relative">
 					<div class="swiper swiper-related-customers">
 						<div class="swiper-wrapper">
-								<?php
+							<?php
 								$related_args = array(
 									'post_type'      => 'customer',
 									'posts_per_page' => 8,
@@ -131,27 +131,26 @@
 								if ($related_query->have_posts()) :
 									while ($related_query->have_posts()) : $related_query->the_post();
 								?>
-								<div class="swiper-slide">
-									<div class="customer-card bg-white p-4 rounded-lg h-full">
-										<div class="card-img">
-											<?php if (has_post_thumbnail()) : ?>
-											<a href="<?php the_permalink(); ?>">
-												<?= get_image_attrachment(get_post_thumbnail_id(), 'image'); ?>
-											</a>
-											<?php endif; ?>
-										</div>
-										<div class="card-body">
-											<h4 class="card-title">
-												<a href="<?php the_permalink(); ?>"
-													class="hover:text-primary-1 transition-colors">
-													<?= the_title(); ?></a>
-											</h4>
-											<a class="btn btn-primary"
-												href="<?php the_permalink(); ?>">Xem chi tiết</a>
-										</div>
+							<div class="swiper-slide">
+								<div class="customer-card bg-white p-4 rounded-lg h-full">
+									<div class="card-img">
+										<?php if (has_post_thumbnail()) : ?>
+										<a href="<?php the_permalink(); ?>">
+											<?= get_image_attrachment(get_post_thumbnail_id(), 'image'); ?>
+										</a>
+										<?php endif; ?>
+									</div>
+									<div class="card-body">
+										<h4 class="card-title">
+											<a href="<?php the_permalink(); ?>"
+												class="hover:text-primary-1 transition-colors">
+												<?= the_title(); ?></a>
+										</h4>
+										<a class="btn btn-primary" href="<?php the_permalink(); ?>">Xem chi tiết</a>
 									</div>
 								</div>
-								<?php
+							</div>
+							<?php
 									endwhile;
 									wp_reset_postdata();
 								endif;

@@ -9,10 +9,10 @@ $form_shortcode = get_field('cta_form_shortcode', 'option') ?? '';
 /** CTA column */
 $cta_title = get_field('cta_title', 'option') ?? '';
 $cta_desc  = get_field('cta_description', 'option') ?? '';
-$cta_btn   = get_field('cta_button', 'option') ?? null;
+$cta_btn   = get_field('cta_link', 'option') ?? null;
 
 /** Hotline */
-$hotline_label_1 = get_field('cta_hotline_label_1', 'option') ?? '';
+$hotline_label = get_field('cta_hotline_label_1', 'option') ?? '';
 $hotline_label_2 = get_field('cta_hotline_label_2', 'option') ?? '';
 $hotline_number  = get_field('cta_hotline_number', 'option') ?? '';
 
@@ -68,11 +68,11 @@ if (
 					<?php if ($cta_title || $cta_desc || $cta_btn): ?>
 					<div class="cta-header">
 						<?php if ($cta_title): ?>
-						<h2 class="cta-title"><?= esc_html($cta_title); ?></h2>
+						<h2 class="cta-title"><?= wp_kses_post($cta_title); ?></h2>
 						<?php endif; ?>
 
 						<?php if ($cta_desc): ?>
-						<p class="cta-desc"><?= $cta_desc; ?></p>
+						<div class="cta-desc"><?= wp_kses_post($cta_desc); ?></div>
 						<?php endif; ?>
 
 						<?php if ($cta_btn): ?>
@@ -87,16 +87,19 @@ if (
 					<?php if ($hotline_number): ?>
 					<div class="cta-hotline">
 						<div class="hotline-left">
-							<?php if ($hotline_label_1): ?>
-							<p class="hotline-label"><?= esc_html($hotline_label_1); ?></p>
-							<?php endif; ?>
-							<?php if ($hotline_label_2): ?>
-							<p class="hotline-label"><?= esc_html($hotline_label_2); ?></p>
+							<?php if ($hotline_label): ?>
+							<div class="hotline-label">
+								<?= $hotline_label ?>
+							</div>
 							<?php endif; ?>
 						</div>
 
 						<div class="hotline-right">
-							<span class="hotline-tag">Hotline</span>
+							<span class="hotline-tag">
+								<?php if ($hotline_label_2): ?>
+								<?= esc_html($hotline_label_2); ?>
+								<?php endif; ?>
+							</span>
 							<p class="hotline-number"><?= esc_html($hotline_number); ?></p>
 						</div>
 					</div>
