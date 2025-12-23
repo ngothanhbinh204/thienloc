@@ -100,7 +100,7 @@ if (
 								<?= esc_html($hotline_label_2); ?>
 								<?php endif; ?>
 							</span>
-							<p class="hotline-number"><?= esc_html($hotline_number); ?></p>
+							<div class="hotline-number"><?= wp_kses_post($hotline_number); ?></div>
 						</div>
 					</div>
 					<?php endif; ?>

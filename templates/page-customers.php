@@ -8,7 +8,7 @@ get_header();
 <main>
 	<?php get_template_part('modules/common/banner')?>
 
-	<div class="wrapper-gap-top">
+	<div class="">
 		<?php get_template_part('modules/common/breadcrumb'); ?>
 
 		<!-- Commitment Section -->

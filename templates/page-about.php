@@ -4,13 +4,21 @@ Template name: Page - About
 */ 
 ?>
 <?= get_header() ?>
-
+<?php
+	$image_decor_top = get_field('image_decor_top');
+?>
 <?php get_template_part('modules/common/banner')?>
 
 <div class="wrapper-introduction">
-	<div class="bg-decor-top"><img class="lozad" data-src="<?= get_template_directory_uri() ?>/UI/img/bg-partent-1.svg" alt=""/></div>
-	<div class="bg-decor-bottom"><img class="lozad" data-src="<?= get_template_directory_uri() ?>/UI/img/bg-partent-1.svg" alt=""/></div>
-	
+	<div class="bg-decor-top">
+		<?php
+		if ($image_decor_top) {
+			echo get_lozad_img($image_decor_top['url'], $image_decor_top['alt']);
+		}
+		?>
+	</div>
+
+
 	<?php
 	if (have_rows('about_sections')) :
 		while (have_rows('about_sections')) : the_row();

@@ -1,7 +1,12 @@
 <?php
 $paged = max(1, get_query_var('paged'));
 $featured_id = 0;
+?>
 
+<section class="section-news-archive section-py">
+	<div class="container">
+
+		<?php
 // ==========================
 // FEATURED POST (PAGE 1 ONLY)
 // ==========================
@@ -23,9 +28,6 @@ if ($paged === 1) {
 		$featured_query->the_post();
 		$featured_id = get_the_ID();
 		?>
-
-<section class="section-news-archive section-py">
-	<div class="container">
 
 		<div class="featured-post">
 			<div class="box-news box-news-featured">

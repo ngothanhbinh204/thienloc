@@ -109,9 +109,10 @@ if (!$rows) {
 										</div>
 										<h4 class="title">
 											<?php if ($item['type'] === 'post' && !empty($item['link'])) : ?>
-												<a href="<?= esc_url($item['link']); ?>"><?= esc_html($item['title']); ?></a>
+											<a
+												href="<?= esc_url($item['link']); ?>"><?= esc_html($item['title']); ?></a>
 											<?php else : ?>
-												<?= esc_html($item['title']); ?>
+											<?= esc_html($item['title']); ?>
 											<?php endif; ?>
 										</h4>
 									</div>
@@ -148,3 +149,46 @@ if (!$rows) {
 		<?php endif; ?>
 	</div>
 </section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+	setTimeout(() => {
+		const sliders = document.querySelectorAll('.introduction-5 .wrapper-grid');
+
+		sliders.forEach(wrapper => {
+			const swiperEl = wrapper.querySelector('.swiper');
+			const nextBtn = wrapper.querySelector('.btn-next');
+			const prevBtn = wrapper.querySelector('.btn-prev');
+
+			if (swiperEl && nextBtn && prevBtn) {
+				// Clone buttons to remove any existing event listeners
+				const newNextBtn = nextBtn.cloneNode(true);
+				const newPrevBtn = prevBtn.cloneNode(true);
+				nextBtn.parentNode.replaceChild(newNextBtn, nextBtn);
+				prevBtn.parentNode.replaceChild(newPrevBtn, prevBtn);
+
+				if (swiperEl.swiper) {
+					Object.assign(swiperEl.swiper.params.navigation, {
+						nextEl: newNextBtn,
+						prevEl: newPrevBtn,
+					});
+
+					swiperEl.swiper.navigation.destroy();
+					swiperEl.swiper.navigation.init();
+					swiperEl.swiper.navigation.update();
+				} else {
+					new Swiper(swiperEl, {
+						slidesPerView: 1,
+						spaceBetween: 30,
+						speed: 800,
+						navigation: {
+							nextEl: newNextBtn,
+							prevEl: newPrevBtn,
+						},
+					});
+				}
+			}
+		});
+	}, 500);
+});
+</script>

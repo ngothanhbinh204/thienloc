@@ -57,157 +57,157 @@ $main_extra_class = !$should_render_banner ? ' wrapper-gap-top' : '';
 <div class="<?= $main_extra_class ?>">
 	<?php get_template_part('modules/common/breadcrumb')?>
 
-<section class="section-product-listing section-py">
-	<div class="container">
-		<div class="row">
-			<aside class="col-lg-3 product-sidebar">
-	<div class="sidebar-sticky">
-		<div class="sidebar-widget category-menu">
-			<div class="widget-header">
-				<?php _e('Danh mục sản phẩm', 'canhcamtheme'); ?>
-			</div>
-
-			<nav class="category-nav">
-				<ul class="category-list">
-					<?php
-					// Lấy term hiện tại (chỉ khi đang ở taxonomy)
-					$current_term_id = is_tax('product_cat') ? get_queried_object_id() : 0;
-
-					// Lấy danh mục cha
-					$terms = get_terms([
-						'taxonomy'   => 'product_cat',
-						'hide_empty' => false,
-						'parent'     => 0,
-					]);
-
-					foreach ($terms as $term) :
-
-						// Lấy danh mục con
-						$children = get_terms([
-							'taxonomy'   => 'product_cat',
-							'hide_empty' => false,
-							'parent'     => $term->term_id,
-						]);
-
-						$has_child = !empty($children);
-
-						/**
-						 * Xác định:
-						 * - Có đang active chính nó không
-						 * - Hoặc có child nào đang active không
-						 */
-						$is_current_term_tree = false;
-
-						if ($current_term_id) {
-							// Chính nó active
-							if ($term->term_id == $current_term_id) {
-								$is_current_term_tree = true;
-							}
-
-							// Hoặc có child active
-							if (!$is_current_term_tree && $has_child) {
-								foreach ($children as $child) {
-									if ($child->term_id == $current_term_id) {
-										$is_current_term_tree = true;
-										break;
-									}
-								}
-							}
-						}
-
-						$item_class   = $is_current_term_tree ? 'active' : '';
-						$icon_class   = $is_current_term_tree ? 'fa-minus' : 'fa-plus';
-						$display_attr = $is_current_term_tree
-							? 'style="display:block"'
-							: 'style="display:none"';
-					?>
-
-					<li class="category-item <?php echo esc_attr($item_class); ?>">
-						<div class="header-filter">
-							<a href="<?php echo esc_url(get_term_link($term)); ?>">
-								<?php echo esc_html($term->name); ?>
-							</a>
-
-							<?php if ($has_child) : ?>
-								<span class="toggle-icon">
-									<i class="fa-solid <?php echo esc_attr($icon_class); ?>"></i>
-								</span>
-							<?php endif; ?>
-						</div>
-
-						<?php if ($has_child) : ?>
-							<ul class="sub-category" <?php echo $display_attr; ?>>
-								<?php foreach ($children as $child) :
-									$child_active = ($child->term_id == $current_term_id) ? 'active' : '';
-								?>
-									<li class="<?php echo esc_attr($child_active); ?>">
-										<a href="<?php echo esc_url(get_term_link($child)); ?>">
-											<?php echo esc_html($child->name); ?>
-										</a>
-									</li>
-								<?php endforeach; ?>
-							</ul>
-						<?php endif; ?>
-					</li>
-
-					<?php endforeach; ?>
-				</ul>
-			</nav>
-		</div>
-	</div>
-</aside>
-
-
-			<main class="col-lg-9 product-main">
-				<div class="product-header">
-					<h1 class="product-title"><?= single_term_title() ?></h1>
-					<!-- Sort functionality can be implemented with JS/AJAX later -->
-					<div class="product-sort">
-						<label>Lọc theo</label>
-						<div class="custom-select">
-							<div class="select-trigger"><span class="selected-value">Tất cả</span><i
-									class="fa-solid fa-chevron-down"></i></div>
-							<div class="select-dropdown">
-								<div class="select-option active" data-value="">Tất cả</div>
-								<div class="select-option" data-value="price">Giá tăng dần</div>
-								<div class="select-option" data-value="price-desc">Giá giảm dần</div>
-								<div class="select-option" data-value="date">Mới nhất</div>
+	<section class="section-product-listing section-py">
+		<div class="container">
+			<div class="wrapper-product-listing">
+				<aside class=" product-sidebar">
+					<div class="sidebar-sticky">
+						<div class="sidebar-widget category-menu">
+							<div class="widget-header">
+								<?php _e('Danh mục sản phẩm', 'canhcamtheme'); ?>
 							</div>
+
+							<nav class="category-nav">
+								<ul class="category-list">
+									<?php
+								// Lấy term hiện tại (chỉ khi đang ở taxonomy)
+								$current_term_id = is_tax('product_cat') ? get_queried_object_id() : 0;
+
+								// Lấy danh mục cha
+								$terms = get_terms([
+									'taxonomy'   => 'product_cat',
+									'hide_empty' => false,
+									'parent'     => 0,
+								]);
+
+								foreach ($terms as $term) :
+
+									// Lấy danh mục con
+									$children = get_terms([
+										'taxonomy'   => 'product_cat',
+										'hide_empty' => false,
+										'parent'     => $term->term_id,
+									]);
+
+									$has_child = !empty($children);
+
+									/**
+									 * Xác định:
+									 * - Có đang active chính nó không
+									 * - Hoặc có child nào đang active không
+									 */
+									$is_current_term_tree = false;
+
+									if ($current_term_id) {
+										// Chính nó active
+										if ($term->term_id == $current_term_id) {
+											$is_current_term_tree = true;
+										}
+
+										// Hoặc có child active
+										if (!$is_current_term_tree && $has_child) {
+											foreach ($children as $child) {
+												if ($child->term_id == $current_term_id) {
+													$is_current_term_tree = true;
+													break;
+												}
+											}
+										}
+									}
+
+									$item_class   = $is_current_term_tree ? 'active' : '';
+									$icon_class   = $is_current_term_tree ? 'fa-minus' : 'fa-plus';
+									$display_attr = $is_current_term_tree
+										? 'style="display:block"'
+										: 'style="display:none"';
+								?>
+
+									<li class="category-item <?php echo esc_attr($item_class); ?>">
+										<div class="header-filter">
+											<a href="<?php echo esc_url(get_term_link($term)); ?>">
+												<?php echo esc_html($term->name); ?>
+											</a>
+
+											<?php if ($has_child) : ?>
+											<span class="toggle-icon">
+												<i class="fa-solid <?php echo esc_attr($icon_class); ?>"></i>
+											</span>
+											<?php endif; ?>
+										</div>
+
+										<?php if ($has_child) : ?>
+										<ul class="sub-category" <?php echo $display_attr; ?>>
+											<?php foreach ($children as $child) :
+												$child_active = ($child->term_id == $current_term_id) ? 'active' : '';
+											?>
+											<li class="<?php echo esc_attr($child_active); ?>">
+												<a href="<?php echo esc_url(get_term_link($child)); ?>">
+													<?php echo esc_html($child->name); ?>
+												</a>
+											</li>
+											<?php endforeach; ?>
+										</ul>
+										<?php endif; ?>
+									</li>
+
+									<?php endforeach; ?>
+								</ul>
+							</nav>
 						</div>
 					</div>
-				</div>
+				</aside>
 
-				<div class="product-grid">
-					<?php
-					$sort = isset($_GET['sort']) ? $_GET['sort'] : '';
+
+				<main class=" product-main">
+					<div class="product-header">
+						<h1 class="product-title"><?= single_term_title() ?></h1>
+						<?php $sort = isset($_GET['sort']) ? sanitize_text_field($_GET['sort']) : ''; ?>
+						<div class="product-sort">
+							<label for="product-sort-select">Lọc theo</label>
+							<select id="product-sort-select" class="form-select js-product-sort-select" onchange="location = this.value;">
+								<?php 
+								$base_url = remove_query_arg(['sort', 'page', 'paged', 'perpage']);
+								?>
+								<option value="<?= esc_url($base_url) ?>" <?= empty($sort) ? 'selected' : '' ?>>Tất cả</option>
+								<option value="<?= esc_url(add_query_arg('sort', 'name_asc', $base_url)) ?>" <?= $sort == 'name_asc' ? 'selected' : '' ?>>Từ A-Z</option>
+								<option value="<?= esc_url(add_query_arg('sort', 'name_desc', $base_url)) ?>" <?= $sort == 'name_desc' ? 'selected' : '' ?>>Từ Z-A</option>
+								<option value="<?= esc_url(add_query_arg('sort', 'newest', $base_url)) ?>" <?= $sort == 'newest' ? 'selected' : '' ?>>Mới nhất</option>
+								<option value="<?= esc_url(add_query_arg('sort', 'oldest', $base_url)) ?>" <?= $sort == 'oldest' ? 'selected' : '' ?>>Cũ nhất</option>
+							</select>
+						</div>
+					</div>
+
+					<div class="product-grid">
+						<?php
 					$args = array();
 
-					// Sort Logic
+					// Sort logic logic
 					switch ($sort) {
-						case 'price':
-							$args['orderby']  = 'meta_value_num';
-							$args['meta_key'] = 'price'; // Assumed meta key
-							$args['order']    = 'ASC';
+						case 'name_asc':
+							$args['orderby'] = 'title';
+							$args['order']   = 'ASC';
 							break;
-						case 'price-desc':
-							$args['orderby']  = 'meta_value_num';
-							$args['meta_key'] = 'price'; // Assumed meta key
-							$args['order']    = 'DESC';
+						case 'name_desc':
+							$args['orderby'] = 'title';
+							$args['order']   = 'DESC';
 							break;
-						case 'date':
+						case 'oldest':
+							$args['orderby'] = 'date';
+							$args['order']   = 'ASC';
+							break;
+						case 'newest':
+						default:
 							$args['orderby'] = 'date';
 							$args['order']   = 'DESC';
 							break;
-						default:
-							// Keep default sort or specific
-							// $args['orderby'] = 'menu_order date';
-							// $args['order']   = 'DESC';
-							break;
 					}
 
-					if (!empty($args)) {
+					// Modify main query for sorting
+					if (!empty($sort)) {
+						$args['ignore_custom_sort'] = true; // Bypass dynamic sorting plugins on Live
 						global $wp_query;
-						query_posts(array_merge($wp_query->query_vars, $args));
+						$query_args = array_merge($wp_query->query_vars, $args);
+						query_posts($query_args);
 					}
 
 					if (have_posts()) :
@@ -216,99 +216,38 @@ $main_extra_class = !$should_render_banner ? ' wrapper-gap-top' : '';
 							$idProduct = get_the_ID();
 							$specs = get_field('product_specs');
 					?>
-					<article class="product-card">
-						<a class="product-link" href="<?php the_permalink(); ?>">
-							<div class="product-image">
-								<?php echo get_image_post($idProduct, 'image'); ?>
-							</div>
-							<div class="product-info">
-								<h3 class="product-name"><?php the_title(); ?></h3>
-								<?php if ($specs) : ?>
-								<div class="product-specs line-clamp-3">
-									<?= get_the_excerpt() ?></p>
+						<article class="product-card">
+							<a class="product-link" href="<?php the_permalink(); ?>">
+								<div class="product-image">
+									<?php echo get_image_post($idProduct, 'image'); ?>
 								</div>
-								<?php endif; ?>
-							</div>
-						</a>
-					</article>
-					<?php
+								<div class="product-info">
+									<h3 class="product-name"><?php the_title(); ?></h3>
+									<?php if ($specs) : ?>
+									<div class="product-specs line-clamp-3">
+										<?= get_the_excerpt() ?>
+									</div>
+									<?php endif; ?>
+								</div>
+							</a>
+						</article>
+						<?php
 						endwhile;
 					else :
 						echo '<p>Chưa có sản phẩm nào.</p>';
 					endif;
 					?>
-				</div>
+					</div>
 
-				<?php wp_bootstrap_pagination(); ?>
-			</main>
+					<?php wp_bootstrap_pagination(); ?>
+				</main>
+			</div>
 		</div>
-	</div>
-</section>
+	</section>
 </div>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-	const selectTrigger = document.querySelector('.select-trigger');
-	const selectDropdown = document.querySelector('.select-dropdown');
-	const selectOptions = document.querySelectorAll('.select-option');
-	const selectedValue = document.querySelector('.selected-value');
 
-	// Toggle dropdown
-	if (selectTrigger) {
-		selectTrigger.addEventListener('click', function() {
-			selectDropdown.classList.toggle('show');
-		});
-	}
-
-	// Close dropdown when clicking outside
-	document.addEventListener('click', function(e) {
-		if (selectTrigger && !selectTrigger.contains(e.target) && !selectDropdown.contains(e.target)) {
-			selectDropdown.classList.remove('show');
-		}
-	});
-
-	// Handle option click
-	selectOptions.forEach(option => {
-		option.addEventListener('click', function() {
-			const value = this.getAttribute('data-value');
-			const text = this.textContent;
-
-			// Update trigger text
-			if (selectedValue) selectedValue.textContent = text;
-
-			// Update active class
-			selectOptions.forEach(opt => opt.classList.remove('active'));
-			this.classList.add('active');
-
-			// Close dropdown
-			if (selectDropdown) selectDropdown.classList.remove('show');
-
-			// Redirect with sort param
-			const url = new URL(window.location.href);
-			if (value) {
-				url.searchParams.set('sort', value);
-			} else {
-				url.searchParams.delete('sort');
-			}
-			// Reset pagination when sorting changes
-			url.searchParams.delete('paged'); // Using 'paged' key for main query
-			url.searchParams.delete('page'); // Sometimes 'page' is used
-			window.location.href = url.toString();
-		});
-	});
-
-	// Set active state based on URL
-	const currentUrl = new URL(window.location.href);
-	const currentSort = currentUrl.searchParams.get('sort');
-	if (currentSort) {
-		const activeOption = document.querySelector(`.select-option[data-value="${currentSort}"]`);
-		if (activeOption) {
-			selectOptions.forEach(opt => opt.classList.remove('active'));
-			activeOption.classList.add('active');
-			if (selectedValue) selectedValue.textContent = activeOption.textContent;
-		}
-	}
-});
 </script>
 
 <?= get_footer() ?>

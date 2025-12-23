@@ -39,7 +39,7 @@ if (!$title && empty($items)) {
 	<?php if ($items): ?>
 	<div class="product-cards">
 		<div class="list-grid">
-			<?php foreach ($items as $item): ?>
+			<?php foreach (array_slice($items, 0, 4) as $item): ?>
 			<div class="product-card">
 				<?php if (!empty($item['image'])): ?>
 				<div class="product-img">

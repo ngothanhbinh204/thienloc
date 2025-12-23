@@ -48,7 +48,8 @@ $footer_decor_image = get_field('footer_decor_image', 'option');
 		<?php if ($footer_decor_image) : ?>
 
 		<div class="footer-decor">
-			<img class="footer-decor-img" src="<?= esc_url($footer_decor_image['url']); ?>" data-src="<?= esc_url($footer_decor_image['url']); ?>" alt="">
+			<img class="footer-decor-img" src="<?= esc_url($footer_decor_image['url']); ?>"
+				data-src="<?= esc_url($footer_decor_image['url']); ?>" alt="">
 		</div>
 
 		<?php endif; ?>
@@ -101,7 +102,8 @@ $footer_decor_image = get_field('footer_decor_image', 'option');
 									if (!$image) continue;
 								?>
 						<div class="box-img">
-							<img class="cert-img" src="<?= esc_url($image['url']); ?>" data-src="<?= esc_url($image['url']); ?>" alt=""/>
+							<img class="cert-img" src="<?= esc_url($image['url']); ?>"
+								data-src="<?= esc_url($image['url']); ?>" alt="" />
 						</div>
 						<?php endforeach; ?>
 					</div>
@@ -128,7 +130,8 @@ $footer_decor_image = get_field('footer_decor_image', 'option');
 					<li class="footer-info-item">
 						<div class="info-icon">
 							<?php if ($icon_type === 'image' && $icon_image) : ?>
-							<img class="cert-img" src="<?= esc_url($icon_image['url']); ?>" data-src="<?= esc_url($icon_image['url']); ?>" alt=""/>
+							<img class="cert-img" src="<?= esc_url($icon_image['url']); ?>"
+								data-src="<?= esc_url($icon_image['url']); ?>" alt="" />
 							<?php elseif ($icon_class) : ?>
 							<i class="<?= esc_attr($icon_class); ?>"></i>
 							<?php endif; ?>
@@ -230,6 +233,19 @@ $footer_decor_image = get_field('footer_decor_image', 'option');
 	</div>
 </footer>
 
+<script>
+window.addEventListener('load', function() { // Thay DOMContentLoaded bằng load
+	if (typeof lozad === 'function') {
+		const observer = lozad();
+		observer.observe();
+		window.FE = {
+			lozad: () => observer.observe()
+		};
+	} else {
+		console.error('Lozad library still not found after window load!');
+	}
+});
+</script>
 </body>
 
 </html>

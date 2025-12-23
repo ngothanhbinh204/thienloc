@@ -27,6 +27,31 @@ class Header_Desktop_Menu_Walker extends Walker_Nav_Menu {
 		$has_children = in_array( 'menu-item-has-children', $classes );
 		$is_active    = in_array( 'current-menu-item', $classes ) || in_array( 'current-menu-ancestor', $classes );
 
+		// Custom CPT Active State
+		if ( ! $is_active ) {
+			if ( is_singular( 'product' ) ) {
+				$product_page_id = get_page_id_by_template( 'templates/page-products.php' );
+				if ( (int) $item->object_id === (int) $product_page_id ) {
+					$is_active = true;
+				}
+			} elseif ( is_singular( 'service' ) ) {
+				$service_page_id = get_page_id_by_template( 'templates/page-services.php' );
+				if ( (int) $item->object_id === (int) $service_page_id ) {
+					$is_active = true;
+				}
+			} elseif ( is_singular( 'customer' ) ) {
+				$customer_page_id = get_page_id_by_template( 'templates/page-customers.php' );
+				if ( (int) $item->object_id === (int) $customer_page_id ) {
+					$is_active = true;
+				}
+			} elseif ( is_singular( 'post' ) ) {
+				$news_page_id = get_option( 'page_for_posts' );
+				if ( (int) $item->object_id === (int) $news_page_id ) {
+					$is_active = true;
+				}
+			}
+		}
+
 		// Add custom classes
 		if ( $has_children ) {
 			$classes[] = 'has-sub';
@@ -65,9 +90,14 @@ class Header_Desktop_Menu_Walker extends Walker_Nav_Menu {
 			$class_names_col = join( ' ', apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item, $args, $depth ) );
 			
 			$output .= '<div class="' . esc_attr( $class_names_col ) . '" role="none">';
-			$output .= '<div class="label" role="presentation">';
+			$output .= '<a href="' . esc_url( $item->url ) . '" class="label" role="presentation">';
 			$output .= esc_html( $item->title );
-			$output .= '</div>';
+			$output .= '</a>';
+
+			// $output .= '<div class="' . esc_attr( $class_names_col ) . '" role="none">';
+			// $output .= '<div class="label" role="presentation">';
+			// $output .= esc_html( $item->title );
+			// $output .= '</div>';
 		}
 
 		// ===== LEVEL 2 (Links) =====
@@ -129,6 +159,31 @@ class Header_Mobile_Menu_Walker extends Walker_Nav_Menu
 			in_array( 'current-menu-ancestor', $classes, true ) ||
 			in_array( 'current_page_item', $classes, true )
 		);
+
+		// Custom CPT Active State
+		if ( ! $is_active ) {
+			if ( is_singular( 'product' ) ) {
+				$product_page_id = get_page_id_by_template( 'templates/page-products.php' );
+				if ( (int) $item->object_id === (int) $product_page_id ) {
+					$is_active = true;
+				}
+			} elseif ( is_singular( 'service' ) ) {
+				$service_page_id = get_page_id_by_template( 'templates/page-services.php' );
+				if ( (int) $item->object_id === (int) $service_page_id ) {
+					$is_active = true;
+				}
+			} elseif ( is_singular( 'customer' ) ) {
+				$customer_page_id = get_page_id_by_template( 'templates/page-customers.php' );
+				if ( (int) $item->object_id === (int) $customer_page_id ) {
+					$is_active = true;
+				}
+			} elseif ( is_singular( 'post' ) ) {
+				$news_page_id = get_option( 'page_for_posts' );
+				if ( (int) $item->object_id === (int) $news_page_id ) {
+					$is_active = true;
+				}
+			}
+		}
 
 		if ( $is_active ) {
 			$classes[] = 'is-active';

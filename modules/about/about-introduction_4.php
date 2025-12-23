@@ -2,8 +2,17 @@
 $title    = get_sub_field('title');
 $subtitle = get_sub_field('subtitle');
 $items    = get_sub_field('items');
+	$image_decor_bottom = get_field('image_decor_bottom');
+
 ?>
 <div class="wrapper-bg bg-linear-1-bottom-to-top">
+	<div class="bg-decor-bottom">
+		<?php
+		if ($image_decor_bottom) {
+			echo get_lozad_img($image_decor_bottom['url'], $image_decor_bottom['alt']);
+		}
+		?>
+	</div>
 	<section class="introduction-4 section-py">
 		<div class="container">
 			<div class="header-center" data-aos="fade-up">

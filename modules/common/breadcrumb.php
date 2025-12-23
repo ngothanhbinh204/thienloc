@@ -1,27 +1,12 @@
 <?php
 /**
- * Get Rank Math breadcrumbs as array
+ * Display Breadcrumbs
  */
-if (!function_exists('canhcam_get_breadcrumbs')) {
-	function canhcam_get_breadcrumbs()
-	{
-		if (function_exists('rank_math_get_breadcrumbs')) {
-			return rank_math_get_breadcrumbs();
-		}
-		return [];
-	}
-}
-
 $breadcrumbs = canhcam_get_breadcrumbs();
 
-// Fallback if no breadcrumbs (e.g. home page or plugin inactive)
-if (empty($breadcrumbs)) {
-	if (is_front_page()) return;
-	
-	$breadcrumbs = [
-		['label' => 'Trang chủ', 'url' => home_url('/')],
-		['label' => get_the_title(), 'url' => ''],
-	];
+// Don't show anything if empty or on home page
+if (empty($breadcrumbs) || is_front_page()) {
+	return;
 }
 ?>
 <div class="breadcrumb-wrapper py-2 w-full">

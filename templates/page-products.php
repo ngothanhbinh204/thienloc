@@ -2,6 +2,7 @@
 /*
 Template name: Page - Products
 */ 
+
 ?>
 <?= get_header() ?>
 
@@ -10,8 +11,8 @@ Template name: Page - Products
 
 <section class="section-product-listing section-py">
 	<div class="container">
-		<div class="row">
-			<aside class="col-lg-3 product-sidebar">
+		<div class="wrapper-product-listing">
+			<aside class="product-sidebar">
 				<div class="sidebar-sticky">
 					<div class="sidebar-widget category-menu">
 						<div class="widget-header">
@@ -37,7 +38,6 @@ Template name: Page - Products
 									));
 									$has_child = !empty($children);
 									
-									// Logic: Open if it's the first item OR if it (or its child) is currently active
 									$is_current_term_tree = ($term->term_id == $current_term_id);
 									if (!$is_current_term_tree && $has_child) {
 										foreach($children as $child) {
@@ -65,8 +65,8 @@ Template name: Page - Products
 									<?php if ($has_child) : ?>
 									<ul class="sub-category" <?= $display_style ?>>
 										<?php foreach ($children as $child) : 
-													$child_active = ($child->term_id == $current_term_id) ? 'active' : '';
-												?>
+											$child_active = ($child->term_id == $current_term_id) ? 'active' : '';
+										?>
 										<li class="<?= $child_active ?>">
 											<a href="<?= get_term_link($child) ?>"><?= esc_html($child->name) ?></a>
 										</li>
@@ -84,42 +84,47 @@ Template name: Page - Products
 				</div>
 			</aside>
 
-			<main class="col-lg-9 product-main">
+			<main class="product-main">
 				<div class="product-header">
 					<h1 class="product-title"><?= get_the_title() ?></h1>
-					<!-- Sort functionality can be implemented with JS/AJAX later -->
+					<?php $sort = isset($_GET['sort']) ? sanitize_text_field($_GET['sort']) : ''; ?>
 					<div class="product-sort">
-						<label>Lọc theo</label>
-						<div class="custom-select">
-							<div class="select-trigger"><span class="selected-value">Tất cả</span><i
-									class="fa-solid fa-chevron-down"></i></div>
-							<div class="select-dropdown">
-								<div class="select-option active" data-value="">Tất cả</div>
-								<div class="select-option" data-value="title-asc">Từ A-Z</div>
-								<div class="select-option" data-value="title-desc">Từ Z-A</div>
-								<div class="select-option" data-value="date-desc">Mới nhất</div>
-								<div class="select-option" data-value="date-asc">Cũ nhất</div>
-							</div>
-						</div>
+						<label for="product-sort-select">Lọc theo</label>
+						<select id="product-sort-select" class="form-select js-product-sort-select"
+							onchange="location = this.value;">
+							<?php 
+							$base_url = remove_query_arg(['sort', 'page', 'paged', 'perpage']);
+							?>
+							<option value="<?= esc_url($base_url) ?>" <?= empty($sort) ? 'selected' : '' ?>>Tất cả
+							</option>
+							<option value="<?= esc_url(add_query_arg('sort', 'name_asc', $base_url)) ?>"
+								<?= $sort == 'name_asc' ? 'selected' : '' ?>>Từ A-Z</option>
+							<option value="<?= esc_url(add_query_arg('sort', 'name_desc', $base_url)) ?>"
+								<?= $sort == 'name_desc' ? 'selected' : '' ?>>Từ Z-A</option>
+							<option value="<?= esc_url(add_query_arg('sort', 'newest', $base_url)) ?>"
+								<?= $sort == 'newest' ? 'selected' : '' ?>>Mới nhất</option>
+							<option value="<?= esc_url(add_query_arg('sort', 'oldest', $base_url)) ?>"
+								<?= $sort == 'oldest' ? 'selected' : '' ?>>Cũ nhất</option>
+						</select>
 					</div>
 				</div>
 
 				<div class="product-grid">
 					<?php
-					$paged = (get_query_var('paged')) ? get_query_var('paged') : ((get_query_var('page')) ? get_query_var('page') : 1);
-					$sort  = isset($_GET['sort']) ? sanitize_text_field($_GET['sort']) : '';
+					// FIX: Sử dụng 'page' cho page template thay vì 'paged'
+					$current_page = max(1, get_query_var('page') ? get_query_var('page') : (get_query_var('paged') ? get_query_var('paged') : 1));
 
 					$args = array(
-						'post_type'      => 'product',
-						'posts_per_page' => 3,
-						'paged'          => $paged,
-						'post_status'    => 'publish',
+						'post_type'          => 'product',
+						'posts_per_page'     => 9,
+						'paged'              => $current_page,
+						'post_status'        => 'publish',
+						'ignore_custom_sort' => true, // Fix for Live plugins like "Post Types Order"
 					);
 
 					// Filter by product category if exists
 					if (is_tax('product_cat')) {
 						$term = get_queried_object();
-
 						if ($term && !is_wp_error($term)) {
 							$args['tax_query'] = array(
 								array(
@@ -131,39 +136,48 @@ Template name: Page - Products
 						}
 					}
 
-					// Sort logic
+					// Sort logic - ADDED Z-A
 					switch ($sort) {
-						case 'title-asc':
+						case 'name_asc':
 							$args['orderby'] = 'title';
 							$args['order']   = 'ASC';
 							break;
 
-						case 'title-desc':
+						case 'name_desc':
 							$args['orderby'] = 'title';
 							$args['order']   = 'DESC';
 							break;
 
-						case 'date-asc':
+						case 'oldest':
 							$args['orderby'] = 'date';
 							$args['order']   = 'ASC';
 							break;
 
-						case 'date-desc':
-							$args['orderby'] = 'date';
-							$args['order']   = 'DESC';
-							break;
-
+						case 'newest':
 						default:
 							$args['orderby'] = 'date';
 							$args['order']   = 'DESC';
+							break;
 					}
-
 
 					$query = new WP_Query($args);
 
+					// === DATABASE QUERY DEBUG - XÓA SAU KHI FIX ===
+					if (isset($_GET['debug'])) {
+						echo '<div style="background:#1e1e1e;color:#00ff00;padding:20px;margin:20px;font-family:monospace;font-size:12px;border:3px solid #00ff00;">';
+						echo '<strong>🗄️ WP_QUERY DEBUG:</strong><br><br>';
+						echo 'Found posts: ' . $query->found_posts . '<br>';
+						echo 'Posts per page: ' . $query->query_vars['posts_per_page'] . '<br>';
+						echo 'Current page: ' . $query->query_vars['paged'] . '<br>';
+						echo 'Max pages: ' . $query->max_num_pages . '<br><br>';
+						echo '<strong>SQL Query:</strong><br>';
+						echo '<div style="word-break:break-all;">' . htmlspecialchars($query->request) . '</div>';
+						echo '</div>';
+					}
+					// === END DEBUG ===
+
 					if ($query->have_posts()) :
 						while ($query->have_posts()) : $query->the_post();
-							$image_id = get_post_thumbnail_id();
 							$idProduct = get_the_ID();
 							$specs = get_field('product_specs');
 					?>
@@ -176,7 +190,11 @@ Template name: Page - Products
 								<h3 class="product-name"><?php the_title(); ?></h3>
 								<?php if ($specs) : ?>
 								<div class="product-specs line-clamp-3">
-									<?= get_the_excerpt() ?></p>
+									<?php foreach ($specs as $spec) : ?>
+									<div>
+										<?php echo esc_html($spec); ?>
+									</div>
+									<?php endforeach; ?>
 								</div>
 								<?php endif; ?>
 							</div>
@@ -191,75 +209,19 @@ Template name: Page - Products
 				</div>
 
 				<?php if ($query->max_num_pages > 1) : ?>
-				<?php wp_bootstrap_pagination(array('custom_query' => $query)); ?>
-				<?php endif; wp_reset_postdata(); ?>
+
+				<?php 
+					wp_bootstrap_pagination_page_template( array( 'custom_query' => $query, 'current_page' => $current_page ) ); ?>
+
+				<?php wp_reset_postdata(); ?>
+				<?php endif; ?>
 			</main>
 		</div>
 	</div>
 </section>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-	const selectTrigger = document.querySelector('.select-trigger');
-	const selectDropdown = document.querySelector('.select-dropdown');
-	const selectOptions = document.querySelectorAll('.select-option');
-	const selectedValue = document.querySelector('.selected-value');
 
-	// Toggle dropdown
-	if (selectTrigger) {
-		selectTrigger.addEventListener('click', function() {
-			selectDropdown.classList.toggle('show');
-		});
-	}
-
-	// Close dropdown when clicking outside
-	document.addEventListener('click', function(e) {
-		if (selectTrigger && !selectTrigger.contains(e.target) && !selectDropdown.contains(e.target)) {
-			selectDropdown.classList.remove('show');
-		}
-	});
-
-	// Handle option click
-	selectOptions.forEach(option => {
-		option.addEventListener('click', function() {
-			const value = this.getAttribute('data-value');
-			const text = this.textContent;
-			
-			// Update trigger text
-			if (selectedValue) selectedValue.textContent = text;
-			
-			// Update active class
-			selectOptions.forEach(opt => opt.classList.remove('active'));
-			this.classList.add('active');
-			
-			// Close dropdown
-			if (selectDropdown) selectDropdown.classList.remove('show');
-
-			// Redirect with sort param
-			const url = new URL(window.location.href);
-			if (value) {
-				url.searchParams.set('sort', value);
-			} else {
-				url.searchParams.delete('sort');
-			}
-			// Reset pagination when sorting changes
-			url.searchParams.delete('paged'); 
-			window.location.href = url.toString();
-		});
-	});
-
-	// Set active state based on URL
-	const currentUrl = new URL(window.location.href);
-	const currentSort = currentUrl.searchParams.get('sort');
-	if (currentSort) {
-		const activeOption = document.querySelector(`.select-option[data-value="${currentSort}"]`);
-		if (activeOption) {
-			selectOptions.forEach(opt => opt.classList.remove('active'));
-			activeOption.classList.add('active');
-			if (selectedValue) selectedValue.textContent = activeOption.textContent;
-		}
-	}
-});
 </script>
 
 <?= get_footer() ?>

@@ -281,9 +281,12 @@ add_action('after_setup_theme', 'example_theme_support');
 // Edit Slug Custom Post Types
 function remove_custom_post_type_slug($post_link, $post)
 {
-	if ('products' === $post->post_type && 'publish' === $post->post_status) {
+	$target_types = array('product', 'service', 'customer');
+	
+	if (in_array($post->post_type, $target_types) && 'publish' === $post->post_status) {
 		$post_link = str_replace('/' . $post->post_type . '/', '/', $post_link);
 	}
+	
 	if ('grounds' === $post->post_type && 'publish' === $post->post_status) {
 		$post_link = str_replace('/' . $post->post_type . '/', '/', $post_link);
 	}
@@ -291,33 +294,34 @@ function remove_custom_post_type_slug($post_link, $post)
 }
 
 add_filter('post_type_link', 'remove_custom_post_type_slug', 10, 2);
+
 function add_post_names_to_main_query($query)
 {
 	// Bail if this is not the main query.
-	if (!$query->is_main_query()) {
+	if (!$query->is_main_query() || is_admin()) {
 		return;
 	}
-	// Bail if this query doesn't match our very specific rewrite rule.
-	if (!isset($query->query['page']) || 2 !== count($query->query)) {
-		return;
-	}
+
 	// Bail if we're not querying based on the post name.
-	if (empty($query->query['name'])) {
+	if (empty($query->query['name']) && empty($query->query['pagename'])) {
 		return;
 	}
+
+	$name = !empty($query->query['name']) ? $query->query['name'] : $query->query['pagename'];
 	
 	// FIX: Check if we are on the products page and allow pagination
 	$product_page_id = get_page_id_by_template('templates/page-products.php');
 	if ($product_page_id) {
 		$product_page = get_post($product_page_id);
-		if ($query->query['name'] === $product_page->post_name) {
+		if ($name === $product_page->post_name) {
 			$query->is_page = true;
+			$query->is_404 = false;
 			return;
 		}
 	}
 
 	// Add CPT to the list of post types WP will include when it queries based on the post name.
-	$query->set('post_type', array('post', 'page', 'products', 'grounds'));
+	$query->set('post_type', array('post', 'page', 'product', 'service', 'customer', 'grounds'));
 }
 add_action('pre_get_posts', 'add_post_names_to_main_query');
 
@@ -597,6 +601,20 @@ function get_post_categories($post_id)
 	return $category_data;
 }
 
+
+function get_page_id_by_template($template_name)
+{
+	$pages = get_pages(array(
+		'meta_key' => '_wp_page_template',
+		'meta_value' => $template_name
+	));
+
+	if (!empty($pages)) {
+		return $pages[0]->ID;
+	}
+
+	return false;
+}
 
 function get_page_link_by_template($template_name)
 {
