@@ -52,7 +52,7 @@ if (!$title && empty($stats)) {
 
 				<div class="stat-info">
 					<?php if (!empty($stat['number'])): ?>
-					<div class="stat-number"><?= esc_html($stat['number']); ?></div>
+					<div class="stat-number"><?= wp_kses_post($stat['number']); ?></div>
 					<?php endif; ?>
 					<?php if (!empty($stat['label'])): ?>
 					<div class="stat-label"><?= esc_html($stat['label']); ?></div>

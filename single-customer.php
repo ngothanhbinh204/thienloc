@@ -21,7 +21,9 @@
 								if ($customer_code) : 
 								?>
 								<div class="meta-item">
-									<span class="meta-label">Mã đối tác:</span>
+									<span class="meta-label">
+										<?php _e('Mã sản phẩm:', 'canhcamtheme'); ?>
+									</span>
 									<span class="meta-value"><?= esc_html($customer_code); ?></span>
 								</div>
 								<?php endif; ?>
@@ -82,7 +84,7 @@
 								<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
 									<?php foreach ($product_images as $img_id) : ?>
 									<div class="gallery-item">
-										<?= get_image_attrachment($img_id, 'medium'); ?>
+										<?= get_image_attrachment($img_id, 'image'); ?>
 									</div>
 									<?php endforeach; ?>
 								</div>
@@ -132,7 +134,7 @@
 									while ($related_query->have_posts()) : $related_query->the_post();
 								?>
 							<div class="swiper-slide">
-								<div class="customer-card bg-white p-4 rounded-lg h-full">
+								<div class="customer-card ">
 									<div class="card-img">
 										<?php if (has_post_thumbnail()) : ?>
 										<a href="<?php the_permalink(); ?>">

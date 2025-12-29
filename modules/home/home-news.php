@@ -69,7 +69,7 @@ if (!empty($categories)) {
 		</div>
 
 		<?php if ($button) : ?>
-		<div class="news-footer mt-10" data-aos="fade-up" data-aos-delay="800">
+		<div class="news-footer mt-10">
 			<a class="btn btn-primary" href="<?= esc_url($button['url']); ?>"
 				target="<?= esc_attr($button['target'] ?: '_self'); ?>">
 				<?= esc_html($button['title']); ?>

@@ -6,7 +6,7 @@ get_header();
 ?>
 
 <main>
-	<?php get_template_part('modules/common/banner')?>
+	<?php get_template_part('modules/common/banner') ?>
 
 	<div class="">
 		<?php get_template_part('modules/common/breadcrumb'); ?>
@@ -16,7 +16,7 @@ get_header();
 			<div class="container">
 				<div class="commitment-header">
 					<div class="header-icon">
-						<?php 
+						<?php
 						$commitment_icon = get_field('commitment_icon');
 						if ($commitment_icon) :
 						?>
@@ -31,7 +31,7 @@ get_header();
 				</div>
 				<div class="commitment-content">
 					<div class="commitment-image">
-						<?php 
+						<?php
 						$commitment_image = get_field('commitment_image');
 						if ($commitment_image) :
 						?>
@@ -42,7 +42,7 @@ get_header();
 						<?php endif; ?>
 					</div>
 					<div class="commitment-info">
-						<?php 
+						<?php
 						if (have_rows('commitment_list')) :
 							while (have_rows('commitment_list')) : the_row();
 						?>
@@ -50,10 +50,10 @@ get_header();
 							<h3 class="info-title"><?php the_sub_field('item_title'); ?></h3>
 							<div class="body-18"><?php the_sub_field('item_desc'); ?></div>
 						</div>
-						<?php 
+						<?php
 							endwhile;
 						else:
-						?>
+							?>
 						<div class="info-item">
 							<h3 class="info-title">Hàng chính hãng 100%</h3>
 							<p class="body-18">Tất cả sản phẩm đều được nhập khẩu trực tiếp từ các thương hiệu nông
@@ -75,7 +75,7 @@ get_header();
 			<div class="container space-y-5">
 				<div class="partners-header">
 					<div class="header-icon">
-						<?php 
+						<?php
 						$partners_icon = get_field('partners_icon');
 						if ($partners_icon) :
 						?>
@@ -97,7 +97,7 @@ get_header();
 					$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
 					$args = array(
 						'post_type' => 'customer',
-						'posts_per_page' => 12,
+						'posts_per_page' => 9,
 						'paged' => $paged,
 						'orderby' => 'date',
 						'order' => 'DESC'

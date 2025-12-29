@@ -164,15 +164,21 @@ $main_extra_class = !$should_render_banner ? ' wrapper-gap-top' : '';
 						<?php $sort = isset($_GET['sort']) ? sanitize_text_field($_GET['sort']) : ''; ?>
 						<div class="product-sort">
 							<label for="product-sort-select">Lọc theo</label>
-							<select id="product-sort-select" class="form-select js-product-sort-select" onchange="location = this.value;">
+							<select id="product-sort-select" class="form-select js-product-sort-select"
+								onchange="location = this.value;">
 								<?php 
 								$base_url = remove_query_arg(['sort', 'page', 'paged', 'perpage']);
 								?>
-								<option value="<?= esc_url($base_url) ?>" <?= empty($sort) ? 'selected' : '' ?>>Tất cả</option>
-								<option value="<?= esc_url(add_query_arg('sort', 'name_asc', $base_url)) ?>" <?= $sort == 'name_asc' ? 'selected' : '' ?>>Từ A-Z</option>
-								<option value="<?= esc_url(add_query_arg('sort', 'name_desc', $base_url)) ?>" <?= $sort == 'name_desc' ? 'selected' : '' ?>>Từ Z-A</option>
-								<option value="<?= esc_url(add_query_arg('sort', 'newest', $base_url)) ?>" <?= $sort == 'newest' ? 'selected' : '' ?>>Mới nhất</option>
-								<option value="<?= esc_url(add_query_arg('sort', 'oldest', $base_url)) ?>" <?= $sort == 'oldest' ? 'selected' : '' ?>>Cũ nhất</option>
+								<option value="<?= esc_url($base_url) ?>" <?= empty($sort) ? 'selected' : '' ?>>Tất cả
+								</option>
+								<option value="<?= esc_url(add_query_arg('sort', 'name_asc', $base_url)) ?>"
+									<?= $sort == 'name_asc' ? 'selected' : '' ?>>Từ A-Z</option>
+								<option value="<?= esc_url(add_query_arg('sort', 'name_desc', $base_url)) ?>"
+									<?= $sort == 'name_desc' ? 'selected' : '' ?>>Từ Z-A</option>
+								<option value="<?= esc_url(add_query_arg('sort', 'newest', $base_url)) ?>"
+									<?= $sort == 'newest' ? 'selected' : '' ?>>Mới nhất</option>
+								<option value="<?= esc_url(add_query_arg('sort', 'oldest', $base_url)) ?>"
+									<?= $sort == 'oldest' ? 'selected' : '' ?>>Cũ nhất</option>
 							</select>
 						</div>
 					</div>
@@ -224,9 +230,18 @@ $main_extra_class = !$should_render_banner ? ' wrapper-gap-top' : '';
 								<div class="product-info">
 									<h3 class="product-name"><?php the_title(); ?></h3>
 									<?php if ($specs) : ?>
-									<div class="product-specs line-clamp-3">
-										<?= get_the_excerpt() ?>
+									<?php if (!empty($specs) && is_array($specs)) : ?>
+									<div class="product-specs">
+										<?php foreach ($specs as $row) : ?>
+										<?php if (!empty($row['text'])) : ?>
+										<div>
+											<?php echo esc_html($row['text']); ?>
+										</div>
+										<?php endif; ?>
+										<?php endforeach; ?>
 									</div>
+									<?php endif; ?>
+
 									<?php endif; ?>
 								</div>
 							</a>

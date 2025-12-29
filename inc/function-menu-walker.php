@@ -73,7 +73,7 @@ class Header_Desktop_Menu_Walker extends Walker_Nav_Menu {
 			
 			// Home icon
 			if ( $is_first_item ) {
-				$output .= '<i class="fa-solid fa-house" aria-hidden="true"></i>';
+				$output .= '<i class="fa-regular fa-house" aria-hidden="true"></i>';
 				$output .= '<span class="menu-text screen-reader-text">' . esc_html( $item->title ) . '</span>';
 			} else {
 				$output .= '<span class="menu-text">' . esc_html( $item->title ) . '</span>';
@@ -211,7 +211,7 @@ class Header_Mobile_Menu_Walker extends Walker_Nav_Menu
 			$output .= '<a href="' . esc_url( $item->url ) . '" class="flex items-center gap-2 flex-1 py-2 text-lg font-bold text-utility-2929" aria-label="' . esc_attr( $item->title ) . '">';
 
 			if ( $is_first_item ) {
-				$output .= '<i class="fa-solid fa-house" aria-hidden="true"></i>';
+				$output .= '<i class="fa-regular fa-house" aria-hidden="true"></i>';
 				$output .= '<span class="screen-reader-text">' . esc_html( $item->title ) . '</span>';
 			} else {
 				$output .= '<span>' . esc_html( $item->title ) . '</span>';

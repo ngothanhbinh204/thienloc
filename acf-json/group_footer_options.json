@@ -878,6 +878,41 @@
                     "parent_repeater": "field_intro_stats"
                 }
             ]
+        },
+        {
+            "key": "field_694b00e045081",
+            "label": "Chi tiết sản phẩm",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 0
+        },
+        {
+            "key": "field_694b00fd45082",
+            "label": "Button Liên hệ",
+            "name": "button_contact_product",
+            "aria-label": "",
+            "type": "link",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "allow_in_bindings": 0
         }
     ],
     "location": [
@@ -898,5 +933,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1766377718
+    "modified": 1766523157
 }

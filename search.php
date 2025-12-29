@@ -108,11 +108,11 @@ if (!is_wp_error($tax_terms) && !empty($tax_terms)) {
 					</div> -->
 					<div class="search-tab-content">
 						<div class="search-tab-pane active" data-pane="all">
-							<?php foreach ($results_data as $slug => $data) : 
-								$query = $data['query'];
-								$query->rewind_posts();
-								$preview_count = 0;
-							?>
+							<?php foreach ($results_data as $slug => $data) :
+									$query = $data['query'];
+									$query->rewind_posts();
+									$preview_count = 0;
+								?>
 							<div class="search-section mb-base">
 								<div class="search-section-header flex items-center justify-between mb-6">
 									<h2 class="heading-4 font-bold text-primary-2"><i
@@ -121,11 +121,11 @@ if (!is_wp_error($tax_terms) && !empty($tax_terms)) {
 									</h2>
 								</div>
 								<div class="search-grid">
-									<?php while ($query->have_posts()) : $query->the_post(); 
-											$preview_count++;
-											if ($preview_count > 4) break; 
-											get_template_part('template-parts/search-item', $slug);
-										endwhile; ?>
+									<?php while ($query->have_posts()) : $query->the_post();
+												$preview_count++;
+												if ($preview_count > 4) break;
+												get_template_part('template-parts/search-item', $slug);
+											endwhile; ?>
 								</div>
 								<?php if ($data['count'] > 4) : ?>
 								<div class="text-center mt-6">
@@ -138,7 +138,7 @@ if (!is_wp_error($tax_terms) && !empty($tax_terms)) {
 							</div>
 							<?php endforeach; ?>
 
-							<?php if ($tax_count > 0) : ?>
+							<!-- <?php if ($tax_count > 0) : ?>
 							<div class="search-section mb-base">
 								<div class="taxonomy-group mb-8">
 									<h3 class="heading-5 font-bold text-primary-2 mb-4">Danh mục sản phẩm</h3>
@@ -152,25 +152,25 @@ if (!is_wp_error($tax_terms) && !empty($tax_terms)) {
 									</div>
 								</div>
 							</div>
-							<?php endif; ?>
+							<?php endif; ?> -->
 						</div>
 
-						<?php foreach ($results_data as $slug => $data) : 
-							$query = $data['query'];
-							$query->rewind_posts();
-						?>
+						<?php foreach ($results_data as $slug => $data) :
+								$query = $data['query'];
+								$query->rewind_posts();
+							?>
 						<div class="search-tab-pane" data-pane="<?php echo esc_attr($slug); ?>">
 							<div class="search-section">
 								<div class="search-grid">
-									<?php while ($query->have_posts()) : $query->the_post(); 
-											get_template_part('template-parts/search-item', $slug);
-										endwhile; ?>
+									<?php while ($query->have_posts()) : $query->the_post();
+												get_template_part('template-parts/search-item', $slug);
+											endwhile; ?>
 								</div>
 							</div>
 						</div>
 						<?php endforeach; ?>
 
-						<?php if ($tax_count > 0) : ?>
+						<!-- <?php if ($tax_count > 0) : ?>
 						<div class="search-tab-pane" data-pane="taxonomies">
 							<div class="search-section">
 								<div class="taxonomy-group mb-8">
@@ -186,7 +186,7 @@ if (!is_wp_error($tax_terms) && !empty($tax_terms)) {
 								</div>
 							</div>
 						</div>
-						<?php endif; ?>
+						<?php endif; ?> -->
 					</div>
 					<?php else : ?>
 					<div class="search-no-results text-center py-20">

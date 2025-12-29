@@ -282,11 +282,11 @@ add_action('after_setup_theme', 'example_theme_support');
 function remove_custom_post_type_slug($post_link, $post)
 {
 	$target_types = array('product', 'service', 'customer');
-	
+
 	if (in_array($post->post_type, $target_types) && 'publish' === $post->post_status) {
 		$post_link = str_replace('/' . $post->post_type . '/', '/', $post_link);
 	}
-	
+
 	if ('grounds' === $post->post_type && 'publish' === $post->post_status) {
 		$post_link = str_replace('/' . $post->post_type . '/', '/', $post_link);
 	}
@@ -308,7 +308,7 @@ function add_post_names_to_main_query($query)
 	}
 
 	$name = !empty($query->query['name']) ? $query->query['name'] : $query->query['pagename'];
-	
+
 	// FIX: Check if we are on the products page and allow pagination
 	$product_page_id = get_page_id_by_template('templates/page-products.php');
 	if ($product_page_id) {
@@ -502,7 +502,7 @@ define('LOZAD_PLACEHOLDER', "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
 function get_lozad_img($src, $alt = '', $class = '')
 {
 	if (empty($src)) return '';
-	
+
 	$class = trim('lozad ' . $class);
 	return sprintf(
 		'<img class="%s" src="%s" data-src="%s" alt="%s" />',
@@ -555,7 +555,7 @@ function get_image_post($post_id, $type = 'image')
 			[
 				'class' => 'product-thumb',
 				'alt'   => esc_attr($alt),
-				'title'=> esc_attr($alt),
+				'title' => esc_attr($alt),
 			]
 		);
 

@@ -234,15 +234,13 @@ $footer_decor_image = get_field('footer_decor_image', 'option');
 </footer>
 
 <script>
-window.addEventListener('load', function() { // Thay DOMContentLoaded bằng load
+window.addEventListener('load', function() {
 	if (typeof lozad === 'function') {
 		const observer = lozad();
 		observer.observe();
 		window.FE = {
 			lozad: () => observer.observe()
 		};
-	} else {
-		console.error('Lozad library still not found after window load!');
 	}
 });
 </script>

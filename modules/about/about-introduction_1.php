@@ -50,7 +50,7 @@ $stats       = get_field('stats', 'option');
 						<?= get_image_attrachment($icon, 'image'); ?>
 					</div>
 					<div class="stat-info">
-						<div class="stat-number"><span class="counter"><?= esc_html($number); ?></span><span>+</span>
+						<div class="stat-number"><span class="counter"><?= wp_kses_post($number); ?></span>
 						</div>
 						<div class="stat-desc"><?= esc_html($label); ?></div>
 					</div>

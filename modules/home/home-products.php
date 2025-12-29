@@ -5,7 +5,7 @@ $desc    = get_sub_field('description');
 $items   = get_sub_field('items') ?? [];
 
 if (!$title && empty($items)) {
-    return;
+	return;
 }
 ?>
 
@@ -31,36 +31,56 @@ if (!$title && empty($items)) {
 			<h2 class="title-48 text-white"><?= esc_html($title); ?></h2>
 			<?php endif; ?>
 			<?php if ($desc): ?>
-			<div class="desc text-white !mt-10"><?= wp_kses_post($desc); ?></div>
+			<p class="desc text-white !mt-10"><?= wp_kses_post($desc); ?></p>
 			<?php endif; ?>
 		</div>
 	</div>
 
 	<?php if ($items): ?>
 	<div class="product-cards">
-		<div class="list-grid">
-			<?php foreach (array_slice($items, 0, 4) as $item): ?>
-			<div class="product-card">
-				<?php if (!empty($item['image'])): ?>
-				<div class="product-img">
-					<img class="lozad" data-src="<?= esc_url($item['image']['url']); ?>" alt="">
-				</div>
-				<?php endif; ?>
+		<div class="product-slider-wrapper">
+			<div class="list-grid swiper">
+				<div class="swiper-wrapper">
+					<?php
+						$delay = 200;
+						foreach ($items as $item):
+						?>
+					<div class="swiper-slide">
+						<div class="product-card" data-aos="fade-up" data-aos-delay="<?= $delay; ?>">
+							<?php if (!empty($item['image'])): ?>
+							<div class="product-img">
+								<img class="lozad" data-src="<?= esc_url($item['image']['url']); ?>" alt="">
+							</div>
+							<?php endif; ?>
 
-				<div class="product-content">
-					<h3 class="product-title">
-						<?= esc_html($item['title'] ?? ''); ?>
-					</h3>
-					<p class="product-desc"><?= wp_kses_post($item['description'] ?? ''); ?></p>
-					<div class="product-line"></div>
-					<?php if (!empty($item['link'])): ?>
-					<a class="btn btn-secondary product-btn" href="<?= esc_url($item['link']['url']); ?>">
-						<?= esc_html($item['link']['title']); ?>
-					</a>
-					<?php endif; ?>
+							<div class="product-content">
+								<h3 class="product-title">
+									<?= esc_html($item['title'] ?? ''); ?>
+								</h3>
+								<p class="product-desc"><?= wp_kses_post($item['description'] ?? ''); ?></p>
+								<div class="product-line"></div>
+								<?php if (!empty($item['link'])): ?>
+								<a class="btn btn-secondary product-btn" href="<?= esc_url($item['link']['url']); ?>">
+									<?= esc_html($item['link']['title']); ?>
+								</a>
+								<?php endif; ?>
+							</div>
+						</div>
+					</div>
+					<?php
+							$delay += 100;
+						endforeach;
+						?>
+				</div>
+				<div class="product-nav">
+					<button class="btn-prev btn-slider-2" type="button">
+						<i class="fa-solid fa-chevron-left"></i>
+					</button>
+					<button class="btn-next btn-slider-2" type="button">
+						<i class="fa-solid fa-chevron-right"></i>
+					</button>
 				</div>
 			</div>
-			<?php endforeach; ?>
 		</div>
 	</div>
 	<?php endif; ?>

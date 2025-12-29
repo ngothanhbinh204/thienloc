@@ -9,9 +9,16 @@
 				<div class="news-detail-main">
 					<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 					<div class="header-news">
-						<div class="news-date">
-							<div class="date-day"><?= get_the_date('d'); ?></div>
-							<div class="date-month"><?= get_the_date('m.Y'); ?></div>
+						<div class="news-card-meta">
+							<span class="news-date"><?= get_the_date(); ?></span>
+							<span class="news-category">
+								<?php
+										$cats = get_the_category();
+										if (!empty($cats)) {
+											echo esc_html($cats[0]->name);
+										}
+										?>
+							</span>
 						</div>
 						<h1 class="news-title title-36"><?php the_title(); ?></h1>
 					</div>
@@ -33,7 +40,8 @@
 									class="fa-brands fa-youtube"></i></a>
 						</div>
 					</div>
-					<?php endwhile; endif; ?>
+					<?php endwhile;
+					endif; ?>
 				</div>
 			</div>
 		</section>
@@ -58,7 +66,7 @@
 									$categories = get_the_category();
 									if ($categories) {
 										$cat_ids = array();
-										foreach($categories as $individual_category) $cat_ids[] = $individual_category->term_id;
+										foreach ($categories as $individual_category) $cat_ids[] = $individual_category->term_id;
 										$related_args['category__in'] = $cat_ids;
 									}
 
@@ -77,9 +85,16 @@
 												</a>
 											</div>
 											<div class="news-content">
-												<div class="news-date">
-													<div class="date-day"><?= get_the_date('d'); ?></div>
-													<div class="date-month"><?= get_the_date('m.Y'); ?></div>
+												<div class="news-card-meta">
+													<span class="news-date"><?= get_the_date(); ?></span>
+													<span class="news-category">
+														<?php
+																$cats = get_the_category();
+																if (!empty($cats)) {
+																	echo esc_html($cats[0]->name);
+																}
+																?>
+													</span>
 												</div>
 												<div class="wrapper">
 													<h3 class="news-title title-20">

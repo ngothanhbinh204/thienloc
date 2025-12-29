@@ -21,8 +21,8 @@ if ($category !== 'all') {
 $query = new WP_Query($query_args);
 
 if ($query->have_posts()) : ?>
-	<div class="news-grid">
-		<?php
+<div class="news-grid">
+	<?php
 		$index = 0;
 		while ($query->have_posts()) : $query->the_post();
 			$post_id      = get_the_ID();
@@ -47,46 +47,46 @@ if ($query->have_posts()) : ?>
 				}
 			}
 			?>
-			<div class="<?= esc_attr($item_class); ?>" <?= $term ? 'data-category="' . esc_attr($term->slug) . '"' : ''; ?>>
-				<div class="news-card <?= esc_attr($card_class); ?>">
-					<a class="news-card-img" href="<?= esc_url(get_permalink()); ?>">
-						<?php if (has_post_thumbnail()) : ?>
-							<?= get_image_post(get_the_ID(), 'image') ?>
-						<?php endif; ?>
-					</a>
+	<div class="<?= esc_attr($item_class); ?>" <?= $term ? 'data-category="' . esc_attr($term->slug) . '"' : ''; ?>>
+		<div class="news-card <?= esc_attr($card_class); ?>">
+			<a class="news-card-img" href="<?= esc_url(get_permalink()); ?>">
+				<?php if (has_post_thumbnail()) : ?>
+				<img src="<?= esc_url(get_the_post_thumbnail_url()); ?>" alt="<?= esc_attr(get_the_title()); ?>">
+				<?php endif; ?>
+			</a>
 
-					<div class="news-card-content">
-						<div class="news-card-meta">
-							<span class="news-date"><?= esc_html(get_the_date('d.m.Y')); ?></span>
-							<?php if ($term) : ?>
-								<span class="news-category cat-<?= esc_attr($term->slug); ?>">
-									<?= esc_html($term->name); ?>
-								</span>
-							<?php endif; ?>
-						</div>
-
-						<h3 class="news-card-title">
-							<a href="<?= esc_url(get_permalink()); ?>">
-								<?= esc_html(get_the_title()); ?>
-							</a>
-						</h3>
-
-						<?php if ($is_primary) : ?>
-							<p class="news-card-desc">
-								<?= esc_html(wp_trim_words(get_the_excerpt(), 30)); ?>
-							</p>
-						<?php endif; ?>
-					</div>
+			<div class="news-card-content">
+				<div class="news-card-meta">
+					<span class="news-date"><?= esc_html(get_the_date('d.m.Y')); ?></span>
+					<?php if ($term) : ?>
+					<span class="news-category cat-<?= esc_attr($term->slug); ?>">
+						<?= esc_html($term->name); ?>
+					</span>
+					<?php endif; ?>
 				</div>
+
+				<h3 class="news-card-title">
+					<a href="<?= esc_url(get_permalink()); ?>">
+						<?= esc_html(get_the_title()); ?>
+					</a>
+				</h3>
+
+				<?php if ($is_primary) : ?>
+				<p class="news-card-desc">
+					<?= esc_html(wp_trim_words(get_the_excerpt(), 30)); ?>
+				</p>
+				<?php endif; ?>
 			</div>
-			<?php
+		</div>
+	</div>
+	<?php
 			$index++;
 		endwhile;
 		wp_reset_postdata();
 		?>
-	</div>
+</div>
 <?php else : ?>
-	<div class="no-posts container text-center py-10">
-		<p><?= esc_html__('Không tìm thấy bài viết nào.', 'canhcamtheme'); ?></p>
-	</div>
+<div class="no-posts container text-center py-10">
+	<p><?= esc_html__('Không tìm thấy bài viết nào.', 'canhcamtheme'); ?></p>
+</div>
 <?php endif; ?>

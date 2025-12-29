@@ -116,7 +116,7 @@ Template name: Page - Products
 
 					$args = array(
 						'post_type'          => 'product',
-						'posts_per_page'     => 9,
+						'posts_per_page'     => 12,
 						'paged'              => $current_page,
 						'post_status'        => 'publish',
 						'ignore_custom_sort' => true, // Fix for Live plugins like "Post Types Order"
@@ -189,13 +189,18 @@ Template name: Page - Products
 							<div class="product-info">
 								<h3 class="product-name"><?php the_title(); ?></h3>
 								<?php if ($specs) : ?>
-								<div class="product-specs line-clamp-3">
-									<?php foreach ($specs as $spec) : ?>
+								<?php if (!empty($specs) && is_array($specs)) : ?>
+								<div class="product-specs">
+									<?php foreach ($specs as $row) : ?>
+									<?php if (!empty($row['text'])) : ?>
 									<div>
-										<?php echo esc_html($spec); ?>
+										<?php echo esc_html($row['text']); ?>
 									</div>
+									<?php endif; ?>
 									<?php endforeach; ?>
 								</div>
+								<?php endif; ?>
+
 								<?php endif; ?>
 							</div>
 						</a>

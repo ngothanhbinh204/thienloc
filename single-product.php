@@ -4,7 +4,7 @@
 	<div class="wrapper-gap-top">
 		<?php get_template_part('modules/common/breadcrumb'); ?>
 
-		<section class="section-product-detail section-py">
+		<section class="section-product-detail">
 			<div class="container">
 				<div class="wrapper">
 					<div class="product-detail-left">
@@ -68,9 +68,21 @@
 									<?= apply_filters('the_content', get_post_field('post_content', get_the_ID())); ?>
 								</div>
 
-								<a class="btn btn-primary" href="#contact-form">
-									<?= esc_html__('Liên hệ tư vấn', 'canhcamtheme'); ?>
+								<?php
+								$button_contact = get_field('button_contact_product', 'option');
+								if (
+									!empty($button_contact)
+									&& is_array($button_contact)
+									&& !empty($button_contact['url'])
+									&& !empty($button_contact['title'])
+								) :
+								?>
+								<a class="btn btn-primary" href="<?php echo esc_url($button_contact['url']); ?>"
+									<?php echo !empty($button_contact['target']) ? 'target="' . esc_attr($button_contact['target']) . '"' : ''; ?>>
+									<?php echo esc_html($button_contact['title']); ?>
 								</a>
+								<?php endif; ?>
+
 							</div>
 						</div>
 
@@ -95,20 +107,19 @@
 							</div>
 
 							<div class="tabs-content">
-								<div class="wrapper-content-tab collapsed">
+								<?php
+								$tabs = [
+									'tab-info'        => ['label' => __('Thông tin sản phẩm', 'canhcamtheme'), 'content' => $info_content],
+									'tab-advantages'  => ['label' => __('Ưu đãi và chiết khấu', 'canhcamtheme'), 'content' => $advantages_content],
+									'tab-usage'       => ['label' => __('Hướng dẫn sử dụng', 'canhcamtheme'), 'content' => $usage_content],
+									'tab-maintenance' => ['label' => __('Hướng dẫn bảo quản', 'canhcamtheme'), 'content' => $maintenance_content],
+								];
+								?>
 
-									<?php
-									$tabs = [
-										'tab-info'        => ['label' => __('Thông tin sản phẩm', 'canhcamtheme'), 'content' => $info_content],
-										'tab-advantages'  => ['label' => __('Ưu đãi và chiết khấu', 'canhcamtheme'), 'content' => $advantages_content],
-										'tab-usage'       => ['label' => __('Hướng dẫn sử dụng', 'canhcamtheme'), 'content' => $usage_content],
-										'tab-maintenance' => ['label' => __('Hướng dẫn bảo quản', 'canhcamtheme'), 'content' => $maintenance_content],
-									];
-									?>
-
-									<?php foreach ($tabs as $id => $tab) : ?>
-									<div class="tab-pane <?= $id === 'tab-info' ? 'active' : ''; ?>"
-										id="<?= esc_attr($id); ?>">
+								<?php foreach ($tabs as $id => $tab) : ?>
+								<div class="tab-pane <?= $id === 'tab-info' ? 'active' : ''; ?>"
+									id="<?= esc_attr($id); ?>">
+									<div class="wrapper-content-tab collapsed">
 										<h3 class="title-36"><?= esc_html($tab['label']); ?></h3>
 										<div class="tab-content-body body-18">
 											<?= $tab['content']
@@ -116,18 +127,17 @@
 													: '<p>' . esc_html__('Đang cập nhật...', 'canhcamtheme') . '</p>'; ?>
 										</div>
 									</div>
-									<?php endforeach; ?>
 
+									<div class="view-more-container text-center mt-8">
+										<button
+											class="btn-view-more text-primary-2 font-normal flex items-center justify-center gap-3 mx-auto"
+											type="button">
+											<span><?= esc_html__('Xem thêm', 'canhcamtheme'); ?></span>
+											<i class="fa-solid fa-chevron-down"></i>
+										</button>
+									</div>
 								</div>
-
-								<div class="view-more-container text-center mt-8">
-									<button
-										class="btn-view-more text-primary-2 font-normal flex items-center justify-center gap-3 mx-auto"
-										type="button">
-										<span><?= esc_html__('Xem thêm', 'canhcamtheme'); ?></span>
-										<i class="fa-solid fa-chevron-down"></i>
-									</button>
-								</div>
+								<?php endforeach; ?>
 							</div>
 						</div>
 
@@ -164,19 +174,17 @@
 										?>
 										<div class="swiper-slide">
 											<div class="slide-inner">
-												<article class="product-card">
-													<a href="<?php the_permalink(); ?>" class="product-link">
-														<div class="product-image">
-															<?= get_image_attrachment(get_post_thumbnail_id(), 'image'); ?>
-														</div>
-														<div class="product-info">
-															<h3 class="product-title"><?php the_title(); ?></h3>
-															<span class="btn btn-primary">
-																<?= esc_html__('Xem chi tiết', 'canhcamtheme'); ?>
-															</span>
-														</div>
-													</a>
-												</article>
+												<div class="product-card">
+													<div class="product-image">
+														<?= get_image_attrachment(get_post_thumbnail_id(), 'image'); ?>
+													</div>
+													<div class="product-info">
+														<h3 class="product-title"><?php the_title(); ?></h3>
+														<a href="<?php the_permalink(); ?>" class="btn btn-primary">
+															<?= esc_html__('Xem chi tiết', 'canhcamtheme'); ?>
+														</a>
+													</div>
+												</div>
 											</div>
 										</div>
 										<?php
@@ -196,33 +204,33 @@
 					<!-- SIDEBAR -->
 					<div class="product-detail-right">
 
-						<div class="sidebar-widget">
+						<div class="sidebar-widget widget-latest-posts">
 							<h3 class="widget-title"><?= esc_html__('Bài viết mới', 'canhcamtheme'); ?></h3>
 							<div class="widget-content">
 								<?php
-							$posts = new WP_Query(['post_type' => 'post', 'posts_per_page' => 5]);
-							while ($posts->have_posts()) : $posts->the_post();
-							?>
-								<a href="<?php the_permalink(); ?>"
-									class="block post-item body-16 hover:text-primary-1">
-									<?php the_title(); ?>
+								$posts = new WP_Query(['post_type' => 'post', 'posts_per_page' => 5]);
+								while ($posts->have_posts()) : $posts->the_post();
+								?>
+								<a href="<?php the_permalink(); ?>" class="post-item">
+									<p class="body-16"><?php the_title(); ?></p>
 								</a>
-								<?php endwhile; wp_reset_postdata(); ?>
+								<?php endwhile;
+								wp_reset_postdata(); ?>
 							</div>
 						</div>
 
-						<div class="sidebar-widget">
+						<div class="sidebar-widget widget-services">
 							<h3 class="widget-title"><?= esc_html__('Dịch vụ chính', 'canhcamtheme'); ?></h3>
 							<div class="widget-content">
 								<?php
-							$services = new WP_Query(['post_type' => 'service', 'posts_per_page' => 5]);
-							while ($services->have_posts()) : $services->the_post();
-							?>
-								<a href="<?php the_permalink(); ?>"
-									class="block post-item body-16 hover:text-primary-1">
-									<?php the_title(); ?>
+								$services = new WP_Query(['post_type' => 'service', 'posts_per_page' => 5]);
+								while ($services->have_posts()) : $services->the_post();
+								?>
+								<a href="<?php the_permalink(); ?>" class="service-item">
+									<p class="body-16"><?php the_title(); ?></p>
 								</a>
-								<?php endwhile; wp_reset_postdata(); ?>
+								<?php endwhile;
+								wp_reset_postdata(); ?>
 							</div>
 						</div>
 
