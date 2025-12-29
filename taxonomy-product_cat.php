@@ -70,88 +70,118 @@ $main_extra_class = !$should_render_banner ? ' wrapper-gap-top' : '';
 							<nav class="category-nav">
 								<ul class="category-list">
 									<?php
-								// Lấy term hiện tại (chỉ khi đang ở taxonomy)
-								$current_term_id = is_tax('product_cat') ? get_queried_object_id() : 0;
+				// Lấy term hiện tại (chỉ khi đang ở taxonomy)
+				$current_term_id = is_tax('product_cat') ? get_queried_object_id() : 0;
+				$current_term_obj = $current_term_id ? get_term($current_term_id, 'product_cat') : null;
 
-								// Lấy danh mục cha
-								$terms = get_terms([
-									'taxonomy'   => 'product_cat',
-									'hide_empty' => false,
-									'parent'     => 0,
-								]);
+				// Bước 1: Lấy danh mục Cấp 0 (root category - thường là "Sản phẩm")
+				$level_0_terms = get_terms([
+					'taxonomy'   => 'product_cat',
+					'hide_empty' => false,
+					'parent'     => 0,
+				]);
 
-								foreach ($terms as $term) :
+				// Bước 2: Lấy tất cả danh mục Cấp 1 (con của tất cả Cấp 0)
+				$level_1_terms = [];
+				if (!is_wp_error($level_0_terms) && is_array($level_0_terms)) {
+					foreach ($level_0_terms as $level_0) {
+						$children = get_terms([
+							'taxonomy'   => 'product_cat',
+							'hide_empty' => false,
+							'parent'     => $level_0->term_id,
+						]);
+						if (!is_wp_error($children) && !empty($children)) {
+							$level_1_terms = array_merge($level_1_terms, $children);
+						}
+					}
+				}
 
-									// Lấy danh mục con
-									$children = get_terms([
-										'taxonomy'   => 'product_cat',
-										'hide_empty' => false,
-										'parent'     => $term->term_id,
-									]);
+				// Bước 3: Hiển thị danh mục từ Cấp 1 trở đi
+				foreach ($level_1_terms as $level_1_term) :
 
-									$has_child = !empty($children);
+					// Lấy danh mục Cấp 2 (con của Cấp 1)
+					$level_2_terms = get_terms([
+						'taxonomy'   => 'product_cat',
+						'hide_empty' => false,
+						'parent'     => $level_1_term->term_id,
+					]);
+					if (is_wp_error($level_2_terms)) {
+						$level_2_terms = [];
+					}
 
-									/**
-									 * Xác định:
-									 * - Có đang active chính nó không
-									 * - Hoặc có child nào đang active không
-									 */
-									$is_current_term_tree = false;
+					$has_child = !empty($level_2_terms);
 
-									if ($current_term_id) {
-										// Chính nó active
-										if ($term->term_id == $current_term_id) {
-											$is_current_term_tree = true;
-										}
+					/**
+					 * Xác định active state:
+					 * - Chính Cấp 1 này đang active
+					 * - Hoặc có Cấp 2 nào đó đang active (child active)
+					 * - Hoặc current term có parent là Cấp 1 này (hỗ trợ cấp sâu hơn)
+					 */
+					$is_current_term_tree = false;
 
-										// Hoặc có child active
-										if (!$is_current_term_tree && $has_child) {
-											foreach ($children as $child) {
-												if ($child->term_id == $current_term_id) {
-													$is_current_term_tree = true;
-													break;
-												}
-											}
-										}
-									}
+					if ($current_term_id) {
+						// Check: Chính nó active (Cấp 1)
+						if ($level_1_term->term_id == $current_term_id) {
+							$is_current_term_tree = true;
+						}
 
-									$item_class   = $is_current_term_tree ? 'active' : '';
-									$icon_class   = $is_current_term_tree ? 'fa-minus' : 'fa-plus';
-									$display_attr = $is_current_term_tree
-										? 'style="display:block"'
-										: 'style="display:none"';
-								?>
+						// Check: Có child Cấp 2 active không
+						if (!$is_current_term_tree && $has_child) {
+							foreach ($level_2_terms as $level_2) {
+								if ($level_2->term_id == $current_term_id) {
+									$is_current_term_tree = true;
+									break;
+								}
+							}
+						}
 
-									<li class="category-item <?php echo esc_attr($item_class); ?>">
-										<div class="header-filter">
-											<a href="<?php echo esc_url(get_term_link($term)); ?>">
-												<?php echo esc_html($term->name); ?>
-											</a>
+						// Check: Current term có phải là descendant của Cấp 1 này không
+						// (Hỗ trợ nếu có Cấp 3, 4... trong tương lai)
+						if (!$is_current_term_tree && $current_term_obj) {
+							$ancestor_ids = get_ancestors($current_term_id, 'product_cat');
+							if (in_array($level_1_term->term_id, $ancestor_ids)) {
+								$is_current_term_tree = true;
+							}
+						}
+					}
 
-											<?php if ($has_child) : ?>
-											<span class="toggle-icon">
-												<i class="fa-solid <?php echo esc_attr($icon_class); ?>"></i>
-											</span>
-											<?php endif; ?>
-										</div>
+					$item_class   = $is_current_term_tree ? 'active' : '';
+					$icon_class   = $is_current_term_tree ? 'fa-minus' : 'fa-plus';
+					$display_attr = $is_current_term_tree
+						? 'style="display:block"'
+						: 'style="display:none"';
+				?>
 
-										<?php if ($has_child) : ?>
-										<ul class="sub-category" <?php echo $display_attr; ?>>
-											<?php foreach ($children as $child) :
-												$child_active = ($child->term_id == $current_term_id) ? 'active' : '';
-											?>
-											<li class="<?php echo esc_attr($child_active); ?>">
-												<a href="<?php echo esc_url(get_term_link($child)); ?>">
-													<?php echo esc_html($child->name); ?>
-												</a>
-											</li>
-											<?php endforeach; ?>
-										</ul>
-										<?php endif; ?>
-									</li>
+					<li class="category-item <?php echo esc_attr($item_class); ?>">
+						<div class="header-filter">
+							<a href="<?php echo esc_url(get_term_link($level_1_term)); ?>">
+								<?php echo esc_html($level_1_term->name); ?>
+							</a>
 
-									<?php endforeach; ?>
-								</ul>
+							<?php if ($has_child) : ?>
+							<span class="toggle-icon">
+								<i class="fa-solid <?php echo esc_attr($icon_class); ?>"></i>
+							</span>
+							<?php endif; ?>
+						</div>
+
+						<?php if ($has_child) : ?>
+						<ul class="sub-category" <?php echo $display_attr; ?>>
+							<?php foreach ($level_2_terms as $level_2) :
+								$child_active = ($level_2->term_id == $current_term_id) ? 'active' : '';
+							?>
+							<li class="<?php echo esc_attr($child_active); ?>">
+								<a href="<?php echo esc_url(get_term_link($level_2)); ?>">
+									<?php echo esc_html($level_2->name); ?>
+								</a>
+							</li>
+							<?php endforeach; ?>
+						</ul>
+						<?php endif; ?>
+					</li>
+
+					<?php endforeach; ?>
+				</ul>
 							</nav>
 						</div>
 					</div>

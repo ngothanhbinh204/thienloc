@@ -1,13 +1,13 @@
-<?php 
+<?php
 /*
 Template name: Page - Products
-*/ 
+*/
 
 ?>
 <?= get_header() ?>
 
-<?php get_template_part('modules/common/banner')?>
-<?php get_template_part('modules/common/breadcrumb')?>
+<?php get_template_part('modules/common/banner') ?>
+<?php get_template_part('modules/common/breadcrumb') ?>
 
 <section class="section-product-listing section-py">
 	<div class="container">
@@ -37,10 +37,10 @@ Template name: Page - Products
 										'parent'     => $term->term_id,
 									));
 									$has_child = !empty($children);
-									
+
 									$is_current_term_tree = ($term->term_id == $current_term_id);
 									if (!$is_current_term_tree && $has_child) {
-										foreach($children as $child) {
+										foreach ($children as $child) {
 											if ($child->term_id == $current_term_id) {
 												$is_current_term_tree = true;
 												break;
@@ -64,9 +64,9 @@ Template name: Page - Products
 									</div>
 									<?php if ($has_child) : ?>
 									<ul class="sub-category" <?= $display_style ?>>
-										<?php foreach ($children as $child) : 
-											$child_active = ($child->term_id == $current_term_id) ? 'active' : '';
-										?>
+										<?php foreach ($children as $child) :
+													$child_active = ($child->term_id == $current_term_id) ? 'active' : '';
+												?>
 										<li class="<?= $child_active ?>">
 											<a href="<?= get_term_link($child) ?>"><?= esc_html($child->name) ?></a>
 										</li>
@@ -74,9 +74,9 @@ Template name: Page - Products
 									</ul>
 									<?php endif; ?>
 								</li>
-								<?php 
+								<?php
 									$i++;
-								endforeach; 
+								endforeach;
 								?>
 							</ul>
 						</nav>
@@ -92,8 +92,10 @@ Template name: Page - Products
 						<label for="product-sort-select">Lọc theo</label>
 						<select id="product-sort-select" class="form-select js-product-sort-select"
 							onchange="location = this.value;">
-							<?php 
-							$base_url = remove_query_arg(['sort', 'page', 'paged', 'perpage']);
+							<?php
+							// Get base URL without sort and pagination params, but keep other params
+							$base_url = get_permalink();
+							$base_url = remove_query_arg(['sort', 'page', 'paged', 'perpage'], $base_url);
 							?>
 							<option value="<?= esc_url($base_url) ?>" <?= empty($sort) ? 'selected' : '' ?>>Tất cả
 							</option>
@@ -213,13 +215,7 @@ Template name: Page - Products
 					?>
 				</div>
 
-				<?php if ($query->max_num_pages > 1) : ?>
 
-				<?php 
-					wp_bootstrap_pagination_page_template( array( 'custom_query' => $query, 'current_page' => $current_page ) ); ?>
-
-				<?php wp_reset_postdata(); ?>
-				<?php endif; ?>
 			</main>
 		</div>
 	</div>

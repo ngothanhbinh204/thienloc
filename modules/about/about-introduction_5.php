@@ -94,7 +94,7 @@ if (!$rows) {
 				$slider_id = 'machine-slider-' . $index;
 			?>
 		<div class="<?= $grid_class; ?>">
-			<div class="col-slider" data-aos="<?= $slider_aos; ?>" data-aos-delay="200">
+			<div class="col-slider">
 				<div class="machine-slider relative" id="<?= $slider_id; ?>">
 					<div class="swiper">
 						<div class="swiper-wrapper">
@@ -125,7 +125,7 @@ if (!$rows) {
 					</div>
 				</div>
 			</div>
-			<div class="col-content" data-aos="<?= $content_aos; ?>" data-aos-delay="200">
+			<div class="col-content" >
 				<?php if ($row_title) : ?>
 				<h2><?= esc_html($row_title); ?></h2>
 				<?php endif; ?>

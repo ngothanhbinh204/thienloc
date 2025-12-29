@@ -34,7 +34,7 @@ if (
 	<?php endif; ?>
 
 	<div class="container relative z-10">
-		<div class="row items-center wrapper-cta">
+		<div class="items-center wrapper-cta">
 
 			<!-- FORM COLUMN -->
 			<div class="form-col w-full mb-8 lg:mb-0">

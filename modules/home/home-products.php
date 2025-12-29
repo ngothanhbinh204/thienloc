@@ -31,7 +31,7 @@ if (!$title && empty($items)) {
 			<h2 class="title-48 text-white"><?= esc_html($title); ?></h2>
 			<?php endif; ?>
 			<?php if ($desc): ?>
-			<p class="desc text-white !mt-10"><?= wp_kses_post($desc); ?></p>
+			<div class="desc text-white !mt-10"><?= wp_kses_post($desc); ?></div>
 			<?php endif; ?>
 		</div>
 	</div>

@@ -58,7 +58,7 @@ $featured_id = 0;
 								</h2>
 
 								<div class="news-excerpt body-16">
-									<?php the_excerpt(); ?>
+									<?php the_content(); ?>
 								</div>
 							</div>
 						</div>
@@ -123,7 +123,7 @@ $featured_id = 0;
 								</h3>
 
 								<div class="news-excerpt body-16">
-									<?php the_excerpt(); ?>
+									<?php the_content(); ?>
 								</div>
 							</div>
 						</div>

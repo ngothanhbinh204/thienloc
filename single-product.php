@@ -119,7 +119,7 @@
 								<?php foreach ($tabs as $id => $tab) : ?>
 								<div class="tab-pane <?= $id === 'tab-info' ? 'active' : ''; ?>"
 									id="<?= esc_attr($id); ?>">
-									<div class="wrapper-content-tab collapsed">
+									<div class="wrapper-content-tab collapsed" data-collapsed-height="500">
 										<h3 class="title-36"><?= esc_html($tab['label']); ?></h3>
 										<div class="tab-content-body body-18">
 											<?= $tab['content']
@@ -131,7 +131,8 @@
 									<div class="view-more-container text-center mt-8">
 										<button
 											class="btn-view-more text-primary-2 font-normal flex items-center justify-center gap-3 mx-auto"
-											type="button">
+											type="button" aria-expanded="false"
+											aria-label="<?= esc_attr__('Xem thêm nội dung', 'canhcamtheme'); ?>">
 											<span><?= esc_html__('Xem thêm', 'canhcamtheme'); ?></span>
 											<i class="fa-solid fa-chevron-down"></i>
 										</button>
@@ -211,9 +212,9 @@
 								$posts = new WP_Query(['post_type' => 'post', 'posts_per_page' => 5]);
 								while ($posts->have_posts()) : $posts->the_post();
 								?>
-								<a href="<?php the_permalink(); ?>" class="post-item">
-									<p class="body-16"><?php the_title(); ?></p>
-								</a>
+								<div class="post-item">
+									<a href="<?php the_permalink(); ?>" class="body-16"><?php the_title(); ?></a>
+								</div>
 								<?php endwhile;
 								wp_reset_postdata(); ?>
 							</div>
@@ -226,9 +227,9 @@
 								$services = new WP_Query(['post_type' => 'service', 'posts_per_page' => 5]);
 								while ($services->have_posts()) : $services->the_post();
 								?>
-								<a href="<?php the_permalink(); ?>" class="service-item">
-									<p class="body-16"><?php the_title(); ?></p>
-								</a>
+								<div class="post-item">
+									<a href="<?php the_permalink(); ?>" class="body-16"><?php the_title(); ?></a>
+								</div>
 								<?php endwhile;
 								wp_reset_postdata(); ?>
 							</div>

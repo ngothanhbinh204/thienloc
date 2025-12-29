@@ -7,18 +7,20 @@
 		<section class="section-manufacturer-detail section-py">
 			<div class="container">
 				<div class="manufacturer-detail-left">
+
 					<div class="manufacturer-header">
 						<div class="manufacturer-logo">
 							<?php if (has_post_thumbnail()) : ?>
 							<?= get_image_attrachment(get_post_thumbnail_id(), 'image'); ?>
 							<?php endif; ?>
 						</div>
+
 						<div class="manufacturer-info">
 							<div class="manufacturer-meta">
 								<h1 class="title-36 text-primary-1"><?php the_title(); ?></h1>
-								<?php 
+								<?php
 								$customer_code = get_field('customer_code');
-								if ($customer_code) : 
+								if ($customer_code) :
 								?>
 								<div class="meta-item">
 									<span class="meta-label">
@@ -28,18 +30,19 @@
 								</div>
 								<?php endif; ?>
 							</div>
+
 							<div class="manufacturer-description body-18">
 								<?php the_content(); ?>
 							</div>
 
-							<?php 
+							<?php
 							$specs = get_field('customer_specs');
-							if ($specs) : 
+							if ($specs) :
 							?>
 							<div class="manufacturer-specs">
 								<?php foreach ($specs as $spec) : ?>
 								<div class="spec-row">
-									<div class="spec-item">
+									<div class="spec-item <?= isset($spec['full_width']) && $spec['full_width'] ? 'spec-full' : '' ?>">
 										<div class="spec-label"> <?= esc_html($spec['spec_label']); ?></div>
 										<div class="spec-value"><?= esc_html($spec['spec_value']); ?></div>
 									</div>
@@ -62,23 +65,42 @@
 		<section class="section-tabs-customer section-py">
 			<div class="manufacturer-tabs tabs-wrapper">
 				<div class="tabs-navigation">
-					<button class="tab-btn active" data-tab="tab-products">Sản phẩm đã làm</button>
-					<button class="tab-btn" data-tab="tab-images">Hình ảnh sản phẩm</button>
-					<button class="tab-btn" data-tab="tab-usage">Hướng dẫn sử dụng</button>
-					<button class="tab-btn" data-tab="tab-maintenance">Hướng dẫn bảo quản</button>
+					<button class="tab-btn active"
+						data-tab="tab-products"><?php _e('Sản phẩm đã làm', 'canhcamtheme'); ?></button>
+					<button class="tab-btn"
+						data-tab="tab-images"><?php _e('Hình ảnh sản phẩm', 'canhcamtheme'); ?></button>
+					<button class="tab-btn"
+						data-tab="tab-usage"><?php _e('Hướng dẫn sử dụng', 'canhcamtheme'); ?></button>
+					<button class="tab-btn"
+						data-tab="tab-maintenance"><?php _e('Hướng dẫn bảo quản', 'canhcamtheme'); ?></button>
 				</div>
 			</div>
 			<div class="container">
 				<div class="tabs-content">
-					<div class="wrapper-content-tab collapsed">
-						<div class="tab-pane active" id="tab-products">
-							<h3 class="title-36 mb-4">Sản phẩm đã làm</h3>
+					<!-- Tab 1: Products Made -->
+					<div class="tab-pane active" id="tab-products">
+						<div class="wrapper-content-tab collapsed" data-collapsed-height="500">
+							<h3 class="title-36 mb-4"><?php _e('Sản phẩm đã làm', 'canhcamtheme'); ?></h3>
 							<div class="tab-content-body body-18">
-								<?= $products_made ? $products_made : '<p>Đang cập nhật...</p>'; ?>
+								<?= $products_made ? $products_made : '<p>' . __('Đang cập nhật...', 'canhcamtheme') . '</p>'; ?>
 							</div>
 						</div>
-						<div class="tab-pane" id="tab-images">
-							<h3 class="title-36 mb-4">Hình ảnh sản phẩm</h3>
+
+						<div class="view-more-container text-center mt-8">
+							<button
+								class="btn-view-more text-primary-2 font-normal flex items-center justify-center gap-3 mx-auto"
+								type="button" aria-expanded="false"
+								aria-label="<?php _e('Xem thêm nội dung', 'canhcamtheme'); ?>">
+								<span><?php _e('Xem thêm', 'canhcamtheme'); ?></span>
+								<i class="fa-solid fa-chevron-down"></i>
+							</button>
+						</div>
+					</div>
+
+					<!-- Tab 2: Product Images -->
+					<div class="tab-pane" id="tab-images">
+						<div class="wrapper-content-tab collapsed" data-collapsed-height="500">
+							<h3 class="title-36 mb-4"><?php _e('Hình ảnh sản phẩm', 'canhcamtheme'); ?></h3>
 							<div class="tab-content-body body-18">
 								<?php if ($product_images) : ?>
 								<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -89,27 +111,57 @@
 									<?php endforeach; ?>
 								</div>
 								<?php else : ?>
-								<p>Đang cập nhật...</p>
+								<p><?php _e('Đang cập nhật...', 'canhcamtheme'); ?></p>
 								<?php endif; ?>
 							</div>
 						</div>
-						<div class="tab-pane" id="tab-usage">
-							<h3 class="title-36 mb-4">Hướng dẫn sử dụng</h3>
-							<div class="tab-content-body body-18">
-								<?= $usage_guide ? $usage_guide : '<p>Đang cập nhật...</p>'; ?>
-							</div>
-						</div>
-						<div class="tab-pane" id="tab-maintenance">
-							<h3 class="title-36 mb-4">Hướng dẫn bảo quản</h3>
-							<div class="tab-content-body body-18">
-								<?= $maintenance_guide ? $maintenance_guide : '<p>Đang cập nhật...</p>'; ?>
-							</div>
+						<div class="view-more-container text-center mt-8">
+							<button
+								class="btn-view-more text-primary-2 font-normal flex items-center justify-center gap-3 mx-auto"
+								type="button" aria-expanded="false"
+								aria-label="<?php _e('Xem thêm nội dung', 'canhcamtheme'); ?>">
+								<span><?php _e('Xem thêm', 'canhcamtheme'); ?></span>
+								<i class="fa-solid fa-chevron-down"></i>
+							</button>
 						</div>
 					</div>
-					<div class="view-more-container text-center mt-8">
-						<button
-							class="btn-view-more text-primary-2 font-normal flex items-center justify-center gap-3 mx-auto"
-							type="button"><span>Xem thêm</span><i class="fa-solid fa-chevron-down"></i></button>
+
+					<!-- Tab 3: Usage Guide -->
+					<div class="tab-pane" id="tab-usage">
+						<div class="wrapper-content-tab collapsed" data-collapsed-height="500">
+							<h3 class="title-36 mb-4"><?php _e('Hướng dẫn sử dụng', 'canhcamtheme'); ?></h3>
+							<div class="tab-content-body body-18">
+								<?= $usage_guide ? $usage_guide : '<p>' . __('Đang cập nhật...', 'canhcamtheme') . '</p>'; ?>
+							</div>
+						</div>
+						<div class="view-more-container text-center mt-8">
+							<button
+								class="btn-view-more text-primary-2 font-normal flex items-center justify-center gap-3 mx-auto"
+								type="button" aria-expanded="false"
+								aria-label="<?php _e('Xem thêm nội dung', 'canhcamtheme'); ?>">
+								<span><?php _e('Xem thêm', 'canhcamtheme'); ?></span>
+								<i class="fa-solid fa-chevron-down"></i>
+							</button>
+						</div>
+					</div>
+
+					<!-- Tab 4: Maintenance -->
+					<div class="tab-pane" id="tab-maintenance">
+						<div class="wrapper-content-tab collapsed" data-collapsed-height="500">
+							<h3 class="title-36 mb-4"><?php _e('Hướng dẫn bảo quản', 'canhcamtheme'); ?></h3>
+							<div class="tab-content-body body-18">
+								<?= $maintenance_guide ? $maintenance_guide : '<p>' . __('Đang cập nhật...', 'canhcamtheme') . '</p>'; ?>
+							</div>
+						</div>
+						<div class="view-more-container text-center mt-8">
+							<button
+								class="btn-view-more text-primary-2 font-normal flex items-center justify-center gap-3 mx-auto"
+								type="button" aria-expanded="false"
+								aria-label="<?php _e('Xem thêm nội dung', 'canhcamtheme'); ?>">
+								<span><?php _e('Xem thêm', 'canhcamtheme'); ?></span>
+								<i class="fa-solid fa-chevron-down"></i>
+							</button>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -117,22 +169,23 @@
 
 		<section class="section-related-customers section-py">
 			<div class="container">
-				<h2 class="title-36 text-center text-primary-1 mb-10">Khách hàng liên quan</h2>
+				<h2 class="title-36 text-center text-primary-1 mb-10"><?php _e('Khách hàng liên quan', 'canhcamtheme'); ?>
+				</h2>
 				<div class="related-customers-slider relative">
 					<div class="swiper swiper-related-customers">
 						<div class="swiper-wrapper">
 							<?php
-								$related_args = array(
-									'post_type'      => 'customer',
-									'posts_per_page' => 8,
-									'post__not_in'   => array(get_the_ID()),
-									'orderby'        => 'rand',
-								);
-								$related_query = new WP_Query($related_args);
+							$related_args = array(
+								'post_type'      => 'customer',
+								'posts_per_page' => 8,
+								'post__not_in'   => array(get_the_ID()),
+								'orderby'        => 'rand',
+							);
+							$related_query = new WP_Query($related_args);
 
-								if ($related_query->have_posts()) :
-									while ($related_query->have_posts()) : $related_query->the_post();
-								?>
+							if ($related_query->have_posts()) :
+								while ($related_query->have_posts()) : $related_query->the_post();
+							?>
 							<div class="swiper-slide">
 								<div class="customer-card ">
 									<div class="card-img">
@@ -148,15 +201,16 @@
 												class="hover:text-primary-1 transition-colors">
 												<?= the_title(); ?></a>
 										</h4>
-										<a class="btn btn-primary" href="<?php the_permalink(); ?>">Xem chi tiết</a>
+										<a class="btn btn-primary"
+											href="<?php the_permalink(); ?>"><?php _e('Xem chi tiết', 'canhcamtheme'); ?></a>
 									</div>
 								</div>
 							</div>
 							<?php
-									endwhile;
-									wp_reset_postdata();
-								endif;
-								?>
+								endwhile;
+								wp_reset_postdata();
+							endif;
+							?>
 						</div>
 					</div>
 					<div class="swiper-navigation center-y">

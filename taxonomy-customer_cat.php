@@ -1,8 +1,36 @@
 <?php
-/*
-Template Name: Customers
-*/
 get_header();
+
+// Get current taxonomy term
+$current_term = get_queried_object();
+$term_id = "customer_cat_{$current_term->term_id}";
+
+// Find the page using page-customers.php template as fallback
+$customers_page_id = null;
+$pages = get_pages(array(
+	'meta_key' => '_wp_page_template',
+	'meta_value' => 'templates/page-customers.php'
+));
+if (!empty($pages)) {
+	$customers_page_id = $pages[0]->ID;
+}
+
+/**
+ * Helper function to get field with fallback
+ * Priority: Term ACF -> Page ACF -> Default
+ */
+function get_field_with_fallback($field_name, $term_id, $page_id, $default = '') {
+	// Try to get from term first
+	$value = get_field($field_name, $term_id);
+	
+	// If empty, try to get from page
+	if (empty($value) && $page_id) {
+		$value = get_field($field_name, $page_id);
+	}
+	
+	// If still empty, return default
+	return !empty($value) ? $value : $default;
+}
 ?>
 
 <main>
@@ -17,7 +45,7 @@ get_header();
 				<div class="commitment-header">
 					<div class="header-icon">
 						<?php
-						$commitment_icon = get_field('commitment_icon');
+						$commitment_icon = get_field_with_fallback('commitment_icon', $term_id, $customers_page_id);
 						if ($commitment_icon) :
 						?>
 							<img class="lozad" data-src="<?= esc_url($commitment_icon); ?>" alt="" />
@@ -26,13 +54,13 @@ get_header();
 								alt="" />
 						<?php endif; ?>
 					</div>
-					<h2><?= get_field('commitment_heading') ?: 'Cam kết sản phẩm – Chính hãng & Hiệu quả vượt trội'; ?>
+					<h2><?= get_field_with_fallback('commitment_heading', $term_id, $customers_page_id, 'Cam kết sản phẩm – Chính hãng & Hiệu quả vượt trội'); ?>
 					</h2>
 				</div>
 				<div class="commitment-content">
 					<div class="commitment-image">
 						<?php
-						$commitment_image = get_field('commitment_image');
+						$commitment_image = get_field_with_fallback('commitment_image', $term_id, $customers_page_id);
 						if ($commitment_image) :
 						?>
 							<img class="lozad" data-src="<?= esc_url($commitment_image); ?>" alt="" />
@@ -43,8 +71,13 @@ get_header();
 					</div>
 					<div class="commitment-info">
 						<?php
-						if (have_rows('commitment_list')) :
-							while (have_rows('commitment_list')) : the_row();
+						// Try term ACF first, then page ACF
+						$has_rows_term = have_rows('commitment_list', $term_id);
+						$has_rows_page = $customers_page_id && have_rows('commitment_list', $customers_page_id);
+						
+						if ($has_rows_term || $has_rows_page) :
+							$source_id = $has_rows_term ? $term_id : $customers_page_id;
+							while (have_rows('commitment_list', $source_id)) : the_row();
 						?>
 								<div class="info-item">
 									<h3 class="info-title"><?php the_sub_field('item_title'); ?></h3>
@@ -70,13 +103,13 @@ get_header();
 			</div>
 		</section>
 
-		<!-- Partners/Customers List Section -->
+		<!-- Customers List Section -->
 		<section class="section-brand-partners section-py">
 			<div class="container space-y-5">
 				<div class="partners-header">
 					<div class="header-icon">
 						<?php
-						$partners_icon = get_field('partners_icon');
+						$partners_icon = get_field_with_fallback('partners_icon', $term_id, $customers_page_id);
 						if ($partners_icon) :
 						?>
 							<img class="lozad" data-src="<?= esc_url($partners_icon); ?>" alt="" />
@@ -85,34 +118,25 @@ get_header();
 								alt="" />
 						<?php endif; ?>
 					</div>
-					<h2><?= get_field('partners_heading') ?: 'Đối tác của <span class="text-primary">NÔNG DƯỢC XANH</span>'; ?>
-					</h2>
+					<h2><?= get_field_with_fallback('partners_heading', $term_id, $customers_page_id, single_term_title('', false)); ?></h2>
 				</div>
 				<div class="partners-description body-18">
-					<?= get_field('partners_desc') ?: 'CÔNG TY TNHH THƯƠNG MẠI NÔNG DƯỢC XANH là chuỗi cửa hàng cung cấp vật tư nông nghiệp chính hãng với chất lượng vượt trội; chuyên phục vụ người nông dân trên hành trình canh tác bền vững và hiệu quả.'; ?>
+					<?php 
+					$partners_desc = get_field_with_fallback('partners_desc', $term_id, $customers_page_id);
+					if ($partners_desc) {
+						echo $partners_desc;
+					} else {
+						echo term_description();
+					}
+					?>
 				</div>
 
 				<div class="partners-grid">
 					<?php
-					// Sử dụng 'pagenumber' thay vì 'paged' để tránh redirect loop của WordPress
-					$paged = get_query_var('pagenumber') ? get_query_var('pagenumber') : 1;
-					// Fallback nếu query var chưa nhận (do chưa flush rules)
-					if (empty($paged) && isset($_GET['pagenumber'])) {
-						$paged = intval($_GET['pagenumber']);
-					}
-					$paged = max(1, $paged);
-
-					$args = array(
-						'post_type' => 'customer',
-						'posts_per_page' => 9,
-						'paged' => $paged,
-						'orderby' => 'date',
-						'order' => 'DESC'
-					);
-					$query = new WP_Query($args);
-
-					if ($query->have_posts()) :
-						while ($query->have_posts()) : $query->the_post();
+					// Main query đã được WordPress tự động set cho taxonomy archive
+					// Chỉ cần dùng have_posts() và the_post()
+					if (have_posts()) :
+						while (have_posts()) : the_post();
 					?>
 							<div class="partner-card">
 								<div class="partner-logo">
@@ -128,7 +152,7 @@ get_header();
 									<a class="btn btn-primary w-fit" href="<?php the_permalink(); ?>">Xem thêm</a>
 								</div>
 							</div>
-					<?php
+						<?php
 						endwhile;
 					else :
 						echo '<p>Đang cập nhật...</p>';
@@ -136,36 +160,17 @@ get_header();
 					?>
 				</div>
 
-				<!-- Custom Pagination -->
-				<?php if ($query->max_num_pages > 1) : ?>
-					<nav class="wrapper-pagination mt-8 flex justify-center" aria-label="Pagination">
-						<ul class="pagination">
-							<?php
-							// Base URL: Lấy đúng permalink của trang hiện tại (Page Template)
-							// Sử dụng get_queried_object_id() để lấy ID trang Khách hàng, tránh lấy nhầm ID của post cuối cùng trong loop
-							$current_page_id = get_queried_object_id();
-							$current_url = get_permalink($current_page_id); 
-							
-							// Render Pages
-							for ($i = 1; $i <= $query->max_num_pages; $i++) {
-								// Build link using ?pagenumber
-								$link = add_query_arg('pagenumber', $i, $current_url);
-								
-								$active_class = ($paged == $i) ? 'active' : '';
-								
-								if ($paged == $i) {
-									// Active State
-									echo '<li class="page-item active"><span class="page-link">' . $i . '</span></li>';
-								} else {
-									// Inactive State
-									echo '<li class="page-item"><a class="page-link" href="' . esc_url($link) . '">' . $i . '</a></li>';
-								}
-							}
-							?>
-						</ul>
-					</nav>
-				<?php endif; ?>
-				<?php wp_reset_postdata(); ?>
+				<!-- Pagination -->
+			<?php
+			global $wp_query;
+			if ($wp_query->max_num_pages > 1) :
+			?>
+				<div class="pagination mt-8 flex justify-center">
+					<?php 
+					wp_bootstrap_pagination();  // Auto-detect customer_cat và dùng ?pagenumber=
+					?>
+				</div>
+			<?php endif; ?>
 			</div>
 		</section>
 	</div>
